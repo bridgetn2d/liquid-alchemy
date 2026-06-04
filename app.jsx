@@ -5769,7 +5769,7 @@ export default function App() {
           {tab==="dev"&&<DevNotes/>}
       <button onClick={scrollToTop} style={{position:"fixed",bottom:28,right:20,zIndex:999,width:40,height:40,borderRadius:"50%",background:"var(--accent)",color:"white",border:"none",cursor:"pointer",fontSize:"1.1rem",boxShadow:"0 2px 10px rgba(0,0,0,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"sans-serif",opacity:0.85}}>↑</button>
           {tab==="originals"&&<Originals cocktails={cocktails} setCocktails={setCocktails} inventory={inventory}/>}
-          {tab==="shopping"&&<ShoppingList cocktails={cocktails} inventory={inventory}/>}
+          {tab==="shopping"&&<ShoppingList cocktails={cocktails} inventory={inventory} isInStock={isInStock}/>}
 
         </main>
 
@@ -6870,8 +6870,7 @@ function CraftEditModal({ item, isNew, onSave, onCancel }) {
 }
 
 /* ─── Shopping List ─── */
-function ShoppingList({ cocktails, inventory }) {
-  const inStock = new Set(inventory.filter(i=>i.inStock).map(i=>i.name.toLowerCase()));
+function ShoppingList({ cocktails, inventory, isInStock }) {
   const [selected, setSelected] = useState(() => new Set(cocktails.map(c=>c.id)));
   const [checked, setChecked] = useState(new Set());
 

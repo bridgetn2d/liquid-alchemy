@@ -1,0 +1,25 @@
+# Liquid Alchemy — Cursor index exclusions
+# See docs/refactor-plan.md Phase 0. Does not affect git or the running app.
+
+# Dependencies and build output (future phases)
+node_modules/
+dist/
+build/
+.vite/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+
+# Future Phase 1+ — binary and bundled assets (uncomment when dirs exist)
+# assets/
+# **/*.jpg
+# **/*.png
+# **/*.webp
+
+# Future — large generated or seed blobs after extraction from app.jsx
+# data/seed/
+# data/bundled/
+
+# Optional: ignore duplicate root doc if you only want agents on docs/
+# ARCHITECTURE.md
