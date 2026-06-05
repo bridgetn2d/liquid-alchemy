@@ -5248,40 +5248,49 @@ export default function App() {
         }
 
       ];
-      const existingCraft = Array.isArray(craftData) ? craftData : [];
-      const existingIds = new Set(existingCraft.map(c => c.id));
-      const updatedCraftData = existingCraft.map(c => {
-        const defaults = DEFAULT_CRAFT_ITEMS.find(d => d.id === c.id);
-        if (!defaults) return c;
-        return { ...defaults, ...c, description: defaults.description, instructions: defaults.instructions, notes: defaults.notes };
-      });
-      const toInjectCraft = [
-        ...DEFAULT_COLLECTIONS.filter(c => !existingIds.has(c.id)),
-        ...DEFAULT_CRAFT_ITEMS.filter(c => !existingIds.has(c.id)),
-      ];
-      const baseData = [...updatedCraftData, ...toInjectCraft];
-      // Also update collection childIds for injected items
-      const injectedItems = DEFAULT_CRAFT_ITEMS.filter(c => !existingIds.has(c.id));
-      const base = baseData;
-      // Link injected items to their collections
-      const linked = base.map(c => {
-        if (!c.isCollection) return c;
-        const newChildren = injectedItems.filter(i => (i.collectionIds||[]).includes(c.id)).map(i=>i.id);
-        if (!newChildren.length) return c;
-        return {...c, childIds:[...(c.childIds||[]), ...newChildren.filter(id=>!(c.childIds||[]).includes(id))]};
-      });
-      // Sort collections: by lastUsed desc, then by default order
       const COLLECTION_ORDER = ["col-syrups","col-tinctures","col-garnishes","col-techniques","col-tools","col-bitters","col-shrubs","col-foams","col-infusions","col-misc"];
-      const sorted = [
-        ...linked.filter(c => c.isCollection).sort((a,b) => {
-          if (b.lastUsed && a.lastUsed) return b.lastUsed - a.lastUsed;
-          if (b.lastUsed) return 1;
-          if (a.lastUsed) return -1;
-          return COLLECTION_ORDER.indexOf(a.id) - COLLECTION_ORDER.indexOf(b.id);
-        }),
-        ...linked.filter(c => !c.isCollection),
-      ];
-      setCraftItems(sorted);
+      const hydrateCraftData = (existingCraft) => {
+        const existingIds = new Set(existingCraft.map(c => c.id));
+        const updatedCraftData = existingCraft.map(c => {
+          const defaults = DEFAULT_CRAFT_ITEMS.find(d => d.id === c.id);
+          if (!defaults) return c;
+          return { ...defaults, ...c, description: defaults.description, instructions: defaults.instructions, notes: defaults.notes };
+        });
+        const toInjectCraft = [
+          ...DEFAULT_COLLECTIONS.filter(c => !existingIds.has(c.id)),
+          ...DEFAULT_CRAFT_ITEMS.filter(c => !existingIds.has(c.id)),
+        ];
+        const baseData = [...updatedCraftData, ...toInjectCraft];
+        // Also update collection childIds for injected items
+        const injectedItems = DEFAULT_CRAFT_ITEMS.filter(c => !existingIds.has(c.id));
+        const base = baseData;
+        // Link injected items to their collections
+        const linked = base.map(c => {
+          if (!c.isCollection) return c;
+          const newChildren = injectedItems.filter(i => (i.collectionIds||[]).includes(c.id)).map(i=>i.id);
+          if (!newChildren.length) return c;
+          return {...c, childIds:[...(c.childIds||[]), ...newChildren.filter(id=>!(c.childIds||[]).includes(id))]};
+        });
+        // Sort collections: by lastUsed desc, then by default order
+        return [
+          ...linked.filter(c => c.isCollection).sort((a,b) => {
+            if (b.lastUsed && a.lastUsed) return b.lastUsed - a.lastUsed;
+            if (b.lastUsed) return 1;
+            if (a.lastUsed) return -1;
+            return COLLECTION_ORDER.indexOf(a.id) - COLLECTION_ORDER.indexOf(b.id);
+          }),
+          ...linked.filter(c => !c.isCollection),
+        ];
+      };
+      try {
+        const existingCraft = Array.isArray(craftData)
+          ? craftData.filter(c => c && typeof c === "object" && typeof c.id === "string" && c.id.trim())
+          : [];
+        setCraftItems(hydrateCraftData(existingCraft));
+      } catch(e) {
+        console.error("[Craft load error]", e);
+        setCraftItems(hydrateCraftData([]));
+      }
 
       } catch(e) { console.error("[Alchemy load error]", e); }
       setLoaded(true);
@@ -5297,7 +5306,7 @@ export default function App() {
   },[cocktails, loaded, saveReady]);
 
   useEffect(()=>{ if(loaded && saveReady) store.set("alchemy_inventory", inventory); },[inventory,loaded,saveReady]);
-  useEffect(()=>{ if(loaded && saveReady) store.set("alchemy_craft", craftItems); },[craftItems,loaded,saveReady]);
+  useEffect(()=>{ if(loaded && saveReady && craftItems.length > 0) store.set("alchemy_craft", craftItems); },[craftItems,loaded,saveReady]);
 
   const inStock = new Set(inventory.filter(i=>i.inStock).map(i=>i.name.toLowerCase()));
   const normStr = s => (s||'').toLowerCase().replace(/[^a-z0-9 ]/gi,' ').replace(/ +/g,' ').trim();
