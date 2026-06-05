@@ -4764,6 +4764,8 @@ export default function App() {
   // saveReady: only true after load completes — prevents save firing during load
   const [saveReady, setSaveReady] = useState(false);
   const [craftItems, setCraftItems] = useState([]);
+  const [craftHydrated, setCraftHydrated] = useState(false);
+  const craftHydratedRef = useRef(false);
   const [exportData, setExportData] = useState(null);
   const [exporting, setExporting] = useState(false);
   const [showPhilosophy, setShowPhilosophy] = useState(false);
@@ -5248,40 +5250,55 @@ export default function App() {
         }
 
       ];
-      const existingCraft = Array.isArray(craftData) ? craftData : [];
-      const existingIds = new Set(existingCraft.map(c => c.id));
-      const updatedCraftData = existingCraft.map(c => {
-        const defaults = DEFAULT_CRAFT_ITEMS.find(d => d.id === c.id);
-        if (!defaults) return c;
-        return { ...defaults, ...c, description: defaults.description, instructions: defaults.instructions, notes: defaults.notes };
-      });
-      const toInjectCraft = [
-        ...DEFAULT_COLLECTIONS.filter(c => !existingIds.has(c.id)),
-        ...DEFAULT_CRAFT_ITEMS.filter(c => !existingIds.has(c.id)),
-      ];
-      const baseData = [...updatedCraftData, ...toInjectCraft];
-      // Also update collection childIds for injected items
-      const injectedItems = DEFAULT_CRAFT_ITEMS.filter(c => !existingIds.has(c.id));
-      const base = baseData;
-      // Link injected items to their collections
-      const linked = base.map(c => {
-        if (!c.isCollection) return c;
-        const newChildren = injectedItems.filter(i => (i.collectionIds||[]).includes(c.id)).map(i=>i.id);
-        if (!newChildren.length) return c;
-        return {...c, childIds:[...(c.childIds||[]), ...newChildren.filter(id=>!(c.childIds||[]).includes(id))]};
-      });
-      // Sort collections: by lastUsed desc, then by default order
       const COLLECTION_ORDER = ["col-syrups","col-tinctures","col-garnishes","col-techniques","col-tools","col-bitters","col-shrubs","col-foams","col-infusions","col-misc"];
-      const sorted = [
-        ...linked.filter(c => c.isCollection).sort((a,b) => {
-          if (b.lastUsed && a.lastUsed) return b.lastUsed - a.lastUsed;
-          if (b.lastUsed) return 1;
-          if (a.lastUsed) return -1;
-          return COLLECTION_ORDER.indexOf(a.id) - COLLECTION_ORDER.indexOf(b.id);
-        }),
-        ...linked.filter(c => !c.isCollection),
-      ];
-      setCraftItems(sorted);
+      const hydrateCraftData = (existingCraft) => {
+        const existingIds = new Set(existingCraft.map(c => c.id));
+        const updatedCraftData = existingCraft.map(c => {
+          const defaults = DEFAULT_CRAFT_ITEMS.find(d => d.id === c.id);
+          if (!defaults) return c;
+          return { ...defaults, ...c, description: defaults.description, instructions: defaults.instructions, notes: defaults.notes };
+        });
+        const toInjectCraft = [
+          ...DEFAULT_COLLECTIONS.filter(c => !existingIds.has(c.id)),
+          ...DEFAULT_CRAFT_ITEMS.filter(c => !existingIds.has(c.id)),
+        ];
+        const baseData = [...updatedCraftData, ...toInjectCraft];
+        // Also update collection childIds for injected items
+        const injectedItems = DEFAULT_CRAFT_ITEMS.filter(c => !existingIds.has(c.id));
+        const base = baseData;
+        // Link injected items to their collections
+        const linked = base.map(c => {
+          if (!c.isCollection) return c;
+          const newChildren = injectedItems.filter(i => (i.collectionIds||[]).includes(c.id)).map(i=>i.id);
+          if (!newChildren.length) return c;
+          return {...c, childIds:[...(c.childIds||[]), ...newChildren.filter(id=>!(c.childIds||[]).includes(id))]};
+        });
+        // Sort collections: by lastUsed desc, then by default order
+        return [
+          ...linked.filter(c => c.isCollection).sort((a,b) => {
+            if (b.lastUsed && a.lastUsed) return b.lastUsed - a.lastUsed;
+            if (b.lastUsed) return 1;
+            if (a.lastUsed) return -1;
+            return COLLECTION_ORDER.indexOf(a.id) - COLLECTION_ORDER.indexOf(b.id);
+          }),
+          ...linked.filter(c => !c.isCollection),
+        ];
+      };
+      try {
+        const existingCraft = Array.isArray(craftData)
+          ? craftData.filter(c => c && typeof c === "object" && typeof c.id === "string" && c.id.trim())
+          : [];
+        const hydratedCraft = hydrateCraftData(existingCraft);
+        setCraftItems(hydratedCraft);
+        craftHydratedRef.current = true;
+        setCraftHydrated(true);
+      } catch(e) {
+        console.error("[Craft load error]", e);
+        const fallbackCraft = hydrateCraftData([]);
+        setCraftItems(fallbackCraft);
+        craftHydratedRef.current = true;
+        setCraftHydrated(true);
+      }
 
       } catch(e) { console.error("[Alchemy load error]", e); }
       setLoaded(true);
@@ -5297,7 +5314,8 @@ export default function App() {
   },[cocktails, loaded, saveReady]);
 
   useEffect(()=>{ if(loaded && saveReady) store.set("alchemy_inventory", inventory); },[inventory,loaded,saveReady]);
-  useEffect(()=>{ if(loaded && saveReady) store.set("alchemy_craft", craftItems); },[craftItems,loaded,saveReady]);
+  useEffect(()=>{ if(loaded && saveReady && craftHydratedRef.current) store.set("alchemy_craft", craftItems); },[craftItems,loaded,saveReady]);
+  const craftReadyForRender = craftHydrated && Array.isArray(craftItems) && craftItems.length > 0;
 
   const inStock = new Set(inventory.filter(i=>i.inStock).map(i=>i.name.toLowerCase()));
   const normStr = s => (s||'').toLowerCase().replace(/[^a-z0-9 ]/gi,' ').replace(/ +/g,' ').trim();
@@ -5762,7 +5780,7 @@ export default function App() {
           </>}
 
           {/* ── THE CRAFT TAB ── */}
-          {tab==="craft"&&<TheCraft craftItems={craftItems} setCraftItems={setCraftItems} cocktails={cocktails} deepLink={craftDeepLink} onDeepLinkConsumed={()=>setCraftDeepLink(null)} returnCocktailId={returnCocktailId} onReturn={()=>{setTab("cocktails");setViewCocktailId(returnCocktailId);setReturnCocktailId(null);}}/>}
+          {tab==="craft"&&<TheCraft craftItems={craftItems} setCraftItems={setCraftItems} craftReadyForRender={craftReadyForRender} cocktails={cocktails} deepLink={craftDeepLink} onDeepLinkConsumed={()=>setCraftDeepLink(null)} returnCocktailId={returnCocktailId} onReturn={()=>{setTab("cocktails");setViewCocktailId(returnCocktailId);setReturnCocktailId(null);}}/>}
 
           {/* ── SHOPPING LIST TAB ── */}
           {tab==="templates"&&<TheTemplates cocktails={cocktails} setTab={setTab} setViewCocktailId={setViewCocktailId} setFilterFamily={setFilterFamily}/>}
@@ -6143,7 +6161,7 @@ export default function App() {
 }
 
 /* ─── The Craft ─── */
-function TheCraft({ craftItems, setCraftItems, cocktails, deepLink, onDeepLinkConsumed, returnCocktailId, onReturn }) {
+function TheCraft({ craftItems, setCraftItems, craftReadyForRender, cocktails, deepLink, onDeepLinkConsumed, returnCocktailId, onReturn }) {
   const stem = s => (s.endsWith("ies")&&s.length>4) ? s.slice(0,-3)+"y" : (s.endsWith("s")&&s.length>3) ? s.slice(0,-1) : s;
   const [editItem, setEditItem] = useState(null);
   const [editCollection, setEditCollection] = useState(null);
@@ -6157,6 +6175,17 @@ function TheCraft({ craftItems, setCraftItems, cocktails, deepLink, onDeepLinkCo
   const [hiddenCollections, setHiddenCollections] = useState(new Set());
   const [confirmRemoveId, setConfirmRemoveId] = useState(null);
 
+  if (!craftReadyForRender) {
+    return (
+      <div>
+        <h1 className="page-title">Craft</h1>
+        <div className="empty-state">
+          <h3>Loading Craft...</h3>
+          <p>Preparing your craft library.</p>
+        </div>
+      </div>
+    );
+  }
 
   const collections = craftItems.filter(c => c.isCollection);
   const preparations = craftItems.filter(c => !c.isCollection);
@@ -6215,6 +6244,11 @@ function TheCraft({ craftItems, setCraftItems, cocktails, deepLink, onDeepLinkCo
   );
   const totalItems = preparations.length;
   const totalCollections = collections.length;
+  const collectedIds = new Set(collections.flatMap(c=>c.childIds||[]));
+  const miscItems = preparations.filter(p => !collectedIds.has(p.id) && p.type === "Other");
+  const visibleCollections = collections.filter(c=>!hiddenCollections.has(c.id));
+  const fallbackItems = preparations.filter(p => !collectedIds.has(p.id));
+  const showFallbackPreparations = !craftSearch && preparations.length > 0 && !miscItems.length && !visibleCollections.length;
 
   return (
     <div>
@@ -6266,8 +6300,6 @@ function TheCraft({ craftItems, setCraftItems, cocktails, deepLink, onDeepLinkCo
 
       {/* Miscellany - preparations not in any collection */}
       {!craftSearch && (()=>{
-        const collectedIds = new Set(collections.flatMap(c=>c.childIds||[]));
-        const miscItems = preparations.filter(p => !collectedIds.has(p.id) && p.type === "Other");
         if (!miscItems.length) return null;
         return (
           <div style={{marginTop:8,marginBottom:24}}>
@@ -6289,6 +6321,27 @@ function TheCraft({ craftItems, setCraftItems, cocktails, deepLink, onDeepLinkCo
           </div>
         );
       })()}
+
+      {/* Fallback when stored craft has preparations but no visible collection/misc section */}
+      {showFallbackPreparations && (
+        <div style={{marginTop:8,marginBottom:24}}>
+          <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:10}}>Preparations</div>
+          <div className="craft-grid">
+            {fallbackItems.map(item=>(
+              <div key={item.id} className="craft-card" onClick={()=>setViewItem(item)}>
+                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
+                  <span className="craft-type-badge">{item.type}</span>
+                  {item.inStock&&<span style={{fontSize:".65rem",fontWeight:600,padding:"2px 8px",borderRadius:"999px",background:"rgba(90,122,82,0.12)",color:"var(--green)"}}>✓ House Made</span>}
+                </div>
+                <div className="craft-card-name">{item.name}</div>
+                {item.yield&&<div style={{fontSize:".72rem",color:"var(--text-3)",fontStyle:"italic",marginBottom:4}}>Yields ~ {item.yield}</div>}
+                {item.description&&<p style={{fontSize:".78rem",color:"var(--text-3)",fontStyle:"italic",marginBottom:8,lineHeight:1.6,whiteSpace:"pre-wrap"}}>{item.description}</p>}
+                {usedIn(item).length>0&&<div style={{fontSize:".72rem",color:"var(--accent-2)",marginTop:2}}>✨ Used in {usedIn(item).length} cocktail{usedIn(item).length!==1?"s":""}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Search results */}
       {craftSearch && (filtered.length === 0 ? (
@@ -6342,11 +6395,11 @@ function TheCraft({ craftItems, setCraftItems, cocktails, deepLink, onDeepLinkCo
         </div>
       )}
 
-      {!craftSearch && collections.filter(c=>!hiddenCollections.has(c.id)).length > 0 && (
+      {!craftSearch && visibleCollections.length > 0 && (
         <div style={{marginBottom:24}}>
           <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:10}}>Collections</div>
           <div style={{display:"flex",flexDirection:"column",gap:10}}>
-            {collections.filter(c=>!hiddenCollections.has(c.id)).map(col => {
+            {visibleCollections.map(col => {
               const children = getChildren(col);
               const expanded = expandedCollections.has(col.id);
               return (
