@@ -6244,6 +6244,11 @@ function TheCraft({ craftItems, setCraftItems, craftReadyForRender, cocktails, d
   );
   const totalItems = preparations.length;
   const totalCollections = collections.length;
+  const collectedIds = new Set(collections.flatMap(c=>c.childIds||[]));
+  const miscItems = preparations.filter(p => !collectedIds.has(p.id) && p.type === "Other");
+  const visibleCollections = collections.filter(c=>!hiddenCollections.has(c.id));
+  const fallbackItems = preparations.filter(p => !collectedIds.has(p.id));
+  const showFallbackPreparations = !craftSearch && preparations.length > 0 && !miscItems.length && !visibleCollections.length;
 
   return (
     <div>
@@ -6295,8 +6300,6 @@ function TheCraft({ craftItems, setCraftItems, craftReadyForRender, cocktails, d
 
       {/* Miscellany - preparations not in any collection */}
       {!craftSearch && (()=>{
-        const collectedIds = new Set(collections.flatMap(c=>c.childIds||[]));
-        const miscItems = preparations.filter(p => !collectedIds.has(p.id) && p.type === "Other");
         if (!miscItems.length) return null;
         return (
           <div style={{marginTop:8,marginBottom:24}}>
@@ -6318,6 +6321,27 @@ function TheCraft({ craftItems, setCraftItems, craftReadyForRender, cocktails, d
           </div>
         );
       })()}
+
+      {/* Fallback when stored craft has preparations but no visible collection/misc section */}
+      {showFallbackPreparations && (
+        <div style={{marginTop:8,marginBottom:24}}>
+          <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:10}}>Preparations</div>
+          <div className="craft-grid">
+            {fallbackItems.map(item=>(
+              <div key={item.id} className="craft-card" onClick={()=>setViewItem(item)}>
+                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
+                  <span className="craft-type-badge">{item.type}</span>
+                  {item.inStock&&<span style={{fontSize:".65rem",fontWeight:600,padding:"2px 8px",borderRadius:"999px",background:"rgba(90,122,82,0.12)",color:"var(--green)"}}>✓ House Made</span>}
+                </div>
+                <div className="craft-card-name">{item.name}</div>
+                {item.yield&&<div style={{fontSize:".72rem",color:"var(--text-3)",fontStyle:"italic",marginBottom:4}}>Yields ~ {item.yield}</div>}
+                {item.description&&<p style={{fontSize:".78rem",color:"var(--text-3)",fontStyle:"italic",marginBottom:8,lineHeight:1.6,whiteSpace:"pre-wrap"}}>{item.description}</p>}
+                {usedIn(item).length>0&&<div style={{fontSize:".72rem",color:"var(--accent-2)",marginTop:2}}>✨ Used in {usedIn(item).length} cocktail{usedIn(item).length!==1?"s":""}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Search results */}
       {craftSearch && (filtered.length === 0 ? (
@@ -6371,11 +6395,11 @@ function TheCraft({ craftItems, setCraftItems, craftReadyForRender, cocktails, d
         </div>
       )}
 
-      {!craftSearch && collections.filter(c=>!hiddenCollections.has(c.id)).length > 0 && (
+      {!craftSearch && visibleCollections.length > 0 && (
         <div style={{marginBottom:24}}>
           <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:10}}>Collections</div>
           <div style={{display:"flex",flexDirection:"column",gap:10}}>
-            {collections.filter(c=>!hiddenCollections.has(c.id)).map(col => {
+            {visibleCollections.map(col => {
               const children = getChildren(col);
               const expanded = expandedCollections.has(col.id);
               return (
