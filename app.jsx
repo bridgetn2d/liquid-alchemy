@@ -5315,6 +5315,7 @@ export default function App() {
 
   useEffect(()=>{ if(loaded && saveReady) store.set("alchemy_inventory", inventory); },[inventory,loaded,saveReady]);
   useEffect(()=>{ if(loaded && saveReady && craftHydratedRef.current) store.set("alchemy_craft", craftItems); },[craftItems,loaded,saveReady]);
+  const craftReadyForRender = craftHydrated && Array.isArray(craftItems) && craftItems.length > 0;
 
   const inStock = new Set(inventory.filter(i=>i.inStock).map(i=>i.name.toLowerCase()));
   const normStr = s => (s||'').toLowerCase().replace(/[^a-z0-9 ]/gi,' ').replace(/ +/g,' ').trim();
@@ -5779,7 +5780,7 @@ export default function App() {
           </>}
 
           {/* ── THE CRAFT TAB ── */}
-          {tab==="craft"&&<TheCraft craftItems={craftItems} setCraftItems={setCraftItems} craftHydrated={craftHydrated} cocktails={cocktails} deepLink={craftDeepLink} onDeepLinkConsumed={()=>setCraftDeepLink(null)} returnCocktailId={returnCocktailId} onReturn={()=>{setTab("cocktails");setViewCocktailId(returnCocktailId);setReturnCocktailId(null);}}/>}
+          {tab==="craft"&&<TheCraft craftItems={craftItems} setCraftItems={setCraftItems} craftReadyForRender={craftReadyForRender} cocktails={cocktails} deepLink={craftDeepLink} onDeepLinkConsumed={()=>setCraftDeepLink(null)} returnCocktailId={returnCocktailId} onReturn={()=>{setTab("cocktails");setViewCocktailId(returnCocktailId);setReturnCocktailId(null);}}/>}
 
           {/* ── SHOPPING LIST TAB ── */}
           {tab==="templates"&&<TheTemplates cocktails={cocktails} setTab={setTab} setViewCocktailId={setViewCocktailId} setFilterFamily={setFilterFamily}/>}
@@ -6160,7 +6161,7 @@ export default function App() {
 }
 
 /* ─── The Craft ─── */
-function TheCraft({ craftItems, setCraftItems, craftHydrated, cocktails, deepLink, onDeepLinkConsumed, returnCocktailId, onReturn }) {
+function TheCraft({ craftItems, setCraftItems, craftReadyForRender, cocktails, deepLink, onDeepLinkConsumed, returnCocktailId, onReturn }) {
   const stem = s => (s.endsWith("ies")&&s.length>4) ? s.slice(0,-3)+"y" : (s.endsWith("s")&&s.length>3) ? s.slice(0,-1) : s;
   const [editItem, setEditItem] = useState(null);
   const [editCollection, setEditCollection] = useState(null);
@@ -6174,7 +6175,7 @@ function TheCraft({ craftItems, setCraftItems, craftHydrated, cocktails, deepLin
   const [hiddenCollections, setHiddenCollections] = useState(new Set());
   const [confirmRemoveId, setConfirmRemoveId] = useState(null);
 
-  if (!craftHydrated) {
+  if (!craftReadyForRender) {
     return (
       <div>
         <h1 className="page-title">Craft</h1>
