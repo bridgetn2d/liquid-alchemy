@@ -4764,6 +4764,7 @@ export default function App() {
   // saveReady: only true after load completes — prevents save firing during load
   const [saveReady, setSaveReady] = useState(false);
   const [craftItems, setCraftItems] = useState([]);
+  const craftHydratedRef = useRef(false);
   const [exportData, setExportData] = useState(null);
   const [exporting, setExporting] = useState(false);
   const [showPhilosophy, setShowPhilosophy] = useState(false);
@@ -5286,10 +5287,14 @@ export default function App() {
         const existingCraft = Array.isArray(craftData)
           ? craftData.filter(c => c && typeof c === "object" && typeof c.id === "string" && c.id.trim())
           : [];
-        setCraftItems(hydrateCraftData(existingCraft));
+        const hydratedCraft = hydrateCraftData(existingCraft);
+        setCraftItems(hydratedCraft);
+        craftHydratedRef.current = true;
       } catch(e) {
         console.error("[Craft load error]", e);
-        setCraftItems(hydrateCraftData([]));
+        const fallbackCraft = hydrateCraftData([]);
+        setCraftItems(fallbackCraft);
+        craftHydratedRef.current = true;
       }
 
       } catch(e) { console.error("[Alchemy load error]", e); }
@@ -5306,7 +5311,7 @@ export default function App() {
   },[cocktails, loaded, saveReady]);
 
   useEffect(()=>{ if(loaded && saveReady) store.set("alchemy_inventory", inventory); },[inventory,loaded,saveReady]);
-  useEffect(()=>{ if(loaded && saveReady && craftItems.length > 0) store.set("alchemy_craft", craftItems); },[craftItems,loaded,saveReady]);
+  useEffect(()=>{ if(loaded && saveReady && craftHydratedRef.current) store.set("alchemy_craft", craftItems); },[craftItems,loaded,saveReady]);
 
   const inStock = new Set(inventory.filter(i=>i.inStock).map(i=>i.name.toLowerCase()));
   const normStr = s => (s||'').toLowerCase().replace(/[^a-z0-9 ]/gi,' ').replace(/ +/g,' ').trim();
