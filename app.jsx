@@ -4764,6 +4764,7 @@ export default function App() {
   // saveReady: only true after load completes — prevents save firing during load
   const [saveReady, setSaveReady] = useState(false);
   const [craftItems, setCraftItems] = useState([]);
+  const [craftHydrated, setCraftHydrated] = useState(false);
   const craftHydratedRef = useRef(false);
   const [exportData, setExportData] = useState(null);
   const [exporting, setExporting] = useState(false);
@@ -5290,11 +5291,13 @@ export default function App() {
         const hydratedCraft = hydrateCraftData(existingCraft);
         setCraftItems(hydratedCraft);
         craftHydratedRef.current = true;
+        setCraftHydrated(true);
       } catch(e) {
         console.error("[Craft load error]", e);
         const fallbackCraft = hydrateCraftData([]);
         setCraftItems(fallbackCraft);
         craftHydratedRef.current = true;
+        setCraftHydrated(true);
       }
 
       } catch(e) { console.error("[Alchemy load error]", e); }
@@ -5776,7 +5779,7 @@ export default function App() {
           </>}
 
           {/* ── THE CRAFT TAB ── */}
-          {tab==="craft"&&<TheCraft craftItems={craftItems} setCraftItems={setCraftItems} cocktails={cocktails} deepLink={craftDeepLink} onDeepLinkConsumed={()=>setCraftDeepLink(null)} returnCocktailId={returnCocktailId} onReturn={()=>{setTab("cocktails");setViewCocktailId(returnCocktailId);setReturnCocktailId(null);}}/>}
+          {tab==="craft"&&<TheCraft craftItems={craftItems} setCraftItems={setCraftItems} craftHydrated={craftHydrated} cocktails={cocktails} deepLink={craftDeepLink} onDeepLinkConsumed={()=>setCraftDeepLink(null)} returnCocktailId={returnCocktailId} onReturn={()=>{setTab("cocktails");setViewCocktailId(returnCocktailId);setReturnCocktailId(null);}}/>}
 
           {/* ── SHOPPING LIST TAB ── */}
           {tab==="templates"&&<TheTemplates cocktails={cocktails} setTab={setTab} setViewCocktailId={setViewCocktailId} setFilterFamily={setFilterFamily}/>}
@@ -6157,7 +6160,7 @@ export default function App() {
 }
 
 /* ─── The Craft ─── */
-function TheCraft({ craftItems, setCraftItems, cocktails, deepLink, onDeepLinkConsumed, returnCocktailId, onReturn }) {
+function TheCraft({ craftItems, setCraftItems, craftHydrated, cocktails, deepLink, onDeepLinkConsumed, returnCocktailId, onReturn }) {
   const stem = s => (s.endsWith("ies")&&s.length>4) ? s.slice(0,-3)+"y" : (s.endsWith("s")&&s.length>3) ? s.slice(0,-1) : s;
   const [editItem, setEditItem] = useState(null);
   const [editCollection, setEditCollection] = useState(null);
@@ -6171,6 +6174,17 @@ function TheCraft({ craftItems, setCraftItems, cocktails, deepLink, onDeepLinkCo
   const [hiddenCollections, setHiddenCollections] = useState(new Set());
   const [confirmRemoveId, setConfirmRemoveId] = useState(null);
 
+  if (!craftHydrated) {
+    return (
+      <div>
+        <h1 className="page-title">Craft</h1>
+        <div className="empty-state">
+          <h3>Loading Craft...</h3>
+          <p>Preparing your craft library.</p>
+        </div>
+      </div>
+    );
+  }
 
   const collections = craftItems.filter(c => c.isCollection);
   const preparations = craftItems.filter(c => !c.isCollection);
