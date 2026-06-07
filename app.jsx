@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 
 /* ─── App-level event log (visible in Debug tab) ─── */
 const _logListeners = [];
@@ -3511,6 +3511,42 @@ body {
 .shopping-check.done { background:var(--green); border-color:var(--green); color:white; }
 .shopping-name { font-size:0.88rem; font-weight:500; color:var(--text); }
 .shopping-for { font-size:0.72rem; color:var(--text-3); margin-top:1px; font-style:italic; }
+.shopping-picker-results {
+  border:1px solid var(--border); border-radius:var(--radius-sm);
+  background:var(--bg); max-height:280px; overflow-y:auto;
+}
+.shopping-picker-row {
+  display:flex; align-items:center; gap:12px;
+  padding:10px 14px; border-bottom:1px solid var(--border);
+  cursor:pointer; transition:background .15s;
+}
+.shopping-picker-row:last-child { border-bottom:none; }
+.shopping-picker-row:hover { background:var(--bg-2); }
+.shopping-picker-row.selected { background:rgba(184,146,42,0.08); }
+.shopping-picker-check {
+  width:20px; height:20px; border-radius:4px; flex-shrink:0;
+  border:2px solid var(--border-2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:transparent; transition:all .15s;
+}
+.shopping-picker-row.selected .shopping-picker-check {
+  background:var(--green); border-color:var(--green); color:white;
+}
+.shopping-picker-label { flex:1; min-width:0; }
+.shopping-picker-name { font-size:0.88rem; font-weight:500; color:var(--text); }
+.shopping-picker-meta { font-size:0.72rem; color:var(--text-3); margin-top:1px; }
+.shopping-selected-chips { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:12px; }
+.shopping-chip {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 8px 4px 12px; border:1px solid var(--border);
+  border-radius:999px; background:var(--bg-2);
+  font-size:0.78rem; color:var(--text-2);
+}
+.shopping-chip-remove {
+  background:none; border:none; cursor:pointer;
+  color:var(--text-3); font-size:0.95rem; line-height:1; padding:0;
+}
+.shopping-chip-remove:hover { color:var(--text); }
 
 /* ── Inventory ── */
 .inventory-section { margin-bottom:28px; }
@@ -4643,6 +4679,8 @@ export default function App() {
   const [returnCocktailId, setReturnCocktailId] = useState(null);
   const [cocktails, setCocktails] = useState([]);
   const [inventory, setInventory] = useState([]);
+  const [plannedCocktailIds, setPlannedCocktailIds] = useState([]);
+  const [checkedIngredientKeys, setCheckedIngredientKeys] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   const [search, setSearch] = useState("");
@@ -4875,7 +4913,21 @@ export default function App() {
       }
 
       // Set cocktails with empty images — everything loads lazily when opened
-      setCocktails(mergedCocktails.map(c => ({...c, imageUrl: "", myPhoto: "", _thumb: ""})));
+      const hydratedCocktails = mergedCocktails.map(c => ({...c, imageUrl: "", myPhoto: "", _thumb: ""}));
+      setCocktails(hydratedCocktails);
+
+      const validCocktailIds = new Set(hydratedCocktails.map(c => c.id));
+      const planData = await store.get("alchemy_shopping_plan");
+      if (planData && typeof planData === "object") {
+        const seenPlanIds = new Set();
+        const loadedPlanIds = (Array.isArray(planData.cocktailIds) ? planData.cocktailIds : [])
+          .filter(id => typeof id === "string" && id.trim() && validCocktailIds.has(id) && !seenPlanIds.has(id) && seenPlanIds.add(id));
+        const loadedChecked = (Array.isArray(planData.checkedIngredients) ? planData.checkedIngredients : [])
+          .filter(k => typeof k === "string" && k.trim());
+        setPlannedCocktailIds(loadedPlanIds);
+        setCheckedIngredientKeys(loadedChecked);
+      }
+
       const craftData = await store.get("alchemy_craft");
       const DEFAULT_COLLECTIONS = [
         { id:"col-syrups",     name:"Syrups",              isCollection:true, childIds:["grapefruit-mint-syrup","strawberry-basil-syrup"], description:"The sweeteners and flavor carriers of the cocktail. House-made syrups let you control the sugar, the texture, and the taste in ways no bottle off a shelf ever will. Simple or complex, a good syrup is the foundation of a well-balanced drink." },
@@ -5315,6 +5367,24 @@ export default function App() {
 
   useEffect(()=>{ if(loaded && saveReady) store.set("alchemy_inventory", inventory); },[inventory,loaded,saveReady]);
   useEffect(()=>{ if(loaded && saveReady && craftHydratedRef.current) store.set("alchemy_craft", craftItems); },[craftItems,loaded,saveReady]);
+  useEffect(()=>{
+    if (!loaded || !saveReady) return;
+    store.set("alchemy_shopping_plan", {
+      cocktailIds: plannedCocktailIds,
+      checkedIngredients: checkedIngredientKeys,
+      updatedAt: Date.now(),
+    });
+  }, [plannedCocktailIds, checkedIngredientKeys, loaded, saveReady]);
+
+  useEffect(()=>{
+    if (!loaded) return;
+    const validIds = new Set(cocktails.map(c => c.id));
+    setPlannedCocktailIds(prev => {
+      const pruned = prev.filter(id => validIds.has(id));
+      return pruned.length === prev.length ? prev : pruned;
+    });
+  }, [cocktails, loaded]);
+
   const craftReadyForRender = craftHydrated && Array.isArray(craftItems) && craftItems.length > 0;
 
   const inStock = new Set(inventory.filter(i=>i.inStock).map(i=>i.name.toLowerCase()));
@@ -5435,6 +5505,29 @@ export default function App() {
     setShuffleOrder(order);
     setSortBy("");
   };
+
+  const addToShoppingPlan = (cocktailId) => {
+    if (!cocktailId || !cocktails.some(c => c.id === cocktailId)) return;
+    setPlannedCocktailIds(prev => prev.includes(cocktailId) ? prev : [...prev, cocktailId]);
+  };
+
+  const removeFromShoppingPlan = (cocktailId) => {
+    if (!cocktailId) return;
+    setPlannedCocktailIds(prev => prev.filter(id => id !== cocktailId));
+  };
+
+  const clearShoppingPlan = () => {
+    setPlannedCocktailIds([]);
+    setCheckedIngredientKeys([]);
+  };
+
+  const toggleCheckedIngredient = (key) => {
+    const k = (key || "").toLowerCase().trim();
+    if (!k) return;
+    setCheckedIngredientKeys(prev => prev.includes(k) ? prev.filter(x => x !== k) : [...prev, k]);
+  };
+
+  const clearCheckedIngredients = () => setCheckedIngredientKeys([]);
 
   const deleteCocktail = (id) => {
     setCocktails(prev=>prev.filter(c=>c.id!==id));
@@ -5787,7 +5880,17 @@ export default function App() {
           {tab==="dev"&&<DevNotes/>}
       <button onClick={scrollToTop} style={{position:"fixed",bottom:28,right:20,zIndex:999,width:40,height:40,borderRadius:"50%",background:"var(--accent)",color:"white",border:"none",cursor:"pointer",fontSize:"1.1rem",boxShadow:"0 2px 10px rgba(0,0,0,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"sans-serif",opacity:0.85}}>↑</button>
           {tab==="originals"&&<Originals cocktails={cocktails} setCocktails={setCocktails} inventory={inventory}/>}
-          {tab==="shopping"&&<ShoppingList cocktails={cocktails} inventory={inventory} isInStock={isInStock}/>}
+          {tab==="shopping"&&<ShoppingList
+            cocktails={cocktails}
+            isInStock={isInStock}
+            plannedCocktailIds={plannedCocktailIds}
+            checkedIngredientKeys={checkedIngredientKeys}
+            addToShoppingPlan={addToShoppingPlan}
+            removeFromShoppingPlan={removeFromShoppingPlan}
+            clearShoppingPlan={clearShoppingPlan}
+            toggleCheckedIngredient={toggleCheckedIngredient}
+            clearCheckedIngredients={clearCheckedIngredients}
+          />}
 
         </main>
 
@@ -5943,6 +6046,14 @@ export default function App() {
                     </div>
                   );
                 })()}
+
+                <div style={{marginTop:12,marginBottom:16}}>
+                  {plannedCocktailIds.includes(viewCocktail.id) ? (
+                    <button className="btn-secondary" disabled style={{width:"100%",opacity:0.85,cursor:"default"}}>On Shopping List</button>
+                  ) : (
+                    <button className="btn-primary" style={{width:"100%"}} onClick={()=>addToShoppingPlan(viewCocktail.id)}>Create Shopping List</button>
+                  )}
+                </div>
 
                 {viewCocktail.instructions&&(
                   <div>
@@ -6923,25 +7034,41 @@ function CraftEditModal({ item, isNew, onSave, onCancel }) {
 }
 
 /* ─── Shopping List ─── */
-function ShoppingList({ cocktails, inventory, isInStock }) {
-  const [selected, setSelected] = useState(() => new Set(cocktails.map(c=>c.id)));
-  const [checked, setChecked] = useState(new Set());
+function ShoppingList({
+  cocktails,
+  isInStock,
+  plannedCocktailIds,
+  checkedIngredientKeys,
+  addToShoppingPlan,
+  removeFromShoppingPlan,
+  clearShoppingPlan,
+  toggleCheckedIngredient,
+  clearCheckedIngredients,
+}) {
+  const [query, setQuery] = useState("");
 
-  const toggleCocktail = id => setSelected(prev => {
-    const next = new Set(prev);
-    next.has(id) ? next.delete(id) : next.add(id);
-    return next;
-  });
+  const plannedIdSet = useMemo(() => new Set(plannedCocktailIds), [plannedCocktailIds]);
+  const checkedSet = useMemo(() => new Set(checkedIngredientKeys), [checkedIngredientKeys]);
 
-  const toggleChecked = name => setChecked(prev => {
-    const next = new Set(prev);
-    next.has(name) ? next.delete(name) : next.add(name);
-    return next;
-  });
+  const plannedCocktails = useMemo(() => {
+    const byId = new Map(cocktails.map(c => [c.id, c]));
+    return plannedCocktailIds.map(id => byId.get(id)).filter(Boolean);
+  }, [cocktails, plannedCocktailIds]);
 
-  // Aggregate missing ingredients across selected cocktails
+  const q = query.trim().toLowerCase();
+  const filteredCocktails = useMemo(() => {
+    const list = cocktails.filter(c => {
+      if (!q) return true;
+      if ((c.name || "").toLowerCase().includes(q)) return true;
+      if ((c.baseSpirit || "").toLowerCase().includes(q)) return true;
+      return (c.ingredients || []).some(i => (i.name || "").toLowerCase().includes(q));
+    });
+    return list.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  }, [cocktails, q]);
+
+  // Aggregate missing ingredients across planned cocktails
   const missing = {};
-  cocktails.filter(c => selected.has(c.id)).forEach(c => {
+  cocktails.filter(c => plannedIdSet.has(c.id)).forEach(c => {
     c.ingredients.filter(i => i.name && !isInStock(i.name)).forEach(i => {
       const key = i.name.toLowerCase();
       if (!missing[key]) missing[key] = { name: i.name, cocktails: [] };
@@ -6950,73 +7077,143 @@ function ShoppingList({ cocktails, inventory, isInStock }) {
   });
 
   const items = Object.values(missing).sort((a,b) => a.name.localeCompare(b.name));
-  const unchecked = items.filter(i => !checked.has(i.name.toLowerCase()));
-  const checkedItems = items.filter(i => checked.has(i.name.toLowerCase()));
+  const unchecked = items.filter(i => !checkedSet.has(i.name.toLowerCase()));
+  const checkedItems = items.filter(i => checkedSet.has(i.name.toLowerCase()));
+
+  const planCount = plannedCocktailIds.length;
+  const subline = planCount === 0
+    ? "No cocktails planned"
+    : items.length === 0
+      ? `${planCount} planned cocktail${planCount !== 1 ? "s" : ""} — nothing missing`
+      : `${items.length} missing ingredient${items.length !== 1 ? "s" : ""} across ${planCount} planned cocktail${planCount !== 1 ? "s" : ""}`;
 
   return (
     <div>
       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",flexWrap:"wrap",gap:10,marginBottom:20}}>
         <div>
           <h1 className="page-title">Shopping List</h1>
-          <p className="page-sub">{items.length} missing ingredient{items.length!==1?"s":""} across {selected.size} selected recipe{selected.size!==1?"s":""}</p>
+          <p className="page-sub" style={{marginBottom:0}}>{subline}</p>
         </div>
-        {checked.size>0&&<button className="btn-ghost" onClick={()=>setChecked(new Set())}>Clear checked</button>}
+        {checkedIngredientKeys.length>0&&<button className="btn-ghost" onClick={clearCheckedIngredients}>Clear checked</button>}
       </div>
 
-      {/* Recipe selector */}
       <div style={{marginBottom:24}}>
-        <div className="section-label" style={{marginBottom:10}}>Include recipes</div>
-        <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-          {cocktails.map(c=>(
-            <button key={c.id}
-              className={"pill" + (selected.has(c.id)?" active":"")}
-              onClick={()=>toggleCocktail(c.id)}>
-              {c.name}
-            </button>
-          ))}
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,marginBottom:10}}>
+          <div className="section-label" style={{marginBottom:0}}>Planned Cocktails</div>
+          {planCount > 0 && (
+            <button className="btn-ghost" style={{fontSize:"0.75rem",padding:"4px 8px"}} onClick={clearShoppingPlan}>Clear all</button>
+          )}
         </div>
+
+        {plannedCocktails.length > 0 ? (
+          <div className="shopping-selected-chips">
+            {plannedCocktails.map(c => (
+              <span key={c.id} className="shopping-chip">
+                {c.name}
+                <button type="button" className="shopping-chip-remove" aria-label={`Remove ${c.name}`} onClick={()=>removeFromShoppingPlan(c.id)}>×</button>
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p style={{fontSize:"0.85rem",color:"var(--text-3)",fontStyle:"italic",margin:"0 0 16px"}}>
+            Open any cocktail recipe and choose Create Shopping List, or search below to add one here.
+          </p>
+        )}
       </div>
 
-      {items.length===0?(
-        <div className="empty-state">
-          <h3>Nothing to buy!</h3>
-          <p>You have everything needed for the selected recipes.</p>
-        </div>
-      ):(
-        <div>
-          {/* Unchecked items */}
-          {unchecked.length>0&&(
-            <div className="shopping-list">
-              {unchecked.map(item=>(
-                <div key={item.name} className="shopping-item" onClick={()=>toggleChecked(item.name.toLowerCase())}>
-                  <div className="shopping-check"/>
-                  <div style={{flex:1,minWidth:0}}>
-                    <div className="shopping-name">{item.name}</div>
-                    <div className="shopping-for">for {item.cocktails.join(", ")}</div>
+      {planCount > 0 && (
+        <div style={{marginBottom:28}}>
+          <div className="section-label">Missing Ingredients</div>
+          {items.length === 0 ? (
+            <div className="empty-state" style={{marginTop:8}}>
+              <h3>All set</h3>
+              <p>You have everything you need for these cocktails.</p>
+            </div>
+          ) : (
+            <div>
+              {unchecked.length>0&&(
+                <div className="shopping-list">
+                  {unchecked.map(item=>(
+                    <div key={item.name} className="shopping-item" onClick={()=>toggleCheckedIngredient(item.name.toLowerCase())}>
+                      <div className="shopping-check"/>
+                      <div style={{flex:1,minWidth:0}}>
+                        <div className="shopping-name">{item.name}</div>
+                        <div className="shopping-for" style={{marginTop:4}}>
+                          {item.cocktails.map(name => (
+                            <div key={name} style={{display:"flex",gap:6}}>
+                              <span>·</span><span>{name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {checkedItems.length>0&&(
+                <div style={{marginTop:20}}>
+                  <div className="section-label" style={{marginBottom:8}}>Got it</div>
+                  <div className="shopping-list" style={{opacity:0.5}}>
+                    {checkedItems.map(item=>(
+                      <div key={item.name} className="shopping-item checked" onClick={()=>toggleCheckedIngredient(item.name.toLowerCase())}>
+                        <div className="shopping-check done">✓</div>
+                        <div style={{flex:1,minWidth:0,textDecoration:"line-through"}}>
+                          <div className="shopping-name">{item.name}</div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
-
-          {/* Checked items */}
-          {checkedItems.length>0&&(
-            <div style={{marginTop:20}}>
-              <div className="section-label" style={{marginBottom:8}}>Got it</div>
-              <div className="shopping-list" style={{opacity:0.5}}>
-                {checkedItems.map(item=>(
-                  <div key={item.name} className="shopping-item checked" onClick={()=>toggleChecked(item.name.toLowerCase())}>
-                    <div className="shopping-check done">✓</div>
-                    <div style={{flex:1,minWidth:0,textDecoration:"line-through"}}>
-                      <div className="shopping-name">{item.name}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              )}
             </div>
           )}
         </div>
       )}
+
+      <div style={{marginBottom:24}}>
+        <div className="section-label" style={{marginBottom:10}}>Add Another Cocktail</div>
+
+        <div className="search-wrap" style={{marginBottom:10}}>
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input
+            className="search-input"
+            placeholder="Search cocktails by name, spirit, or ingredient…"
+            value={query}
+            onChange={e=>setQuery(e.target.value)}
+          />
+        </div>
+
+        <div className="shopping-picker-results">
+          {filteredCocktails.length === 0 ? (
+            <div style={{padding:"16px 14px",fontSize:"0.85rem",color:"var(--text-3)",fontStyle:"italic"}}>
+              {q ? `No cocktails match "${query.trim()}".` : "No cocktails available."}
+            </div>
+          ) : filteredCocktails.map(c => {
+            const inPlan = plannedIdSet.has(c.id);
+            return (
+              <div
+                key={c.id}
+                className={"shopping-picker-row" + (inPlan ? " selected" : "")}
+                onClick={()=>{ if (!inPlan) addToShoppingPlan(c.id); }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={e=>{ if ((e.key === "Enter" || e.key === " ") && !inPlan) { e.preventDefault(); addToShoppingPlan(c.id); } }}
+                style={inPlan ? {cursor:"default"} : undefined}
+              >
+                <div className="shopping-picker-check">{inPlan ? "✓" : ""}</div>
+                <div className="shopping-picker-label">
+                  <div className="shopping-picker-name">{c.name}</div>
+                  {c.baseSpirit && <div className="shopping-picker-meta">{c.baseSpirit}</div>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <p style={{fontSize:"0.72rem",color:"var(--text-3)",marginTop:8,marginBottom:0}}>
+          {planCount} planned · {filteredCocktails.length} showing{q ? ` for "${query.trim()}"` : ""}
+        </p>
+      </div>
     </div>
   );
 }
