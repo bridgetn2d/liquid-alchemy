@@ -51,6 +51,32 @@ const store = {
   },
 };
 
+/* AI Assist disabled for public beta.
+   Future feature. Requires backend proxy, authentication, rate limiting, privacy review, and deployment strategy before activation. */
+const AI_ASSIST_ENABLED = false;
+const AI_ASSIST_BETA_LABEL = "✦ AI Assist — Coming Soon";
+const AI_ASSIST_TOOLTIP = "AI Assist — coming in a future release";
+
+function AiAssistButton({ activeLabel, onClick, busy = false, loadingLabel = "Thinking…", ready = true }) {
+  if (!AI_ASSIST_ENABLED) {
+    return (
+      <button type="button" className="autofill-btn autofill-btn-beta" disabled title={AI_ASSIST_TOOLTIP} aria-disabled="true">
+        {AI_ASSIST_BETA_LABEL}
+      </button>
+    );
+  }
+  return (
+    <button type="button" className="autofill-btn" onClick={onClick} disabled={busy || !ready} title={activeLabel}>
+      {busy ? loadingLabel : activeLabel}
+    </button>
+  );
+}
+
+function AiAssistBetaHint() {
+  if (AI_ASSIST_ENABLED) return null;
+  return <div className="ai-assist-hint">{AI_ASSIST_TOOLTIP}</div>;
+}
+
 /* ─── Constants ─── */
 const CHAR_TAGS = [
   "Boozy","Sweet","Sour/Tart","Fruity","Herbal/Botanical",
@@ -3156,6 +3182,9 @@ body {
 }
 .autofill-btn:hover { background:var(--accent); color:var(--bg); border-color:var(--accent); }
 .autofill-btn:disabled { opacity:.4; cursor:not-allowed; }
+.autofill-btn-beta { opacity:.72; cursor:not-allowed; border-style:dashed; font-size:0.68rem; letter-spacing:.03em; }
+.autofill-btn-beta:hover { background:var(--accent-lt); color:var(--accent-2); border-color:rgba(184,146,42,0.35); }
+.ai-assist-hint { font-size:.72rem; color:var(--text-3); font-style:italic; margin:-4px 0 8px; line-height:1.4; }
 
 /* ── Cards ── */
 .cocktail-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(268px,1fr)); gap:18px; }
@@ -6781,6 +6810,8 @@ function CollectionEditModal({ collection, isNew, preparations, onSave, onCancel
   );
 
   const generateDesc = async () => {
+    // AI Assist disabled for public beta. Future feature — see AI_ASSIST_ENABLED.
+    if (!AI_ASSIST_ENABLED) return;
     if (!form.name.trim()) return;
     setGeneratingDesc(true);
     const prompt = "You are a cocktail expert. Write 2-3 sentences introducing a collection of bar preparations called \"" + form.name + "\". Explain the philosophy behind this category, why a serious home bartender should master it, and what makes these preparations transformative. Inspiring and educational. No filler.";
@@ -6812,10 +6843,9 @@ function CollectionEditModal({ collection, isNew, preparations, onSave, onCancel
           <div>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8,paddingBottom:6,borderBottom:"1px solid var(--border)"}}>
               <div style={{fontSize:"0.7rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".1em",color:"var(--text-3)"}}>Description / Philosophy</div>
-              <button className="autofill-btn" onClick={generateDesc} disabled={generatingDesc||!form.name.trim()}>
-                {generatingDesc?"Thinking…":"✦ Generate"}
-              </button>
+              <AiAssistButton activeLabel="✦ Generate" onClick={generateDesc} busy={generatingDesc} ready={!!form.name.trim()} />
             </div>
+            <AiAssistBetaHint />
             <textarea
               value={form.description||""}
               onChange={e=>set("description",e.target.value)}
@@ -6900,6 +6930,8 @@ function CraftEditModal({ item, isNew, onSave, onCancel }) {
   };
 
   const generateDescription = async () => {
+    // AI Assist disabled for public beta. Future feature — see AI_ASSIST_ENABLED.
+    if (!AI_ASSIST_ENABLED) return;
     if (!form.name.trim()) return;
     setGeneratingDesc(true);
     setDescError("");
@@ -6939,10 +6971,9 @@ function CraftEditModal({ item, isNew, onSave, onCancel }) {
           <div>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10,paddingBottom:6,borderBottom:"1px solid var(--border)"}}>
               <div style={{fontSize:"0.7rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".1em",color:"var(--text-3)"}}>Description</div>
-              <button className="autofill-btn" onClick={generateDescription} disabled={generatingDesc||!form.name.trim()} title="Generate description">
-                {generatingDesc?"Thinking…":"✦ Generate"}
-              </button>
+              <AiAssistButton activeLabel="✦ Generate" onClick={generateDescription} busy={generatingDesc} ready={!!form.name.trim()} />
             </div>
+            <AiAssistBetaHint />
             {descError&&<div style={{fontSize:".78rem",color:"var(--red)",marginBottom:8}}>{descError}</div>}
             <textarea
               value={form.description||""}
@@ -7386,6 +7417,8 @@ function EditModal({ cocktail, isNew, ingredientNames, craftItems, onSave, onCan
   const [fillError, setFillError] = useState("");
 
   const autoFillProfile = async () => {
+    // AI Assist disabled for public beta. Future feature — see AI_ASSIST_ENABLED.
+    if (!AI_ASSIST_ENABLED) return;
     const ings = form.ingredients.filter(i => i.name.trim());
     if (!ings.length) return;
     setFilling(true);
@@ -7418,6 +7451,8 @@ Estimate integer scores from 0–10 for each flavor dimension. Respond ONLY with
   };
 
   const autoFillTags = async () => {
+    // AI Assist disabled for public beta. Future feature — see AI_ASSIST_ENABLED.
+    if (!AI_ASSIST_ENABLED) return;
     const ings = form.ingredients.filter(i => i.name.trim());
     if (!ings.length) return;
     setFillingTags(true);
@@ -7453,6 +7488,8 @@ Estimate integer scores from 0–10 for each flavor dimension. Respond ONLY with
   const [loreError, setLoreError] = useState("");
 
   const generateLore = async () => {
+    // AI Assist disabled for public beta. Future feature — see AI_ASSIST_ENABLED.
+    if (!AI_ASSIST_ENABLED) return;
     if (!form.name.trim()) return;
     setGeneratingLore(true);
     setLoreError("");
@@ -7592,14 +7629,9 @@ Estimate integer scores from 0–10 for each flavor dimension. Respond ONLY with
           <div>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10,paddingBottom:6,borderBottom:"1px solid var(--border)"}}>
               <div style={{fontSize:"0.7rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".1em",color:"var(--text-3)"}}>Character Tags</div>
-              <button
-                className="autofill-btn"
-                onClick={autoFillTags}
-                disabled={fillingTags || !form.ingredients.filter(i=>i.name.trim()).length}
-                title="Auto-suggest tags from ingredients">
-                {fillingTags ? "Thinking…" : "✦ Auto-fill"}
-              </button>
+              <AiAssistButton activeLabel="✦ Auto-fill" onClick={autoFillTags} busy={fillingTags} ready={!!form.ingredients.filter(i=>i.name.trim()).length} />
             </div>
+            <AiAssistBetaHint />
             {fillTagsError && <div style={{fontSize:".78rem",color:"var(--red)",marginBottom:8}}>{fillTagsError}</div>}
             <div className="tag-checkbox-grid">
               {CHAR_TAGS.map(tag=>{
@@ -7618,14 +7650,9 @@ Estimate integer scores from 0–10 for each flavor dimension. Respond ONLY with
           <div>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10,paddingBottom:6,borderBottom:"1px solid var(--border)"}}>
               <div style={{fontSize:"0.7rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".1em",color:"var(--text-3)"}}>Character Profile — Sliders</div>
-              <button
-                className="autofill-btn"
-                onClick={autoFillProfile}
-                disabled={filling || !form.ingredients.filter(i=>i.name.trim()).length}
-                title="Auto-estimate from ingredients">
-                {filling ? "Thinking…" : "✦ Auto-fill"}
-              </button>
+              <AiAssistButton activeLabel="✦ Auto-fill" onClick={autoFillProfile} busy={filling} ready={!!form.ingredients.filter(i=>i.name.trim()).length} />
             </div>
+            <AiAssistBetaHint />
             {fillError && <div style={{fontSize:".78rem",color:"var(--red)",marginBottom:8}}>{fillError}</div>}
             <CharSliderEdit sliders={form.sliders} onChange={v=>set("sliders",v)}/>
           </div>
@@ -7648,10 +7675,9 @@ Estimate integer scores from 0–10 for each flavor dimension. Respond ONLY with
           <div>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10,paddingBottom:6,borderBottom:"1px solid var(--border)"}}>
               <div style={{fontSize:"0.7rem",fontWeight:700,textTransform:"uppercase",letterSpacing:".1em",color:"var(--text-3)"}}>Cocktail Lore</div>
-              <button className="autofill-btn" onClick={generateLore} disabled={generatingLore||!form.name.trim()} title="Generate lore from cocktail name">
-                {generatingLore?"Researching…":"✦ Generate"}
-              </button>
+              <AiAssistButton activeLabel="✦ Generate" onClick={generateLore} busy={generatingLore} loadingLabel="Researching…" ready={!!form.name.trim()} />
             </div>
+            <AiAssistBetaHint />
             {loreError&&<div style={{fontSize:".78rem",color:"var(--red)",marginBottom:8}}>{loreError}</div>}
             <textarea className="field" value={form.lore||""} onChange={e=>set("lore",e.target.value)}
               placeholder="Family, etymology, origin story, historical context…"
