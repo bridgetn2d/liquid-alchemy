@@ -3370,6 +3370,45 @@ body {
 }
 .family-link:hover { color:var(--accent); }
 
+.family-detail-tree-wrap { margin:0 auto 20px; max-width:700px; text-align:center; }
+.family-detail-tree {
+  width:100%; height:auto; display:block; margin:0 auto;
+  border-radius:var(--radius); background:#f7f4ec;
+  box-shadow:0 2px 12px rgba(0,0,0,0.08); cursor:zoom-in;
+  border:1px solid var(--border); transition:border-color .2s, box-shadow .2s;
+}
+.family-detail-tree:hover {
+  border-color:rgba(184,146,42,0.45);
+  box-shadow:0 4px 16px rgba(0,0,0,0.1);
+}
+.family-detail-tree-hint {
+  font-size:0.65rem; color:var(--text-3); font-style:italic; margin-top:6px;
+}
+.family-map-lightbox {
+  position:fixed; inset:0; z-index:2000;
+  background:rgba(28,24,18,0.84);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; cursor:zoom-out;
+}
+.family-map-lightbox-panel {
+  position:relative; max-width:min(960px,100%); max-height:92vh; cursor:default;
+}
+.family-map-lightbox-panel img {
+  width:100%; height:auto; max-height:85vh; object-fit:contain;
+  border-radius:var(--radius); box-shadow:0 12px 40px rgba(0,0,0,0.35);
+  background:#f7f4ec; display:block;
+}
+.family-map-lightbox-title {
+  text-align:center; margin-top:10px;
+  font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#f7f4ec;
+}
+.family-map-lightbox-close {
+  position:absolute; top:-8px; right:-8px;
+  width:32px; height:32px; border-radius:999px;
+  border:1px solid rgba(255,255,255,0.25); background:rgba(0,0,0,0.45);
+  color:#f7f4ec; font-size:1rem; line-height:1; cursor:pointer;
+}
+
 .lore-block {
   font-size:0.82rem; font-style:italic; color:var(--text-3);
   line-height:1.7; margin-top:8px; padding-top:8px;
@@ -4585,26 +4624,23 @@ const TEMPLATES_DATA = [
   },
 ];
 
+const FAMILY_TREE_IMAGES = {
+  "Sour": "sour family tree 2.png",
+  "Old Fashioned": "old fashioned family tree.png",
+  "Martini & Manhattan": "martini and manhattan family tree.png",
+  "Negroni": "Negroni family tree.png",
+};
+
+function familyTreeSrc(file) {
+  return "/family-trees/" + encodeURIComponent(file);
+}
+
 
 /* ─── Templates ─── */
 function TheTemplates({ cocktails, setTab, setViewCocktailId, setFilterFamily }) {
   const [expanded, setExpanded] = React.useState(new Set());
   const [expandedSub, setExpandedSub] = React.useState(new Set());
-  const [familyImgs, setFamilyImgs] = React.useState({});
-
-  React.useEffect(()=>{
-    (async()=>{
-      const keys = ["SOUR_FAMILY_IMG","OLD_FASHIONED_FAMILY_IMG","MARTINI_FAMILY_IMG","NEGRONI_FAMILY_IMG"];
-      const imgs = {};
-      for (const k of keys) {
-        try {
-          const r = await window.storage.get("alchemy_img_"+k);
-          if (r && r.value) imgs[k] = r.value;
-        } catch(e) {}
-      }
-      setFamilyImgs(imgs);
-    })();
-  },[]);
+  const [enlargedMap, setEnlargedMap] = React.useState(null);
 
   const toggle = (id) => setExpanded(prev => {
     const next = new Set(prev);
@@ -4634,9 +4670,20 @@ function TheTemplates({ cocktails, setTab, setViewCocktailId, setFilterFamily })
         </div>
       </div>
 
+      {enlargedMap && (
+        <div className="family-map-lightbox" onClick={()=>setEnlargedMap(null)} role="dialog" aria-modal="true" aria-label={enlargedMap.title + " family map"}>
+          <div className="family-map-lightbox-panel" onClick={e=>e.stopPropagation()}>
+            <button type="button" className="family-map-lightbox-close" onClick={()=>setEnlargedMap(null)} aria-label="Close">✕</button>
+            <img src={familyTreeSrc(enlargedMap.file)} alt={enlargedMap.title + " cocktail family tree"}/>
+            <div className="family-map-lightbox-title">{enlargedMap.title}</div>
+          </div>
+        </div>
+      )}
+
       <div style={{display:"flex",flexDirection:"column",gap:12}}>
         {TEMPLATES_DATA.map(family => {
           const isOpen = expanded.has(family.id);
+          const treeFile = FAMILY_TREE_IMAGES[family.name];
           return (
             <div key={family.id} style={{borderRadius:"var(--radius)",border:"1px solid var(--border)",background:"var(--bg)",overflow:"hidden"}}>
               <div onClick={()=>toggle(family.id)} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"16px 20px",cursor:"pointer",background:isOpen?"var(--bg-2)":"var(--bg)",transition:"background .15s"}}>
@@ -4654,11 +4701,16 @@ function TheTemplates({ cocktails, setTab, setViewCocktailId, setFilterFamily })
 
               {isOpen && (
                 <div style={{borderTop:"1px solid var(--border)",padding:"16px 20px"}}>
-                  <p style={{fontSize:".875rem",color:"var(--text-2)",lineHeight:1.7,marginBottom:16}}>{family.description}</p>
-                  {family.name === "Sour" && familyImgs.SOUR_FAMILY_IMG && <img src={familyImgs.SOUR_FAMILY_IMG} alt="Sour Cocktail Family" style={{width:"100%",maxWidth:700,display:"block",margin:"0 auto 20px auto",borderRadius:"var(--radius)",boxShadow:"0 2px 12px rgba(0,0,0,0.08)"}}/>}
-                  {family.name === "Old Fashioned" && familyImgs.OLD_FASHIONED_FAMILY_IMG && <img src={familyImgs.OLD_FASHIONED_FAMILY_IMG} alt="Old Fashioned Family" style={{width:"100%",maxWidth:700,display:"block",margin:"0 auto 20px auto",borderRadius:"var(--radius)",boxShadow:"0 2px 12px rgba(0,0,0,0.08)"}}/>}
-                  {family.name === "Martini & Manhattan" && familyImgs.MARTINI_FAMILY_IMG && <img src={familyImgs.MARTINI_FAMILY_IMG} alt="Martini & Manhattan Family" style={{width:"100%",maxWidth:700,display:"block",margin:"0 auto 20px auto",borderRadius:"var(--radius)",boxShadow:"0 2px 12px rgba(0,0,0,0.08)"}}/>}
-                  {family.name === "Negroni" && familyImgs.NEGRONI_FAMILY_IMG && <img src={familyImgs.NEGRONI_FAMILY_IMG} alt="Negroni Family" style={{width:"100%",maxWidth:700,display:"block",margin:"0 auto 20px auto",borderRadius:"var(--radius)",boxShadow:"0 2px 12px rgba(0,0,0,0.08)"}}/>}
+                  <p style={{fontSize:".875rem",color:"var(--text-2)",lineHeight:1.7,marginBottom:treeFile?12:16}}>{family.description}</p>
+                  {treeFile && (
+                    <figure className="family-detail-tree-wrap">
+                      <img className="family-detail-tree" src={familyTreeSrc(treeFile)} alt={family.name + " cocktail family tree"} loading="lazy"
+                        onClick={()=>setEnlargedMap({ title:family.name, file:treeFile })}
+                        onKeyDown={e=>{ if (e.key==="Enter"||e.key===" ") { e.preventDefault(); setEnlargedMap({ title:family.name, file:treeFile }); } }}
+                        role="button" tabIndex={0} aria-label={"Enlarge " + family.name + " family tree"}/>
+                      <figcaption className="family-detail-tree-hint">Click to enlarge</figcaption>
+                    </figure>
+                  )}
                   <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:10}}>Sub-families</div>
                   <div style={{display:"flex",flexDirection:"column",gap:8}}>
                     {family.subfamilies.map((sub,i) => {
