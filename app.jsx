@@ -3110,6 +3110,20 @@ body {
 }
 .btn-secondary:hover { border-color:var(--border-2); background:var(--bg-2); }
 
+.modal-shopping-btn {
+  display:inline-flex; align-items:center;
+  padding:6px 14px;
+  background:rgba(245,236,212,0.35);
+  color:var(--accent-2);
+  border:1px solid rgba(184,146,42,0.45);
+  border-radius:var(--radius-sm);
+  font-family:'Jost',sans-serif; font-size:0.78rem; font-weight:500;
+  letter-spacing:.02em; white-space:nowrap;
+  cursor:pointer; transition:all .15s;
+}
+.modal-shopping-btn:hover { background:rgba(245,236,212,0.55); border-color:var(--accent); color:var(--accent); }
+.modal-shopping-btn:disabled { opacity:0.85; cursor:default; }
+
 .btn-ghost {
   padding:6px 12px; background:none; color:var(--text-3);
   border:1px solid transparent; border-radius:var(--radius-sm);
@@ -6049,9 +6063,9 @@ export default function App() {
 
                 <div style={{marginTop:12,marginBottom:16}}>
                   {plannedCocktailIds.includes(viewCocktail.id) ? (
-                    <button className="btn-secondary" disabled style={{width:"100%",opacity:0.85,cursor:"default"}}>On Shopping List</button>
+                    <button type="button" className="modal-shopping-btn" disabled>On Shopping List</button>
                   ) : (
-                    <button className="btn-primary" style={{width:"100%"}} onClick={()=>addToShoppingPlan(viewCocktail.id)}>Create Shopping List</button>
+                    <button type="button" className="modal-shopping-btn" onClick={()=>addToShoppingPlan(viewCocktail.id)}>Create Shopping List</button>
                   )}
                 </div>
 
