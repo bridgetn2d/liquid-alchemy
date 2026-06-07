@@ -5959,7 +5959,7 @@ export default function App() {
                   </div>
                 </div>
                 <div style={{display:"flex",gap:16,marginBottom:16}}>
-                  {!viewCocktail.tried&&<button onClick={()=>setCocktails(prev=>prev.map(c=>c.id===viewCocktail.id?{...c,wantToTry:!c.wantToTry}:c))} style={{background:"none",border:"none",cursor:"pointer",fontSize:"1.2rem",color:viewCocktail.wantToTry?"#b43c50":"var(--text-3)",padding:0,display:"flex",alignItems:"center",gap:4,fontFamily:"'Jost',sans-serif",fontSize:".8rem"}}>
+                  {!viewCocktail.tried&&<button onClick={()=>setCocktails(prev=>prev.map(c=>c.id===viewCocktail.id?{...c,wantToTry:!c.wantToTry}:c))} style={{background:"none",border:"none",cursor:"pointer",color:viewCocktail.wantToTry?"#b43c50":"var(--text-3)",padding:0,display:"flex",alignItems:"center",gap:4,fontFamily:"'Jost',sans-serif",fontSize:".8rem"}}>
                     <span style={{fontSize:"1.1rem"}}>{viewCocktail.wantToTry?"♡":"♡"}</span>{viewCocktail.wantToTry?"On my list":"Want to Try"}
                   </button>}
                   <button onClick={()=>setCocktails(prev=>prev.map(c=>c.id===viewCocktail.id?{...c,tried:!c.tried,wantToTry:false}:c))} style={{background:"none",border:"none",cursor:"pointer",color:viewCocktail.tried?"var(--green)":"var(--text-3)",padding:0,display:"flex",alignItems:"center",gap:4,fontFamily:"'Jost',sans-serif",fontSize:".8rem"}}>
@@ -5980,14 +5980,14 @@ export default function App() {
                       <span className="batch-count">{batch}</span>
                       <button className="batch-btn" onClick={()=>setBatch(b=>Math.min(24,b+1))}>+</button>
                     </div>
-                    {batch>1&&<span style={{fontSize:".75rem",color:"var(--text-3)"}}>×{batch} scale</span>}
+                    {batch > 1 && <span style={{fontSize:".75rem",color:"var(--text-3)"}}>×{batch} scale</span>}
                   </div>
                 )}
 
                 {viewCocktail.ingredients.some(i=>i.name)&&(
                   <div>
                     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:4}}>
-                      <div className="section-label" style={{marginBottom:0}}>Ingredients{batch>1?` (×${batch})`:""}</div>
+                      <div className="section-label" style={{marginBottom:0}}>Ingredients{batch > 1 ? ` (×${batch})` : ""}</div>
                       <button onClick={()=>setUseMetric(m=>!m)} style={{
                         fontSize:".68rem",fontWeight:700,letterSpacing:".06em",
                         padding:"2px 10px",borderRadius:"999px",cursor:"pointer",
