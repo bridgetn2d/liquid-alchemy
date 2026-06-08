@@ -80,7 +80,7 @@ function AiAssistBetaHint() {
 /* ─── Constants ─── */
 const CHAR_TAGS = [
   "Boozy","Sweet","Sour/Tart","Fruity","Herbal/Botanical",
-  "Smoky","Bitter","Creamy/Rich","Spicy","Light/Refreshing",
+  "Smoky","Bitter","Creamy/Rich","Spicy","Savory","Light/Refreshing",
   "Sparkling","Tropical","Elegant"
 ];
 
@@ -96,6 +96,7 @@ const CHAR_META = {
   "Bitter":           { color:"#7a4a3a", bg:"rgba(156,74,60,0.1)" },
   "Creamy/Rich":      { color:"#7a6830", bg:"#f5ecd4" },
   "Spicy":            { color:"#9c4a3c", bg:"rgba(156,74,60,0.1)" },
+  "Savory":           { color:"#6a5a42", bg:"rgba(106,90,66,0.12)" },
   "Light/Refreshing": { color:"#4a6a70", bg:"rgba(74,106,112,0.1)" },
   "Sparkling":        { color:"#9eaab0", bg:"rgba(158,170,176,0.15)" },
   "Tropical":         { color:"#7a8a30", bg:"rgba(122,138,48,0.12)" },
