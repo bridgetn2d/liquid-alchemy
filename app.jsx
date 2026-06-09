@@ -538,7 +538,7 @@ const NEGRONI = {
     { name:"Orange peel",        amount:"1",    unit:"whole" },
   ],
   instructions:"Combine gin, Campari, and sweet vermouth in a mixing glass with ice. Stir for 30 seconds. Strain over a large ice cube in a rocks glass. Express an orange peel over the surface and drop it in.",
-  notes:"Equal parts is the rule — resist the urge to increase the gin. The Negroni rewards patience; stir it longer than you think necessary. Substituting bourbon for gin gives you a Boulevardier.",
+  notes:"Equal parts is the rule — resist the urge to increase the gin. The Negroni rewards patience; stir it longer than you think necessary. Swapping the base spirit changes the entire character of the drink.",
   riffs:"Boulevardier: substitute bourbon for gin. Mezcal Negroni: substitute mezcal for gin. Sbagliato: substitute Prosecco for gin. White Negroni: substitute Suze and Lillet Blanc.", tastingNotes:"", lore:"The Negroni was born in Florence in 1919 when Count Camillo Negroni asked bartender Fosco Scarselli to strengthen his Americano by replacing the soda water with gin. It belongs to the equal-parts family and is the gateway drug to the world of bitter, amaro-driven cocktails. The Sbagliato (with prosecco), Boulevardier (with bourbon), and Mezcal Negroni are its most celebrated variations.",
 };
 
@@ -573,7 +573,7 @@ const MOSCOW_MULE = {
     { name:"Lime wheel",         amount:"1",    unit:"whole" },
   ],
   instructions:"Fill a copper mug with ice. Add vodka and lime juice. Top with ginger beer and gently stir to combine. Garnish with a lime wheel.",
-  notes:"The copper mug is traditional and does keep the drink colder longer. Use a spicy, full-flavored ginger beer — Fever-Tree or Bundaberg work well. Substituting dark rum gives you a Dark & Stormy.",
+  notes:"The copper mug is traditional and does keep the drink colder longer. Use a spicy, full-flavored ginger beer — Fever-Tree or Bundaberg work well. Swapping the spirit while keeping ginger beer and lime is the standard Buck variation.",
   riffs:"Dark and Stormy: substitute dark rum for vodka. Kentucky Mule: substitute bourbon. Mexican Mule: substitute tequila.", tastingNotes:"", lore:"The Moscow Mule was invented in 1941 at the Cock 'n' Bull pub in Los Angeles as a marketing collaboration between Smirnoff vodka and a ginger beer company. Its signature copper mug was a stroke of branding genius. It represents the Highball family — spirit, mixer, ice — the simplest and most refreshing cocktail template, and the one responsible for popularizing vodka in America.",
 };
 
@@ -704,8 +704,8 @@ const SIDECAR = {
     { name:"Sugar",              amount:"1",    unit:"whole" },
   ],
   instructions:"Sugar the rim of a coupe glass. Combine cognac, Cointreau, and lemon juice in a shaker with ice. Shake hard for 15 seconds. Double strain into the prepared glass.",
-  notes:"The sugared rim is traditional but optional — omit it if you prefer a drier drink. The ratio of spirit to orange liqueur to citrus (2:1:1 or 8:3:3) is the same template as the Margarita and Cosmopolitan.",
-  riffs:"Brandy Crusta: add maraschino and bitters, add a sugar-rimmed crusta — the ancestor of this drink. Substitute Calvados for cognac for a French apple variation.", tastingNotes:"", lore:"The Sidecar was born in Paris around World War I, with Harry's New York Bar and the Ritz both claiming credit. It is one of the great classic Daisies — the same family as the Margarita and Cosmopolitan — and essentially a Cognac sour with orange liqueur substituting for simple syrup. Its name supposedly comes from the motorcycle sidecar in which a regular patron arrived.",
+  notes:"The sugared rim is traditional but optional — omit it if you prefer a drier drink. The ratio of spirit to orange liqueur to citrus (2:1:1 or 8:3:3) is the classic Daisy template — spirit, citrus, and orange liqueur in balance.",
+  riffs:"Margarita: substitute tequila for cognac and lime for lemon. Cosmopolitan: substitute vodka with cranberry for a modern Daisy riff. Brandy Crusta: add maraschino and bitters, add a sugar-rimmed crusta — the ancestor of this drink. Substitute Calvados for cognac for a French apple variation.", tastingNotes:"", lore:"The Sidecar was born in Paris around World War I, with Harry's New York Bar and the Ritz both claiming credit. It is one of the great classic Daisies — the same family as the Margarita and Cosmopolitan — and essentially a Cognac sour with orange liqueur substituting for simple syrup. Its name supposedly comes from the motorcycle sidecar in which a regular patron arrived.",
 };
 
 const PISCO_SOUR = {
@@ -809,7 +809,7 @@ const ROB_ROY = {
     { name:"Cocktail cherry",    amount:"1",    unit:"whole" },
   ],
   instructions:"Combine Scotch, vermouth, and bitters in a mixing glass with ice. Stir for 30 seconds. Strain into a chilled coupe or Nick & Nora glass. Garnish with a cocktail cherry.",
-  notes:"The Scotch you choose defines the drink entirely. A blended Scotch gives a smooth, approachable result; an Islay single malt makes it smoky and dramatic. Dry vermouth instead of sweet gives you a Dry Rob Roy.",
+  notes:"The Scotch you choose defines the drink entirely. A blended Scotch gives a smooth, approachable result; an Islay single malt makes it smoky and dramatic. Dry vermouth instead of sweet yields a leaner, drier profile.",
   riffs:"Perfect Rob Roy: split sweet and dry vermouth equally. Dry Rob Roy: use dry vermouth only.", tastingNotes:"", lore:"The Rob Roy is simply a Manhattan made with Scotch whisky instead of rye or bourbon, created at the Waldorf Astoria in New York in 1894 to celebrate the opening of a Broadway operetta about the Scottish folk hero Rob Roy MacGregor. It demonstrates how the Manhattan template — whiskey, sweet vermouth, bitters — translates beautifully across different whisky styles.",
 };
 
@@ -917,7 +917,7 @@ const TOM_COLLINS = {
     { name:"Lemon wheel",        amount:"1",    unit:"whole" },
   ],
   instructions:"Combine gin, lemon juice, and simple syrup in a shaker with ice. Shake for 10 seconds. Strain into a Collins glass over fresh ice. Top with club soda. Stir gently. Garnish with a lemon wheel and cocktail cherry.",
-  notes:"Don't over-shake — you are about to add carbonation. Strain over fresh ice to keep the dilution controlled. A John Collins substitutes bourbon for gin; a Vodka Collins uses vodka.",
+  notes:"Don't over-shake — you are about to add carbonation. Strain over fresh ice to keep the dilution controlled. Spirit swaps are the standard Collins variation — whiskey or vodka in place of gin.",
   riffs:"John Collins: substitute whiskey for gin. Vodka Collins: substitute vodka. Add a barspoon of elderflower liqueur for a floral Hugo Collins variation.", tastingNotes:"", lore:"The Tom Collins is a gin fizz served long over ice, one of the great summer cocktails. Its name comes from an 1874 practical joke — the Tom Collins Hoax — where people would tell friends that a man named Tom Collins had been spreading rumors about them, sending them on a wild chase to find him at various bars. The drink was ready and waiting when they arrived, puzzled and thirsty. It represents the Fizz family — spirit, citrus, sweetener, soda.",
 };
 
@@ -1055,7 +1055,7 @@ const WHITE_RUSSIAN = {
     { name:"Heavy cream",        amount:"1",    unit:"oz" },
   ],
   instructions:"Fill a rocks glass with ice. Add vodka and coffee liqueur. Float cream on top by pouring it slowly over the back of a spoon. Stir gently before drinking, or leave it to swirl for the visual effect.",
-  notes:"The float is visual drama — the swirling cream and coffee is part of the experience. Mr. Black is a significant upgrade over Kahlúa. For a Black Russian, simply omit the cream.",
+  notes:"The float is visual drama — the swirling cream and coffee is part of the experience. Mr. Black is a significant upgrade over Kahlúa. Omit the cream for a spirit-forward coffee liqueur build on the rocks.",
   riffs:"Black Russian: omit the cream entirely. Substitute oat milk or coconut cream for a dairy-free variation.", tastingNotes:"", lore:"The White Russian was created in 1949 by a Belgian bartender named Gustave Tops at the Hotel Metropole in Brussels, in honor of Perle Mesta, U.S. Ambassador to Luxembourg. It languished in relative obscurity until The Big Lebowski (1998), in which Jeff Bridges's character The Dude drinks them constantly — catapulting it back into cultural relevance. 'The Dude abides.'",
 };
 
@@ -2040,9 +2040,9 @@ const COFFEE_COCKTAIL = {
     { name:"Freshly grated nutmeg", amount:"1", unit:"pinch" },
   ],
   instructions:"Combine all ingredients in a shaker. Dry shake vigorously without ice for 10 seconds to emulsify. Add ice and shake hard until well chilled. Fine strain into a chilled wine glass or coupe. Grate fresh nutmeg generously over the surface.",
-  notes:"Essentially a Porto Flip with cognac in place of brandy — the distinction is subtle but cognac adds a more refined aromatic quality. The drink looks like black coffee in the glass, which is the entire point of the name. Jerry Thomas himself noted the drink contains neither coffee nor bitters despite being called a cocktail, which in 1887 specifically implied the presence of bitters.",
+  notes:"A whole-egg Flip built on cognac and ruby port — cognac adds a more refined aromatic quality than brandy alone. The drink looks like black coffee in the glass, which is the entire point of the name. Jerry Thomas himself noted the drink contains neither coffee nor bitters despite being called a cocktail, which in 1887 specifically implied the presence of bitters.",
   tastingNotes:"",
-  riffs:"Use aged rum in place of cognac for a more tropical character. A barspoon of coffee liqueur leans into the name without actually being a Coffee Cocktail anymore.",
+  riffs:"Porto Flip: substitute brandy for cognac for the classic port-and-egg template. Use aged rum in place of cognac for a more tropical character. A barspoon of coffee liqueur leans into the name without actually being a Coffee Cocktail anymore.",
   lore:"The best cocktail in the world named after what it is not. It contains no coffee. It barely qualifies as a cocktail by the 1887 definition — Jerry Thomas himself pointed this out in the recipe note: the name of this drink is a misnomer, as coffee and bitters are not to be found among its ingredients, but it looks like coffee when properly concocted, and hence its name. The appearance is the whole joke. Cognac and ruby port, whole egg, simple syrup — shaken until it is the color of cold espresso in a coupe glass. The nutmeg is the only garnish it needs.",
   source:"https://drinkboy.com/Cocktails/Recipe.aspx?itemid=46",
 };
@@ -2348,9 +2348,9 @@ const SPRINGS_FIRST_BLOOM = {
     { name:"Egg white",                        amount:"1",   unit:"whole" },
   ],
   instructions:"Combine all ingredients in a shaker and dry shake vigorously without ice to build the foam. Add ice and shake again until well chilled. Double strain through a fine mesh strainer into a chilled coupe. Garnish with a single mint leaf or microgreen.",
-  notes:"Hendricks is specified and non-negotiable — its cucumber and botanical profile is structural to the drink. Voisey published this with St-Germain elderflower as the liqueur and The Bitter Truth Celery Bitters as the aromatic element. The lemongrass syrup takes time but is worth making — equal parts sugar and water with 2–3 stalks of bruised lemongrass, steeped 30 minutes.",
+  notes:"Hendricks is specified and non-negotiable — its cucumber and botanical profile is structural to the drink. Voisey published this with St-Germain elderflower as the liqueur and The Bitter Truth Celery Bitters as the aromatic element. The lemongrass syrup takes time but is worth making and works beautifully in a variety of citrus-forward cocktails — equal parts sugar and water with 2–3 stalks of bruised lemongrass, steeped 30 minutes.",
   tastingNotes:"",
-  riffs:"The lemongrass syrup works in almost any floral sour. Try it in a Gimlet or a Bees Knees riff.",
+  riffs:"The lemongrass syrup works in almost any floral sour. Try it in a Daiquiri, Gimlet, or Bees Knees riff.",
   lore:"Created by Charlotte Voisey, one of the most decorated bartenders of the modern era — William Grant and Sons brand ambassador, Tales of the Cocktail Foundation board member, and a driving force in bringing craft bartending into the mainstream consciousness. Spring First Bloom is a showcase for what a thoughtfully constructed Egg White Sour can be: Hendricks cucumber botanicals, St-Germain elderflower, lemongrass, lavender bitters, and egg white foam, all working in concert. Published in Liquor.com. The name is apt — this is what spring tastes like.",
   source:"https://www.liquor.com/recipes/springs-first-bloom/",
 };
@@ -2642,9 +2642,9 @@ const PINEAPPLE_MAKRUT_BUCK = {
     { name:"Makrut lime leaf",                  amount:"1",    unit:"whole" },
   ],
   instructions:"Add pineapple juice, ginger-makrut syrup, lime juice, and cream of coconut to a shaker and fill with ice. Shake until just combined and chilled, about 5 seconds — do not over-shake. Strain into a chilled highball glass half-filled with ice. Add seltzer and use a bar spoon to gently lift the juice mixture from the bottom to the top to combine. Top with additional ice and garnish with a makrut lime leaf. Serve immediately.",
-  notes:"The ✨ next to the syrup means the recipe lives in the Craft section. The 5-second shake is deliberate — long enough to chill and combine without destroying the cream of coconut's body. Cream of coconut is not coconut cream or coconut milk: Coco Lopez or Goya are the reliable supermarket brands. If you cannot find makrut lime leaves, substitute 3 strips of lime zest and 3 strips of lemon zest. Structurally this is a zero-proof Buck — the same family as the Moscow Mule — built on pineapple and coconut rather than spirit. It drinks like a cocktail because the syrup, acid, and carbonation are doing the same structural work that spirit would do.",
+  notes:"The ✨ next to the syrup means the recipe lives in the Craft section. The 5-second shake is deliberate — long enough to chill and combine without destroying the cream of coconut's body. Cream of coconut is not coconut cream or coconut milk: Coco Lopez or Goya are the reliable supermarket brands. If you cannot find makrut lime leaves, substitute 3 strips of lime zest and 3 strips of lemon zest. Structurally this is a zero-proof Buck — spirit replaced by pineapple and coconut — built on the same ginger-lime highball template. It drinks like a cocktail because the syrup, acid, and carbonation are doing the same structural work that spirit would do.",
   tastingNotes:"",
-  riffs:"Add 1–1.5 oz of white rum or coconut rum to make it a proper Buck. A float of ginger beer over the seltzer adds more heat.",
+  riffs:"Moscow Mule: the spirit-forward Buck this drink echoes — vodka, lime, and ginger beer. Add 1–1.5 oz of white rum or coconut rum to make it a proper Buck. A float of ginger beer over the seltzer adds more heat.",
   lore:"Created by Camila Chaparro and published in Cocktails Illustrated by America's Test Kitchen (October 2025). Five five-star reviews. This is what a genuinely good zero-proof cocktail looks like — not a juice with bubbles, but a fully considered drink where every element has a structural role. The ginger-makrut syrup, cream of coconut, and fresh lime work together the way spirit, sweetener, and acid do in a classic Buck. The result is frothy, tropical, and complex in a way that earns its place in any collection.",
   source:"https://www.americastestkitchen.com/recipes/17221-pineapple-makrut-buck",
 };
@@ -2897,6 +2897,11 @@ const MY_RECIPES_LIST = [
   TRIPLE_CROWN,
   OLD_FASHIONED,
 ];
+
+const CONTENT_STANDARD_PATCH_IDS = new Set([
+  "classic-negroni", "moscow-mule", "classic-sidecar", "white-russian",
+  "coffee-cocktail", "pineapple-makrut-buck", "rob-roy", "tom-collins",
+]);
 
 /* ─── End of My Recipes ─── */
 
@@ -5099,6 +5104,10 @@ export default function App() {
           riffs:"The direct ancestor of this drink is the Gin Basil Smash, created by German bartender Jorg Meyer at Le Lion in Hamburg in 2008 — same template, basil instead of rosemary. Worth making both back to back.",
           lore:"The Smash is one of cocktailing oldest templates — spirit, herb, sugar, and seasonal fruit, dating to at least 1862. The modern gin-and-herb interpretation was pioneered by German bartender Jorg Meyer, whose Gin Basil Smash (created in 2008 at Le Lion in Hamburg) inspired a generation of herb-forward riffs. This rosemary version follows that lineage: clean, aromatic, and deeply refreshing. Found on a German cocktail website featuring The Great Eight Gin, an Austrian craft dry gin from the Peter Affenzeller distillery.",
         }
+        if (CONTENT_STANDARD_PATCH_IDS.has(x.id)) {
+          const canonical = MY_RECIPES_LIST.find(r => r.id === x.id);
+          if (canonical) return { ...x, notes: canonical.notes, riffs: canonical.riffs };
+        }
         return x;
       });
       const toInject = [...MY_RECIPES_LIST].filter(r => !finalCocktails.some(x => x.id === r.id));
@@ -5370,10 +5379,11 @@ export default function App() {
           collectionIds:["col-syrups"],
           tags:["House Made"],
           yield:"~1 liter",
-          description:"A clean, fragrant syrup that captures the citrusy, grassy brightness of fresh lemongrass. Charlotte Voisey uses it in Springs First Bloom, and it works equally well in a Daiquiri or Gimlet.",
+          description:"A clean, fragrant syrup that captures the citrusy, grassy brightness of fresh lemongrass. Charlotte Voisey uses it in Springs First Bloom, and it works beautifully across a wide range of citrus-forward cocktail styles.",
           ingredients:[{name:"White sugar", amount:"4", unit:"cup"},{name:"Water", amount:"4", unit:"cup"},{name:"Fresh lemongrass stalks", amount:"6", unit:"whole"}],
           instructions:"Combine sugar and water and stir until fully dissolved. Remove the outer layer from each lemongrass stalk, slice off and discard the ends, and cut into small pieces. Combine with the sugar mixture in a blender and pulse until finely chopped. Let stand for 1 hour. Strain through a fine mesh strainer. Bottle and refrigerate.",
           notes:"Shelf life is approximately 1 week. The blender method extracts far more flavor than steeping alone. Scales down easily: 1 cup sugar, 1 cup water, 2 stalks lemongrass.",
+          riffs:"Daiquiri: replace simple syrup with lemongrass syrup for a floral citrus sour. Gimlet: swap in lemongrass syrup for a grassy twist on the lime-forward template.",
           imageUrl:"", myPhoto:"", _thumb:"",
         }        ,{
           id:"ginger-makrut-syrup",
@@ -5507,7 +5517,7 @@ export default function App() {
         const updatedCraftData = existingCraft.map(c => {
           const defaults = DEFAULT_CRAFT_ITEMS.find(d => d.id === c.id);
           if (!defaults) return c;
-          return { ...defaults, ...c, description: defaults.description, instructions: defaults.instructions, notes: defaults.notes };
+          return { ...defaults, ...c, description: defaults.description, instructions: defaults.instructions, notes: defaults.notes, riffs: defaults.riffs };
         });
         const toInjectCraft = [
           ...DEFAULT_COLLECTIONS.filter(c => !existingIds.has(c.id)),
@@ -6500,7 +6510,7 @@ function TheCraft({ craftItems, setCraftItems, craftReadyForRender, cocktails, d
 
   const craftNorm = s => (s||"").toLowerCase().replace(/[^a-z0-9 ]/gi," ").replace(/ +/g," ").trim();
   const filtered = preparations.filter(c =>
-    !craftSearch || craftNorm(c.name).includes(craftNorm(craftSearch)) || craftNorm(c.description||"").includes(craftNorm(craftSearch))
+    !craftSearch || craftNorm(c.name).includes(craftNorm(craftSearch)) || craftNorm(c.description||"").includes(craftNorm(craftSearch)) || craftNorm(c.riffs||"").includes(craftNorm(craftSearch))
   );
 
   const saveItem = (item) => {
@@ -6894,6 +6904,13 @@ function TheCraft({ craftItems, setCraftItems, craftReadyForRender, cocktails, d
                 <div>
                   <div className="section-label">Notes</div>
                   <div className="notes-block">{viewItem.notes}</div>
+                </div>
+              )}
+
+              {viewItem.riffs&&(
+                <div>
+                  <div className="section-label">Riffs & Variations</div>
+                  <div className="notes-block" style={{fontStyle:"italic"}}>{viewItem.riffs}</div>
                 </div>
               )}
 
