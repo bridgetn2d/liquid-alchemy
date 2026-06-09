@@ -326,24 +326,33 @@ const SUGAR_TABLE = {
   "coconut water": 0.03,
 };
 
-function lookupABV(name) {
-  if (!name) return null;
-  const lower = name.toLowerCase().trim();
-  if (ABV_TABLE[lower] !== undefined) return ABV_TABLE[lower];
-  for (const [key, abv] of Object.entries(ABV_TABLE)) {
-    if (lower.includes(key) || key.includes(lower)) return abv;
+function normalizeIngredientLookupName(name) {
+  return (name || "").toLowerCase().trim().replace(/[✨🌟]/g, "").replace(/\s+/g, " ").trim();
+}
+
+/** Match ingredient names to ABV/sugar tables using exact or whole-phrase matches only. */
+function lookupInReferenceTable(name, table) {
+  const lower = normalizeIngredientLookupName(name);
+  if (!lower) return null;
+  if (Object.prototype.hasOwnProperty.call(table, lower)) return table[lower];
+
+  const keys = Object.keys(table).sort((a, b) => b.length - a.length);
+  for (const key of keys) {
+    const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const re = new RegExp(`(?:^|[^a-z0-9])${escaped}(?:[^a-z0-9]|$)`, "i");
+    if (re.test(lower)) return table[key];
   }
   return null;
 }
 
+function lookupABV(name) {
+  const abv = lookupInReferenceTable(name, ABV_TABLE);
+  return abv === null ? null : abv;
+}
+
 function lookupSugar(name) {
-  if (!name) return null;
-  const lower = name.toLowerCase().trim();
-  if (SUGAR_TABLE[lower] !== undefined) return SUGAR_TABLE[lower];
-  for (const [key, val] of Object.entries(SUGAR_TABLE)) {
-    if (lower.includes(key) || key.includes(lower)) return val;
-  }
-  return null;
+  const sugar = lookupInReferenceTable(name, SUGAR_TABLE);
+  return sugar === null ? null : sugar;
 }
 
 function calcABV(ingredients) {
