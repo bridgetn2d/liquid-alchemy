@@ -1,0 +1,270 @@
+{
+  "cocktails": [
+    {
+      "id": "lantern-fly",
+      "name": "Lantern Fly",
+      "family": "Sour",
+      "subFamily": "Daisy — Equal Parts",
+      "baseSpirit": "Rum",
+      "glass": "Coupe",
+      "occasion": "After Dinner",
+      "season": "Year-Round",
+      "difficulty": "Medium",
+      "serveStyle": "Up",
+      "tags": [
+        "Sour/Tart",
+        "Bitter",
+        "Fruity",
+        "Boozy",
+        "Spicy"
+      ],
+      "sliders": {
+        "boozy": 6,
+        "sweet": 3,
+        "sour": 6,
+        "bitter": 7,
+        "fruity": 5,
+        "herbal": 4,
+        "smoky": 0,
+        "spicy": 4,
+        "rich": 2
+      },
+      "ingredients": [
+        {
+          "name": "Jamaican pot still rum (Doctor Bird recommended)",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lemon juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Sweetened ginger juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Amargo-Vallet amaro",
+          "amount": "0.75",
+          "unit": "oz"
+        }
+      ],
+      "instructions": "Combine all ingredients in a cocktail shaker with ice. Shake until well chilled. Strain into a chilled coupe. Garnish with candied ginger.",
+      "rating": 0,
+      "addedAt": 1780281600003,
+      "imageUrl": "",
+      "myPhoto": "",
+      "notes": "Creator's spec per Punch, January 2025. Jamaican pot still rum is not interchangeable with standard Jamaican rum or blended Caribbean rum — the funk is structural. Worthy Park, Hampden, or Doctor Bird are the appropriate choices. Amargo-Vallet has limited distribution; check specialty spirits retailers. In a pinch, Angostura bitters at 0.5 oz plus 0.25 oz Campari approximates the botanical character at some cost to the amaro's depth and sweetness contribution — adjust the ginger juice accordingly.",
+      "lore": "Jojo Colona created the Lantern Fly at Attaboy's New York location, working with two ingredients that are unusual choices within the Bug family and that produce, together, the most distinctly funky drink in the series.\n\nJamaican pot still rum is not a background ingredient. Made in traditional pot stills rather than the continuous column stills that produce lighter Caribbean rums, pot still Jamaican rum carries an intense, funky, almost overripe fruit quality — esters and congeners that make themselves known in any drink they inhabit. Doctor Bird, the rum Punch specifies for this recipe, is a Worthy Park expression named for the Jamaican national bird, made entirely from pot still distillate. It is not a subtle rum.\n\nAmargo-Vallet is equally specific. The Mexican digestif amaro, made since 1881 in Mexico City and named for its French founder Adolphe Vallet, is built on a base of angostura bark — making it a relative of Angostura bitters in botanical character, with the flavor profile of a bitter liqueur rather than a concentrate. It is drier, more herbal, and less sweet than Campari, and its angostura-forward bitterness creates a different kind of tension with the ginger than Campari's more fruit-and-citrus bitterness.\n\nThe combination — funky pot still rum, angostura-forward amaro, ginger heat, lemon acid — is aggressive and layered in a way that rewards attention.",
+      "riffs": "Substitute Campari for Amargo-Vallet for a sweeter, more familiar bitter profile that tames the funk of the pot still rum rather than amplifying it. Smith & Cross, the Navy-strength Jamaican pot still rum, in place of Doctor Bird increases the proof significantly and pushes the funk further — the drink becomes considerably more demanding. Combine equal parts pot still rum and aged agricole rhum for a split-base variation with additional grassy, vegetal complexity.",
+      "sourceUrl": "https://punchdrink.com/articles/attaboy-equal-parts-cocktail-recipes/",
+      "obscura": false,
+      "craftLinks": [
+        "sweetened-ginger-juice"
+      ]
+    },
+    {
+      "id": "maverick",
+      "name": "Maverick",
+      "family": "Sour",
+      "subFamily": "Daisy — Equal Parts",
+      "baseSpirit": "Gin",
+      "glass": "Coupe",
+      "occasion": "Aperitivo",
+      "season": "Year-Round",
+      "difficulty": "Easy",
+      "serveStyle": "Up",
+      "tags": [
+        "Sour/Tart",
+        "Herbal/Botanical",
+        "Light/Refreshing",
+        "Fruity",
+        "Elegant"
+      ],
+      "sliders": {
+        "boozy": 5,
+        "sweet": 4,
+        "sour": 6,
+        "bitter": 4,
+        "fruity": 2,
+        "herbal": 6,
+        "smoky": 0,
+        "spicy": 3,
+        "rich": 1
+      },
+      "ingredients": [
+        {
+          "name": "London dry gin",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lemon juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Sweetened ginger juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Aperol",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh mint leaves",
+          "amount": "7",
+          "unit": "whole"
+        }
+      ],
+      "instructions": "Combine all ingredients in a cocktail shaker with ice. Shake until well chilled. Strain through a tightly gated Hawthorne strainer — or double-strain — into a chilled coupe. The mint is shaken in, not muddled; the strainer catches the leaves. Garnish with candied ginger.",
+      "rating": 0,
+      "addedAt": 1780281600002,
+      "imageUrl": "",
+      "myPhoto": "",
+      "notes": "Creator's spec per Punch, January 2025. A botanical gin with genuine herbal presence works better here than a neutral or citrus-forward gin — the mint needs something to harmonize with. Beefeater, Tanqueray, or Sipsmith are appropriate. The double-strain or tightly gated Hawthorne is important — mint leaf fragments in a coupe are not pleasant. Aperol's lower proof (11% ABV) means this is the lowest-alcohol drink in the Bug family; factor that in if you are building a round.",
+      "lore": "Mike McCollum of Attaboy Nashville brought two things to the Bug family that none of the other drinks in the series have: gin as the base spirit, and fresh mint shaken directly into the cocktail.\n\nThe gin choice is interesting. The Last Word — the great-grandparent of this entire family — is a gin drink. The Paper Plane moved to bourbon. The Mosquito moved to mezcal. The Maverick returns to gin, completing a kind of circle, and pairs it with Aperol rather than Campari or Gran Classico. The result is the lightest, most herbaceous, and most approachable drink in the Bug family — Aperol's lower bitterness and higher sweetness softening the ginger's heat, gin's botanicals amplified by the mint, lemon keeping everything bright and clean.\n\nThe mint technique is the detail worth noting. Rather than muddled in the shaker or used as a garnish, the leaves are shaken whole with the other ingredients and caught by the strainer. This produces a gentler mint character than muddling — more aromatic than aggressive, woven into the drink rather than dominating it.",
+      "riffs": "Substitute Campari for Aperol for a significantly more bitter, less sweet version — closer to a gin Mosquito. Add a half ounce of green Chartreuse and reduce Aperol to 0.5 oz to push the drink back toward its Last Word ancestor. Basil shaken in place of mint produces a more savory, anise-adjacent variation worth trying.",
+      "sourceUrl": "https://punchdrink.com/articles/attaboy-equal-parts-cocktail-recipes/",
+      "obscura": false,
+      "craftLinks": [
+        "sweetened-ginger-juice"
+      ]
+    },
+    {
+      "id": "mosquito",
+      "name": "Mosquito",
+      "family": "Sour",
+      "subFamily": "Daisy — Equal Parts",
+      "baseSpirit": "Mezcal",
+      "glass": "Coupe",
+      "occasion": "After Dinner",
+      "season": "Year-Round",
+      "difficulty": "Easy",
+      "serveStyle": "Up",
+      "tags": [
+        "Sour/Tart",
+        "Bitter",
+        "Smoky",
+        "Spicy",
+        "Boozy"
+      ],
+      "sliders": {
+        "boozy": 6,
+        "sweet": 3,
+        "sour": 6,
+        "bitter": 7,
+        "fruity": 2,
+        "herbal": 2,
+        "smoky": 6,
+        "spicy": 5,
+        "rich": 1
+      },
+      "ingredients": [
+        {
+          "name": "Mezcal",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lemon juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Sweetened ginger juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Campari",
+          "amount": "0.75",
+          "unit": "oz"
+        }
+      ],
+      "instructions": "Combine all ingredients in a cocktail shaker with ice. Shake until well chilled. Strain into a chilled coupe. Garnish with candied ginger.",
+      "rating": 0,
+      "addedAt": 1780281600000,
+      "imageUrl": "",
+      "myPhoto": "",
+      "notes": "Creator's spec per Punch, January 2025. The ginger juice is the heart of this drink and every drink in the Bug family — it must be made fresh. The sweetening ratio (4:3 juice to sugar by weight) is precise and intentional; adjust and the balance collapses. Campari's bitterness is what reins in the ginger's natural sweetness — they are calibrated against each other. Mezcal with genuine smoke presence is necessary; a neutral-tasting mezcal loses the tension that makes the drink interesting.",
+      "lore": "Sam Ross created the Paper Plane in 2007 for the opening menu of Chicago's Violet Hour, drawing on the Last Word — the pre-Prohibition equal-parts classic of gin, green Chartreuse, maraschino, and lime — as his structural template. Equal parts, shaken, citrus-forward, bitter element. The Paper Plane went on to become one of the most widely traveled modern classics in the craft cocktail canon.\n\nTen years later, Ross revisited his own creation. At Attaboy — the celebrated bar he launched on Manhattan's Lower East Side in 2012 with partner Michael McIlroy — he assembled a new equal-parts drink called the Mosquito: mezcal, lemon, sweetened ginger juice, Campari. The architecture is the same as the Paper Plane. The personality is entirely different — smokier, spicier, more bitter, with ginger replacing Amaro Nonino's herbal sweetness and Campari sharpening the finish where Aperol had softened it.\n\nThe Mosquito became the progenitor of what Attaboy staff have dubbed the Bug Cocktail family: a growing library of equal-parts originals, now numbering more than eight, each keeping the lemon and ginger components intact while swapping the spirit and bitter element. It is, in miniature, the same creative logic that produced the Mosquito from the Paper Plane — a template passed forward, remixed, extended. Attaboy operates without written menus, relying on bartender's choice, which means these drinks exist in the bar's institutional memory as much as on any page. Publishing them is an act of preservation as much as documentation.",
+      "riffs": "The Paper Plane (Sam Ross, 2007) is the direct ancestor: bourbon, Aperol, Amaro Nonino, lemon, equal parts. The Last Word (pre-Prohibition) is the architectural grandfather: gin, green Chartreuse, maraschino, lime, equal parts. The three Bug Cocktails below are all Mosquito variations following the same equal-parts ginger-lemon template with different spirit and bitter pairings.",
+      "sourceUrl": "https://punchdrink.com/articles/attaboy-equal-parts-cocktail-recipes/",
+      "obscura": false,
+      "craftLinks": [
+        "sweetened-ginger-juice"
+      ]
+    },
+    {
+      "id": "praying-mantis",
+      "name": "Praying Mantis",
+      "family": "Sour",
+      "subFamily": "Daisy — Equal Parts",
+      "baseSpirit": "Scotch",
+      "glass": "Coupe",
+      "occasion": "After Dinner",
+      "season": "Year-Round",
+      "difficulty": "Medium",
+      "serveStyle": "Up",
+      "tags": [
+        "Sour/Tart",
+        "Bitter",
+        "Smoky",
+        "Boozy",
+        "Herbal/Botanical"
+      ],
+      "sliders": {
+        "boozy": 7,
+        "sweet": 2,
+        "sour": 6,
+        "bitter": 8,
+        "fruity": 1,
+        "herbal": 5,
+        "smoky": 7,
+        "spicy": 3,
+        "rich": 1
+      },
+      "ingredients": [
+        {
+          "name": "Islay Scotch",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lemon juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Sweetened ginger juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Gran Classico",
+          "amount": "0.75",
+          "unit": "oz"
+        }
+      ],
+      "instructions": "Combine all ingredients in a cocktail shaker with ice. Shake until well chilled. Strain into a chilled coupe. Garnish with candied ginger.",
+      "rating": 0,
+      "addedAt": 1780281600001,
+      "imageUrl": "",
+      "myPhoto": "",
+      "notes": "Creator's spec per Punch, January 2025. Islay Scotch is not interchangeable with blended or Highland Scotch here — the peat is structural, not decorative. Laphroaig 10, Ardbeg 10, or Caol Ila 12 are all appropriate choices at different smoke intensities. Gran Classico is available in well-stocked craft spirits retailers; Contratto Bitter or Tempus Fugit Gran Classico are the same product. Do not substitute Campari — the bitterness profile is different enough to produce a meaningfully different drink.",
+      "lore": "Brandon Bramhall created the Praying Mantis at Attaboy's Nashville outpost, working within the equal-parts ginger-lemon template that Sam Ross established with the Mosquito. The formula is consistent across the Bug family: a base spirit, lemon juice, sweetened ginger juice, and a bitter liqueur or amaro, all in equal proportion, all shaken and served up in a coupe. What changes is the pairing — and the pairing is everything.\n\nBramhall's choice of Islay Scotch and Gran Classico is the most austere and complex variation in the Bug family. Islay Scotch brings peat smoke, maritime salt, and iodine — a flavor profile that has no equivalent in any other spirit and that pairs with bitterness in ways that require careful calibration. Gran Classico, the Swiss bitter liqueur made from a nineteenth-century recipe with twenty-five herbs and roots, sits between Campari and Aperol in sweetness but carries a complexity that neither achieves. The combination produces a drink that is simultaneously more smoky, more bitter, and more herbal than the Mosquito — and considerably more demanding of the drinker.\n\nThe name is well-chosen. The praying mantis is a patient, precise, and formidable creature. So is this drink.",
+      "riffs": "Substitute blended Scotch for Islay to soften the smoke and produce a more approachable version at some cost to complexity. Campari in place of Gran Classico sharpens the bitterness and reduces the herbal depth — closer to a Scotch Mosquito than a distinct drink. For a lower-proof version, substitute a peated Scotch-style whisky liqueur (Drambuie adds honey sweetness that changes the balance significantly — account for it by reducing the ginger juice).",
+      "sourceUrl": "https://punchdrink.com/articles/attaboy-equal-parts-cocktail-recipes/",
+      "obscura": false,
+      "craftLinks": [
+        "sweetened-ginger-juice"
+      ]
+    }
+  ],
+  "inventory": []
+}
