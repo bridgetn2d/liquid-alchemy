@@ -565,7 +565,7 @@ export function cocktailSearchText(c) {
   const extra = c.searchTerms || [];
   return searchNorm([
     c.name, c.aka, c.baseSpirit, c.family, c.subFamily,
-    c.notes, c.riffs,
+    c.notes,
     ...(c.ingredients || []).map(i => i.name),
     ...(c.tags || []),
     ...(idx?.creators || []),
