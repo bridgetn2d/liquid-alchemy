@@ -1,0 +1,86 @@
+{
+  "cocktails": [
+    {
+      "id": "singapore-sling",
+      "name": "Singapore Sling",
+      "family": "Sour",
+      "subFamily": "Collins",
+      "baseSpirit": "Gin",
+      "glass": "Highball",
+      "occasion": "Party/Batch",
+      "season": "Summer",
+      "difficulty": "Medium",
+      "serveStyle": "On the Rocks",
+      "tags": [
+        "Fruity",
+        "Herbal/Botanical",
+        "Light/Refreshing",
+        "Tropical",
+        "Sweet"
+      ],
+      "sliders": {
+        "boozy": 5,
+        "sweet": 5,
+        "sour": 3,
+        "bitter": 1,
+        "fruity": 6,
+        "herbal": 3,
+        "smoky": 0,
+        "spicy": 0,
+        "rich": 2
+      },
+      "ingredients": [
+        {
+          "name": "Gin",
+          "amount": "1.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Cherry Heering",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Cointreau",
+          "amount": "0.25",
+          "unit": "oz"
+        },
+        {
+          "name": "Benedictine",
+          "amount": "0.25",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh pineapple juice",
+          "amount": "4",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lime juice",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Grenadine",
+          "amount": "0.33",
+          "unit": "oz"
+        },
+        {
+          "name": "Angostura bitters",
+          "amount": "1",
+          "unit": "dash"
+        }
+      ],
+      "instructions": "Combine all ingredients in a shaker with ice. Shake well. Strain into a Collins glass filled with fresh ice. Garnish with a pineapple slice and a maraschino cherry.",
+      "rating": 0,
+      "addedAt": 1780198575337,
+      "imageUrl": "",
+      "myPhoto": "",
+      "notes": "Cherry Heering specifically — not generic cherry brandy. The Benedictine is the secret weapon and should not be omitted; it adds a herbal depth that is hard to identify but impossible to miss when absent. Fresh pineapple juice makes a significant difference over canned. The grenadine provides color as much as sweetness — housemade grenadine gives a far better result than commercial.",
+      "lore": "Created sometime between 1899 and 1915 by Ngiam Tong Boon, a Hainanese-Chinese bartender at the Long Bar in Raffles Hotel, Singapore. The original recipe was never formally recorded — the closest thing to a primary source is a recipe hastily scrawled on a bar chit in 1936 by a visitor who thought to ask a waiter how it was made.\n\nThe drink was conceived as a workaround. In colonial Singapore, women were not permitted to consume alcohol in public — but fruit juice was perfectly acceptable. The Singapore Sling's pink color and tropical sweetness gave women plausible deniability, a cocktail disguised as something respectable. Ngiam Tong Boon built the subversion right into the recipe.\n\nThe Long Bar where it was born did not survive the war intact. Japanese forces occupied Raffles in 1942, using it as a prisoner of war transit camp, and whatever records existed were lost. The version served today is reconstructed from the memories of former bartenders and that lone 1936 chit.\n\nThe hotel was later restored to its colonial-era splendor, and the Long Bar now serves thousands of Singapore Slings a day — guests still encouraged, as they always were, to throw their peanut shells on the floor.",
+      "riffs": "Reduce grenadine and pineapple for a drier, more spirit-forward version. Add a float of dark rum for a richer tropical character.",
+      "obscura": false
+    }
+  ],
+  "inventory": []
+}
