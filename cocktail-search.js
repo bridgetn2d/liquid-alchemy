@@ -17,10 +17,21 @@ export const COCKTAIL_SEARCH_INDEX =
 {
   "classic-daiquiri": {
     "creators": [
+      "Ernest Hemingway",
+      "Hemingway",
       "Jennings Cox"
     ],
     "venues": [
       "El Floridita"
+    ]
+  },
+  "classic-mojito": {
+    "creators": [
+      "Ernest Hemingway",
+      "Hemingway"
+    ],
+    "venues": [
+      "La Bodeguita del Medio"
     ]
   },
   "classic-negroni": {
@@ -356,6 +367,14 @@ export const COCKTAIL_SEARCH_INDEX =
 
 export const SEARCH_ALIAS_TO_IDS = 
 {
+  "hemingway": [
+    "classic-daiquiri",
+    "classic-mojito"
+  ],
+  "ernest hemingway": [
+    "classic-daiquiri",
+    "classic-mojito"
+  ],
   "jeffrey morgenthaler": [
     "bourbon-renewal",
     "morgenthaler-amaretto-sour",
@@ -546,7 +565,7 @@ export function cocktailSearchText(c) {
   const extra = c.searchTerms || [];
   return searchNorm([
     c.name, c.aka, c.baseSpirit, c.family, c.subFamily,
-    c.lore, c.notes, c.riffs, c.instructions, c.source, c.sourceUrl,
+    c.notes, c.riffs,
     ...(c.ingredients || []).map(i => i.name),
     ...(c.tags || []),
     ...(idx?.creators || []),
