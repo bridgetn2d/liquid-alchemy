@@ -8,6 +8,7 @@ and writes { cocktails, inventory } JSON for the app Import UI.
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -151,6 +152,11 @@ def snake_to_kebab(recipe_id: str) -> str:
 
 def kebab_to_snake(app_id: str) -> str:
     return app_id.replace("-", "_")
+
+
+def normalize_recipe_id_selection(recipe_ids: list[str]) -> set[str]:
+    """Accept snake_case or kebab-case ids; return snake_case set."""
+    return {kebab_to_snake(recipe_id.strip()) for recipe_id in recipe_ids if recipe_id.strip()}
 
 
 def parse_tags(raw: str) -> list[str]:
@@ -421,11 +427,58 @@ def collect_mapping_uncertainties(
     return uncertainties
 
 
+def validate_import_shape(payload: dict) -> list[str]:
+    """Check JSON matches the app's import expectations."""
+    issues: list[str] = []
+
+    if not isinstance(payload, dict):
+        return ["Top-level payload must be an object"]
+    if "cocktails" not in payload or not isinstance(payload["cocktails"], list):
+        issues.append("Top-level cocktails must be an array")
+    if "inventory" not in payload or not isinstance(payload["inventory"], list):
+        issues.append("Top-level inventory must be an array")
+
+    cocktails = payload.get("cocktails", [])
+    required_fields = (
+        "id", "name", "family", "subFamily", "baseSpirit", "glass", "occasion", "season",
+        "difficulty", "serveStyle", "tags", "sliders", "ingredients", "instructions",
+        "rating", "addedAt", "imageUrl", "myPhoto",
+    )
+
+    for cocktail in cocktails:
+        if not isinstance(cocktail, dict):
+            issues.append("Each cocktail must be an object")
+            continue
+        cid = cocktail.get("id", "<unknown>")
+        for field in required_fields:
+            if field not in cocktail:
+                issues.append(f"{cid}: missing required field '{field}'")
+        if not isinstance(cocktail.get("tags"), list):
+            issues.append(f"{cid}: tags must be an array")
+        sliders = cocktail.get("sliders")
+        if not isinstance(sliders, dict):
+            issues.append(f"{cid}: sliders must be an object")
+        else:
+            for key in SLIDER_KEYS:
+                if key not in sliders:
+                    issues.append(f"{cid}: sliders missing '{key}'")
+        ingredients = cocktail.get("ingredients")
+        if not isinstance(ingredients, list) or not ingredients:
+            issues.append(f"{cid}: ingredients must be a non-empty array")
+        elif not all(isinstance(item, dict) and item.get("name") for item in ingredients):
+            issues.append(f"{cid}: each ingredient needs a name")
+        if not cocktail.get("instructions"):
+            issues.append(f"{cid}: instructions must be non-empty")
+
+    return issues
+
+
 def export_workbook(
     workbook_path: Path = DEFAULT_WORKBOOK,
     output_path: Path = DEFAULT_OUTPUT,
     *,
     export_ready_only: bool = True,
+    recipe_ids: list[str] | None = None,
 ) -> dict:
     sheets = load_workbook_sheets(workbook_path)
 
@@ -454,11 +507,30 @@ def export_workbook(
         steps_by_recipe[row.get("recipe_id", "")].append(row)
 
     lore_by_recipe = {row.get("recipe_id", ""): row for row in lore_all if row.get("recipe_id")}
+    recipes_by_id = {r["recipe_id"]: r for r in recipes if r.get("recipe_id")}
+    selected_ids = normalize_recipe_id_selection(recipe_ids) if recipe_ids else None
 
     exported: list[dict] = []
     skipped: list[dict[str, str]] = []
 
-    for recipe in recipes:
+    if selected_ids:
+        for recipe_id in sorted(selected_ids):
+            if recipe_id not in recipes_by_id:
+                skipped.append(
+                    {
+                        "recipe_id": recipe_id,
+                        "name": "",
+                        "reason": "recipe_id not found in workbook Recipes sheet",
+                    }
+                )
+
+    recipe_iter = (
+        [recipes_by_id[recipe_id] for recipe_id in sorted(selected_ids) if recipe_id in recipes_by_id]
+        if selected_ids
+        else recipes
+    )
+
+    for recipe in recipe_iter:
         recipe_id = recipe.get("recipe_id", "").strip()
         if not recipe_id:
             skipped.append({"recipe_id": "", "name": recipe.get("name", ""), "reason": "missing recipe_id"})
@@ -498,13 +570,13 @@ def export_workbook(
     payload = {"cocktails": exported, "inventory": []}
     output_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    recipes_by_id = {r["recipe_id"]: r for r in recipes if r.get("recipe_id")}
     uncertainties = collect_mapping_uncertainties(
         exported,
         recipes_by_id,
         enum_rules=enum_rules,
         tag_map=tag_map,
     )
+    shape_issues = validate_import_shape(payload)
 
     return {
         "workbook": str(workbook_path),
@@ -512,8 +584,11 @@ def export_workbook(
         "exported_count": len(exported),
         "skipped_count": len(skipped),
         "total_recipes": len(recipes),
+        "exported_recipe_ids": [kebab_to_snake(c["id"]) for c in exported],
+        "selected_recipe_ids": sorted(selected_ids) if selected_ids else None,
         "skipped": skipped,
         "uncertainties": uncertainties,
+        "shape_issues": shape_issues,
         "normalization": {
             "enum_rules_loaded": sum(len(v) for v in enum_maps.values()),
             "tag_rules_loaded": len(tag_map),
@@ -540,26 +615,65 @@ def print_report(report: dict) -> None:
             print(f"  - {item['recipe_id']} | {item['name']} | {item['reason']}")
         print()
 
+    if report.get("selected_recipe_ids"):
+        print("Selected recipe_ids:")
+        for recipe_id in report["selected_recipe_ids"]:
+            print(f"  - {recipe_id}")
+        print()
+        print("Exported recipe_ids:")
+        for recipe_id in report.get("exported_recipe_ids", []):
+            print(f"  - {recipe_id}")
+        print()
+
     if report["uncertainties"]:
         print(f"Mapping uncertainties ({len(report['uncertainties'])}):")
         for note in report["uncertainties"]:
             print(f"  - {note}")
     else:
         print("Mapping uncertainties: none flagged")
+    print()
+
+    shape_issues = report.get("shape_issues", [])
+    if shape_issues:
+        print(f"Import shape issues ({len(shape_issues)}):")
+        for note in shape_issues:
+            print(f"  - {note}")
+    else:
+        print("Import shape: valid for app import")
 
 
-def main(argv: list[str]) -> int:
-    workbook = Path(argv[1]) if len(argv) > 1 else DEFAULT_WORKBOOK
-    output = Path(argv[2]) if len(argv) > 2 else DEFAULT_OUTPUT
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Export Liquid Alchemy workbook to app-import JSON")
+    parser.add_argument(
+        "workbook",
+        nargs="?",
+        default=str(DEFAULT_WORKBOOK),
+        help="Path to workbook .xlsx",
+    )
+    parser.add_argument(
+        "output",
+        nargs="?",
+        default=str(DEFAULT_OUTPUT),
+        help="Output JSON path",
+    )
+    parser.add_argument(
+        "--ids",
+        help="Comma-separated recipe_ids to export (snake_case or kebab-case)",
+    )
+    args = parser.parse_args(argv)
+
+    workbook = Path(args.workbook)
+    output = Path(args.output)
 
     if not workbook.exists():
         print(f"Workbook not found: {workbook}", file=sys.stderr)
         return 1
 
-    report = export_workbook(workbook, output)
+    recipe_ids = [part.strip() for part in args.ids.split(",")] if args.ids else None
+    report = export_workbook(workbook, output, recipe_ids=recipe_ids)
     print_report(report)
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main(sys.argv))
+    raise SystemExit(main())

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import { cocktailMatchesSearch, normalizeSearchText } from "./cocktail-search.js";
 
 /* ─── App-level event log (visible in Debug tab) ─── */
 const _logListeners = [];
@@ -5511,10 +5512,8 @@ export default function App() {
   )].sort();
 
   let filtered = cocktails.filter(c=>{
-    const q=normStr(search.replace(/[\u2018\u2019']/g,''));
-    const ms=!q||normStr((c.name||'').replace(/[\u2018\u2019']/g,'')).includes(q)||normStr(c.baseSpirit||"").includes(q)
-      ||c.ingredients.some(i=>normStr(i.name).includes(q))||c.tags.some(t=>normStr(t).includes(q))
-      ||normStr(c.lore||"").includes(q)||normStr(c.notes||"").includes(q)||normStr(c.riffs||"").includes(q);
+    const q=normalizeSearchText(search);
+    const ms=!q||cocktailMatchesSearch(c, q);
     return ms
       &&(activeTags.size===0||c.tags.some(t=>activeTags.has(t)))
       &&(!filterCanMake||canMake(c))
@@ -5761,7 +5760,7 @@ export default function App() {
             <div className="toolbar">
               <div className="search-wrap">
                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                <input className="search-input" placeholder="Search by name, spirit, or ingredient…" value={search} onChange={e=>setSearch(e.target.value)}/>
+                <input className="search-input" placeholder="Search by name, spirit, ingredient, creator, or bar…" value={search} onChange={e=>setSearch(e.target.value)}/>
                 {search&&<button onClick={()=>setSearch("")} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",color:"var(--text-3)",fontSize:"1rem",lineHeight:1,padding:0}}>✕</button>}
                 {search&&<button onClick={()=>setSearch("")} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",color:"var(--text-3)",fontSize:"1rem",lineHeight:1,padding:0}}>✕</button>}
               </div>
