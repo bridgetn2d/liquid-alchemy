@@ -1,0 +1,525 @@
+LIQUID ALCHEMY — BAR & COCKTAIL RESEARCH TRACKER
+================================================================================
+Status codes:
+  [ ] Not in workbook
+  [~] In workbook, lore needs work
+  [X] In workbook, lore complete
+
+Attribution confidence:
+  Clean     = one bar, one person, documented
+  Contested = multiple bars claim it, no consensus
+  Legend    = associated by tradition/endorsement, not invention
+
+Creator status:
+  Historical = deceased; no outreach needed
+  Living     = active; outreach protocol applies
+
+Source abbreviations:
+  WON  = Wondrich (Imbibe!, Punch, Oxford Companion)
+  REG  = Regan (The Joy of Mixology)
+  CC   = Cocktail Codex (Death & Co)
+  DC   = Death & Co: Modern Classic Cocktails
+  BUB  = Beachbum Berry (Sippin' Safari, Grog Log)
+  RES  = This research session (June 2026)
+  IBA  = International Bartenders Association
+
+================================================================================
+THE TRACKER
+================================================================================
+
+BAR: El Floridita
+Location: Havana, Cuba
+Est: ~1817
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Daiquiri          | [ ]    | Clean        | Constantino Ribalaigua| Historical    | WON / RES   | Floridita's head bartender refined the classic; Hemingway connection
+Hemingway Daiquiri| [ ]    | Clean        | Ribalaigua / Hemingway| Historical    | WON / RES   | Created to Hemingway's spec — no sugar, double rum, grapefruit
+
+================================================================================
+
+BAR: La Bodeguita del Medio
+Location: Havana, Cuba
+Est: 1942
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Mojito            | [ ]    | Legend       | Unknown              | —             | WON / RES   | Recipe predates bar; associated by Hemingway endorsement quote
+
+================================================================================
+
+BAR: Harry's Bar
+Location: Venice, Italy
+Est: 1931
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Bellini           | [ ]    | Clean        | Giuseppe Cipriani    | Historical     | RES         | 1948; Prosecco + white peach purée; UNESCO landmark bar
+
+================================================================================
+
+BAR: Harry's New York Bar
+Location: Paris, France
+Est: 1911
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Bloody Mary       | [ ]    | Contested    | Fernand Petiot       | Historical     | WON / RES   | Also claimed by St. Regis NY; Petiot brought it to NY and refined it
+Sidecar           | [ ]    | Contested    | Unknown              | —             | WON / RES   | Also claimed by Harry's Bar London; Paris claim is strong
+French 75         | [ ]    | Contested    | Unknown              | —             | WON / RES   | Also associated with Arnaud's New Orleans; gin + Champagne + lemon
+
+================================================================================
+
+BAR: Bar Hemingway, Ritz Paris
+Location: Paris, France
+Est: 1921
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Serendipity       | [ ]    | Clean        | Colin Field          | Historical     | RES         | Calvados, apple juice, mint, Champagne; Field ran bar for decades
+
+================================================================================
+
+BAR: Dukes Bar
+Location: London, UK
+Est: 1908
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Dukes Martini     | [ ]    | Clean        | Salvatore Calabrese  | Living         | RES         | 1987; frozen bottle, undiluted, tableside, 2-drink limit; outreach applies
+Vesper            | [ ]    | Contested    | Ian Fleming          | Historical     | RES         | Fleming was a Dukes regular; Vesper appears in Casino Royale (1953)
+
+================================================================================
+
+BAR: American Bar, The Savoy
+Location: London, UK
+Est: 1889
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Hanky Panky       | [ ]    | Clean        | Ada Coleman          | Historical     | WON / RES   | Early 1900s; gin/vermouth/Fernet; Coleman was only female head bartender
+White Lady        | [ ]    | Contested    | Harry Craddock       | Historical     | WON         | Craddock codified it; earlier versions exist; gin/Cointreau/lemon
+
+================================================================================
+
+BAR: Long Bar, Raffles Hotel
+Location: Singapore
+Est: ~1887 (bar ~1899–1915)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Singapore Sling   | [X]    | Clean        | Ngiam Tong Boon      | Historical     | WON / RES   | Lore fully upgraded this session; colonial-era women's subversion angle
+
+================================================================================
+
+BAR: Carousel Bar, Hotel Monteleone
+Location: New Orleans, USA
+Est: 1886 (hotel); 1949 (carousel bar)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Vieux Carré       | [~]    | Clean        | Walter Bergeron      | Historical     | WON / RES   | Upgraded lore drafted this session; Capote/Williams/Faulkner; rotating bar
+
+================================================================================
+
+BAR: Arnaud's French 75 Bar
+Location: New Orleans, USA
+Est: 1918 (restaurant); 2003 (current bar)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+French 75 (NOLA)  | [ ]    | Contested    | Chris Hannah (NOLA)  | Living         | RES         | Cognac not gin; the deviation is the lore; outreach applies
+                  |        |              |                      |                |             | James Beard Award 2017; originally "gentlemen only" space
+
+================================================================================
+
+BAR: Sazerac Bar, Roosevelt Hotel
+Location: New Orleans, USA
+Est: 1938 (at Roosevelt)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Sazerac           | [ ]    | Clean        | Antoine Peychaud     | Historical     | WON / RES   | 1838; rye/cognac, Peychaud's bitters, absinthe rinse; oldest US cocktail
+Ramos Gin Fizz    | [ ]    | Clean        | Henry Ramos          | Historical     | WON / RES   | 1888; 12-minute shake; 30 bartenders at Carnival 1915; women forced entry
+
+================================================================================
+
+BAR: Trader Vic's
+Location: Oakland, CA (now global)
+Est: 1934
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Mai Tai (original)| [ ]    | Clean        | Victor "Trader Vic"  | Historical     | BUB / RES   | 1944; original rum now extinct; degradation story as important as origin
+                  |        |              | Bergeron             |                |             | Donn Beach dispute; 1944 recipe ≠ beach bar version; Cate revival
+
+================================================================================
+
+BAR: Don the Beachcomber
+Location: Hollywood, CA
+Est: 1934
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Zombie            | [ ]    | Clean        | Donn Beach           | Historical     | BUB / RES   | 1934; 2-drink limit; recipes were coded; Berry decoded them over decades
+Missionary's      | [ ]    | Clean        | Donn Beach           | Historical     | BUB         | Rum, peach brandy, honey, mint, pineapple; gentler than the Zombie
+Downfall          |        |              |                      |                |             |
+
+================================================================================
+
+BAR: Buena Vista Café
+Location: San Francisco, CA
+Est: 1916
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Irish Coffee      | [ ]    | Clean        | Joe Sheridan (origin)| Historical     | RES         | Invented at Shannon Airport; Koeppler + Delaplane brought to SF ~1952
+                  |        |              | Koeppler (US intro)  |                |             | Months spent perfecting the cream float; now a production line
+
+================================================================================
+
+BAR: Bemelmans Bar, The Carlyle
+Location: New York City, USA
+Est: 1947
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Old Cuban         | [ ]    | Clean        | Audrey Saunders      | Living         | RES         | Debuted here 2002; later at Pegu Club; aged rum/mint/lime/bitters/Champagne
+                  |        |              |                      |                |             | Outreach applies; Saunders is one of the revival's most important figures
+
+================================================================================
+
+BAR: Bar Basso
+Location: Milan, Italy
+Est: 1947
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Negroni Sbagliato | [ ]    | Clean        | Mirko Stocchetto     | Historical     | RES         | ~1970s; Prosecco grabbed instead of gin; accident origin; 2022 viral moment
+
+================================================================================
+
+BAR: Caffè Florian
+Location: Venice, Italy
+Est: 1720
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Spritz (context)  | [ ]    | Legend       | —                    | —             | RES         | Not invented here; Austrian occupation origin; Florian is contextual bar
+                  |        |              |                      |                |             | Use for Spritz / Aperol Spritz / Venetian aperitivo lore backdrop
+
+================================================================================
+
+BAR: Tommy's Mexican Restaurant
+Location: San Francisco, CA
+Est: 1965
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Tommy's Margarita | [ ]    | Clean        | Julio Bermejo        | Living         | IBA / RES   | ~1988; agave nectar replaces triple sec; first venue-specific IBA cocktail
+                  |        |              |                      |                |             | Outreach applies; Bermejo is official Tequila Ambassador to North America
+
+================================================================================
+
+BAR: Napoleon House
+Location: New Orleans, USA
+Est: building 1797; bar 1914
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Pimm's Cup        | [ ]    | Legend       | —                    | —             | RES         | British import; American home at Napoleon House late 1940s; Napoleon plot
+
+================================================================================
+
+BAR: Tujague's
+Location: New Orleans, USA
+Est: 1856
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Grasshopper       | [ ]    | Clean        | Philip Guichet       | Historical     | RES         | 1918; came second in NYC competition; oldest stand-up bar; 250yr-old mirror
+
+================================================================================
+
+BAR: Pat O'Brien's
+Location: New Orleans, USA
+Est: 1933 (legal); Prohibition-era before
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Hurricane         | [ ]    | Clean        | Pat O'Brien et al.   | Historical     | RES         | WWII rum surplus origin; hurricane-lamp glass; dueling pianos invented here
+
+================================================================================
+
+BAR: The Old Absinthe House
+Location: New Orleans, USA
+Est: building early 1800s
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Absinthe Frappe   | [ ]    | Clean        | Cayetano Ferrer      | Historical     | RES         | 1874; banned 1912–2007; unavailable for ~95 years; now restored
+                  |        |              |                      |                |             | Jackson / Lafitte legend; pre-Battle of New Orleans
+
+================================================================================
+
+BAR: Angel's Share
+Location: New York City, USA
+Est: 1993 (recently relocated)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+(No single        | —      | —            | —                    | —             | RES         | Bar is important as context: first Japanese-style bar in Manhattan;
+attributable      |        |              |                      |                |             | directly influenced Milk & Honey; enter through restaurant dining room
+recipe)           |        |              |                      |                |             |
+
+================================================================================
+
+BAR: Milk & Honey
+Location: New York City, USA
+Est: 1999 (closed 2020)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Penicillin        | [ ]    | Clean        | Sam Ross             | Living         | RES         | Blended Scotch, lemon, ginger, honey, Islay float; one of most-ordered
+                  |        |              |                      |                |             | modern classics globally; outreach applies
+Gold Rush         | [ ]    | Clean        | TJ Siegal            | Living         | RES         | Bourbon, lemon, honey syrup; deceptively simple; outreach applies
+Paper Plane       | [ ]    | Clean        | Sam Ross             | Living         | RES         | Equal parts bourbon/Aperol/Amaro Nonino/lemon; named for M.I.A. track
+                  |        |              |                      |                |             | Outreach applies (same as Penicillin)
+
+================================================================================
+
+BAR: Pegu Club
+Location: New York City, USA
+Est: 2005 (closed 2020)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Old Cuban         | [ ]    | Clean        | Audrey Saunders      | Living         | RES         | Originated at Bemelmans 2002; became Pegu signature; see Bemelmans entry
+Gin-Gin Mule      | [ ]    | Clean        | Audrey Saunders      | Living         | RES         | Gin riff on Moscow Mule; ginger beer, mint, lime; outreach applies
+Little Italy      | [ ]    | Clean        | Audrey Saunders      | Living         | RES         | Rye, Cynar, sweet vermouth; outreach applies
+
+================================================================================
+
+BAR: PDT (Please Don't Tell)
+Location: New York City, USA
+Est: 2007
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Benton's          | [ ]    | Clean        | Don Lee / Jim Meehan | Living         | RES         | 2007; bacon-fat-washed bourbon; invented fat-washing as cocktail technique
+Old-Fashioned     |        |              |                      |                |             | ~150 sold/week; enter via phone booth in hot dog shop; outreach applies
+
+================================================================================
+
+BAR: Death & Co
+Location: New York City (+ Denver, LA)
+Est: New Year's Eve 2006
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Oaxaca            | [ ]    | Clean        | Phil Ward            | Living         | DC / RES    | 2007; tequila + mezcal Old-Fashioned; named for mezcal-producing region
+Old-Fashioned     |        |              |                      |                |             | Now on D&C merch; outreach applies
+Naked and Famous  | [~]    | Clean        | Joaquín Simó         | Living         | DC / RES    | 2011; equal parts mezcal/Aperol/yellow Chartreuse/lemon; Last Word riff
+                  |        |              |                      |                |             | Outreach applies; check lore quality
+
+================================================================================
+
+BAR: Attaboy
+Location: New York City, USA
+Est: 2013
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+(No set menu —    | —      | —            | —                    | —             | RES         | Dealer's choice model; Penicillin and Paper Plane served here but
+bespoke only)     |        |              |                      |                |             | originated at M&H; bar itself is context for the no-menu movement
+
+================================================================================
+
+BAR: Employees Only
+Location: New York City (+ global)
+Est: 2004
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Mata Hari         | [ ]    | Clean        | Jason Kosmas /       | Living         | RES         | Brandy, Cointreau, apricot, blood orange, bitters; house signature
+                  |        |              | Dushan Zaric         |                |             | Outreach applies
+
+================================================================================
+
+BAR: The Dead Rabbit
+Location: New York City, USA
+Est: 2013
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Irish Coffee      | [ ]    | Clean        | McGarry / Muldoon    | Living         | RES         | Teeling whiskey / Andytown coffee / fresh cream; modern benchmark version
+(Dead Rabbit      |        |              |                      |                |             | Different from Buena Vista origin story; worth a separate entry or note
+version)          |        |              |                      |                |             | Outreach applies
+
+================================================================================
+
+BAR: Flatiron Lounge
+Location: New York City, USA
+Est: 2003 (closed 2018)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Flatiron Martini  | [ ]    | Clean        | Julie Reiner         | Living         | RES         | Vodka, Cointreau, Lillet; opening menu drink; drink of the first wave
+                  |        |              |                      |                |             | Outreach applies
+
+================================================================================
+
+BAR: Clover Club
+Location: Brooklyn, New York, USA
+Est: 2008
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Clover Club       | [ ]    | Legend       | Pre-Prohibition      | Historical     | WON / RES   | Bar named for the cocktail, not the other way around; gin/raspberry/
+(cocktail)        |        |              | (1800s Philadelphia  |                |             | lemon/egg white; predates the bar by a century; context entry
+                  |        |              | drinking club)       |                |             |
+
+================================================================================
+
+BAR: Dante
+Location: New York City, USA
+Est: 1915 (café); 2015 (relaunched)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Garibaldi         | [ ]    | Clean        | Naren Young          | Living         | RES         | Campari + "fluffy" fresh OJ (aerated); technique is the invention
+                  |        |              |                      |                |             | World's Best Bar 2019; outreach applies
+
+================================================================================
+
+BAR: Violet Hour
+Location: Chicago, IL, USA
+Est: 2007
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Juliet & Romeo    | [ ]    | Clean        | Toby Maloney         | Living         | RES         | Gin/lime/cucumber/sugar/mint/salt/rose water; "walk through an English
+                  |        |              |                      |                |             | garden"; 20/day by 2019; only Old-Fashioned outsells it; outreach applies
+
+================================================================================
+
+BAR: Maison Premiere
+Location: Brooklyn, New York, USA
+Est: 2011
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Absinthe Frappe   | [ ]    | Legend       | —                    | —             | RES         | Revival of NOLA original; bar is context for absinthe rehabilitation
+(revival)         |        |              |                      |                |             | Only operational vintage absinthe fountain in America
+
+================================================================================
+
+BAR: Bar Goto
+Location: New York City, USA
+Est: 2015
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Sakura Martini    | [ ]    | Clean        | Kenta Goto           | Living         | RES         | Sake, gin, maraschino, cherry blossom; Japanese-NYC hybrid; outreach applies
+Far East Side     | [ ]    | Clean        | Kenta Goto           | Living         | RES         | Sake, elderflower, shiso, yuzu, tequila; created at Pegu Club; outreach applies
+
+================================================================================
+
+BAR: Smuggler's Cove
+Location: San Francisco, CA, USA
+Est: 2009
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+(No single        | —      | —            | —                    | —             | BUB / RES   | Bar is context for Tiki scholarship and rum canon; Martin Cate wrote
+attributable      |        |              |                      |                |             | the definitive Tiki book; largest rum selection in US; outreach applies
+recipe)           |        |              |                      |                |             |
+
+================================================================================
+
+BAR: Trick Dog
+Location: San Francisco, CA, USA
+Est: 2013
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+(No single        | —      | —            | —                    | —             | RES         | Menu concept is the invention (biannual themed menus); strong context
+attributable      |        |              |                      |                |             | bar for cocktail menu creativity; outreach for any specific drinks
+recipe)           |        |              |                      |                |             |
+
+================================================================================
+
+BAR: Connaught Bar
+Location: London, UK
+Est: 2008 (current form)
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Connaught Martini | [ ]    | Clean        | Ago Perrone /        | Living         | RES         | Tableside trolley service; bitters customization; ceremony is the recipe
+                  |        |              | Maura Milia          |                |             | Outreach applies; consistently top 5 World's 50 Best
+
+================================================================================
+
+BAR: Handshake Speakeasy
+Location: Mexico City, Mexico
+Est: 2020
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Hanky Panky       | [ ]    | Clean        | Eric van Beek        | Living         | RES         | Century-old amaro; World's Best Bar 2024; first Mexican bar to hold title
+(their version)   |        |              |                      |                |             | Note: different drink from Savoy Hanky Panky despite same name
+Old-Fashioned     | [ ]    | Clean        | Eric van Beek        | Living         | RES         | Brown butter mushroom umami; cutting-edge technique; outreach applies
+(mushroom)        |        |              |                      |                |             |
+
+================================================================================
+
+BAR: Paradiso
+Location: Barcelona, Spain
+Est: 2017
+────────────────────────────────────────────────────────────────────────────────
+Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
+──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
+Primordial        | [ ]    | Clean        | Giacomo Giannotti    | Living         | RES         | Whisky, port, pear; served in two metal hands; World's Best Bar 2022
+                  |        |              |                      |                |             | Enter through pastrami fridge; outreach applies
+
+================================================================================
+SUMMARY COUNTS (update as work progresses)
+================================================================================
+
+Total bars tracked:          33
+Total drinks tracked:        ~55
+
+By status:
+  [X] Lore complete:          1  (Singapore Sling)
+  [~] In workbook, needs work: 2  (Vieux Carré, Naked and Famous)
+  [ ] Not in workbook:        ~52
+
+By attribution:
+  Clean:                     ~38
+  Contested:                  ~7
+  Legend:                     ~5
+  Context only (no recipe):   ~5
+
+Creator outreach flagged:     ~22 drinks across ~18 living creators
+
+================================================================================
+PRIORITY QUEUE — suggested next lore entries
+================================================================================
+
+Based on library gaps identified (Martini & Manhattan family, Tiki & Tropical,
+Julep, Zero Proof) and Alchemy Standard strength:
+
+1. Vieux Carré           — draft written; needs final polish and entry
+2. Hanky Panky           — Ada Coleman story; strong Alchemy Standard
+3. Oaxaca Old-Fashioned  — Death & Co; modern classic; great lore
+4. Penicillin            — Milk & Honey; most-ordered modern classic globally
+5. Mai Tai (original)    — Tiki gap; degradation story is the lore
+6. Zombie                — Tiki gap; coded recipe story is extraordinary
+7. Benton's Old-Fashioned— fat-washing origin; PDT provenance
+8. Old Cuban             — Champagne Mojito; Bemelmans/Pegu Club/Saunders
+9. Grasshopper           — unexpected; second-place origin; Tujague's depth
+10. Bellini              — Harry's Bar Venice; clean attribution; easy win
+
+================================================================================
+End of document — last updated: June 2026 research session
+================================================================================

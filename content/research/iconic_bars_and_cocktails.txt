@@ -1,0 +1,532 @@
+ICONIC BARS & THEIR COCKTAILS
+A Liquid Alchemy Research Summary
+================================================================================
+
+This document maps the world's most storied bars to the drinks they invented,
+with notes on lore potential and Alchemy Standard relevance. Organized by tier:
+historically iconic first, contemporary legends second, with special sections
+on New Orleans and the Japanese influence thread.
+
+================================================================================
+HISTORICALLY ICONIC
+================================================================================
+
+EL FLORIDITA — Havana, Cuba (est. ~1817)
+Signature drinks: Daiquiri, Hemingway Daiquiri
+"The cradle of the Daiquiri." Hemingway's favorite bar — he is immortalized in
+bronze at his usual stool. The Hemingway Daiquiri (no sugar, double rum,
+grapefruit juice, maraschino) was created to his personal specification. The
+original Floridita Daiquiri — Havana Club rum, lemon juice, maraschino, sugar —
+maintains its own celebrated status alongside the Hemingway variant.
+Lore rating: Essential. Two attributable recipes, Hemingway connection, Cuban
+cocktail history.
+
+--------------------------------------------------------------------------------
+
+LA BODEGUITA DEL MEDIO — Havana, Cuba (est. 1942)
+Signature drink: Mojito
+The other half of Hemingway's Havana drinking life. He was quoted: "My mojito
+in La Bodeguita, my daiquiri in El Floridita," forever linking the bar with the
+Mojito in global popular culture. The walls are covered floor to ceiling in
+signatures and scrawlings from generations of visitors.
+Note: The Mojito predates the bar; the attribution is by legend and endorsement,
+not invention. Still strong lore material.
+
+--------------------------------------------------------------------------------
+
+HARRY'S BAR — Venice, Italy (est. 1931)
+Signature drinks: Bellini, Martini
+Giuseppe Cipriani invented the Bellini — Prosecco and white peach purée — in
+1948. Hemingway, Orson Welles, and Truman Capote all drank here. Now a UNESCO
+cultural landmark. The Bellini has clean attribution: one man, one bar, one year.
+Lore rating: High. Bellini is a direct Alchemy Standard candidate.
+
+--------------------------------------------------------------------------------
+
+HARRY'S NEW YORK BAR — Paris, France (est. 1911)
+Signature drinks: Bloody Mary, Sidecar, French 75
+Founded 1911; favorite of Hemingway, Rita Hayworth, Jean-Paul Sartre. Claims
+credit for inventing the Bloody Mary, the Sidecar, and the French 75. The
+interior was shipped plank-by-plank from a Manhattan bar and reassembled in
+Paris. All three attributions are contested but the claim is strong and
+well-documented.
+Lore rating: High. Three possible recipes, all with great stories.
+
+--------------------------------------------------------------------------------
+
+BAR HEMINGWAY, RITZ PARIS — Paris, France (est. 1921)
+Signature drinks: Serendipity, Classic Martini
+The intimate bar is adorned with leather armchairs, vintage photographs, and
+literary memorabilia. The Serendipity — Calvados, apple juice, mint, Champagne
+— was created by legendary head bartender Colin Field. Hemingway legendarily
+"liberated" the bar himself in 1944 when Allied forces entered Paris, reportedly
+arriving ahead of the troops to secure the premises.
+Lore rating: Medium-high. Serendipity is a lesser-known recipe with strong lore.
+
+--------------------------------------------------------------------------------
+
+DUKES BAR — London, UK (est. 1908)
+Signature drinks: Dukes Martini, Vesper
+The house Martini was invented in 1987 by bartender Salvatore Calabrese. Poured
+tableside from a frozen bottle — undiluted, brutally cold — guests are limited
+to two. Ian Fleming was a regular; the Vesper (Bond's Martini) is closely
+associated with the bar. The Martini here is not a recipe so much as a
+performance.
+Lore rating: High. Bond connection, theatrical service ritual, tableside prep.
+
+--------------------------------------------------------------------------------
+
+AMERICAN BAR, THE SAVOY — London, UK (est. 1889)
+Signature drinks: Hanky Panky, White Lady, various Craddock classics
+The oldest surviving cocktail bar in London. Two figures define its legacy:
+Ada "Coley" Coleman became head bartender in 1903 — the first and only woman
+to hold that position — and served 100,000 customers over 23 years. She invented
+the Hanky Panky: gin, sweet vermouth, Fernet-Branca, orange peel. When actor
+Sir Charles Hawtrey asked for something with "a bit of punch" and drained the
+glass, he allegedly exclaimed: "By Jove! That is the real hanky-panky." Coleman
+was quietly pushed out in 1925 and replaced by Harry Craddock, who went on to
+write The Savoy Cocktail Book (1930) — and credited exactly one drink to her by
+name: the Hanky Panky. Craddock also created the White Lady and corpse reviver
+series. Named World's Best Bar in 2017.
+Lore rating: Essential. Ada Coleman's story is one of the best in the canon —
+maps directly onto the Singapore Sling ethos. Women doing extraordinary work in
+spaces that didn't want them.
+
+--------------------------------------------------------------------------------
+
+LONG BAR, RAFFLES HOTEL — Singapore (est. ~1887, bar est. ~1899–1915)
+Signature drink: Singapore Sling
+Created by Hainanese-Chinese bartender Ngiam Tong Boon sometime between 1899
+and 1915. The drink was conceived as a workaround — in colonial Singapore, women
+were not permitted to consume alcohol in public, but fruit juice was perfectly
+acceptable. The Sling's pink color and tropical sweetness gave women plausible
+deniability, a cocktail disguised as something respectable. Ngiam Tong Boon
+built the subversion right into the recipe. The original recipe was never
+formally recorded; the closest thing to a primary source is a recipe scrawled on
+a bar chit in 1936. Japanese forces occupied Raffles in 1942 and whatever records
+existed were lost. The version served today is reconstructed from memory and that
+lone 1936 note. Peanut shells on the floor remain an honored tradition.
+Lore rating: Essential. Already in the library with upgraded lore.
+
+--------------------------------------------------------------------------------
+
+CAROUSEL BAR, HOTEL MONTELEONE — New Orleans, USA (est. 1886 hotel, bar 1949)
+Signature drink: Vieux Carré
+The bar rotates on 2,000 large steel rollers, completing a full turn every
+fifteen minutes, powered by a quarter-horsepower motor — continuously since 1949.
+The Vieux Carré (French for "Old Square," the name for the French Quarter) was
+created by head bartender Walter Bergeron in the 1930s. Rye whiskey and cognac
+as co-equal base spirits — American whiskey and French brandy sharing a glass,
+neither yielding to the other, mirroring the city itself. United by sweet
+vermouth, Bénédictine, Peychaud's and Angostura bitters. Tennessee Williams,
+William Faulkner, and Truman Capote all drank here. Capote claimed to have been
+born here — not true, but he repeated it often enough that the hotel eventually
+put up a plaque.
+Lore rating: Essential. Updated lore drafted in this session.
+
+--------------------------------------------------------------------------------
+
+ARNAUD'S FRENCH 75 BAR — New Orleans, USA (est. 1918, current bar 2003)
+Signature drink: French 75 (New Orleans style — Cognac, not gin)
+Nestled within Arnaud's Restaurant in the French Quarter. The bar was originally
+a "gentlemen only" space; women were categorically excluded until renovations in
+1979. Head bartender Chris Hannah has shaken more French 75s than arguably
+anyone else in the world. The New Orleans version uses Cognac rather than gin —
+a significant and debated departure from the classic recipe. James Beard Award
+for Outstanding Bar Program, 2017.
+Lore rating: High. French 75 has strong lore; the Cognac vs. gin debate is
+genuinely interesting and very New Orleans.
+
+--------------------------------------------------------------------------------
+
+SAZERAC BAR, ROOSEVELT HOTEL — New Orleans, USA (est. 1938 at Roosevelt)
+Signature drinks: Sazerac, Ramos Gin Fizz
+The spiritual home of America's oldest cocktail. The Sazerac traces back to
+1838 in the French Quarter; the Roosevelt Bar codified it for the modern era.
+Also the canonical home of the Ramos Gin Fizz — invented by Henry Ramos in 1888,
+notoriously requiring a 12-minute shake. During Carnival 1915, Ramos employed
+over 30 bartenders to keep up with demand. The bar famously excluded women until
+a group of them forced their way in — the "storming of the Sazerac."
+Lore rating: High for both drinks. Sazerac is likely already in library;
+Ramos Gin Fizz deserves attention.
+
+--------------------------------------------------------------------------------
+
+TRADER VIC'S — Oakland, CA (est. 1934, now global)
+Signature drink: Mai Tai (original 1944 recipe)
+As a treat for Tahitian friends in 1944, Vic Bergeron took a bottle of J. Wray
+& Nephew 17-year rum from the back bar and mixed it with orgeat, lime juice,
+rock candy syrup, and dry Curaçao. His guest exclaimed in Tahitian "Maita'i Roa
+A'e!" — Out of this world, the best. The original rum went out of production;
+Vic burned through his entire stock. Everything that followed — the sweet,
+juice-heavy beach bar Mai Tai — is a degraded copy. The original is a
+rum-forward, barely sweet cocktail of genuine elegance. Martin Cate of
+Smuggler's Cove has spent decades restoring its reputation.
+Lore rating: Essential for Tiki coverage. The degradation story is as important
+as the origin.
+
+--------------------------------------------------------------------------------
+
+DON THE BEACHCOMBER — Hollywood, CA (est. 1934)
+Signature drinks: Zombie, Rum Barrel, Missionary's Downfall
+Donn Beach essentially invented Tiki culture here — Polynesian escapism through
+rum, exotic fruit, and theatrical presentation. The Zombie was famously limited
+to two per customer on account of its potency (three rums including overproof,
+fruit juices, Falernum, absinthe rinse). Donn kept his recipes in coded form to
+prevent staff from replicating them elsewhere. Cocktail historian Jeff "Beachbum"
+Berry spent decades decoding them. Friendly rivals with Trader Vic's for Mai Tai
+credit.
+Lore rating: High. The coded recipes story is extraordinary. Essential for Tiki.
+
+--------------------------------------------------------------------------------
+
+BUENA VISTA CAFÉ — San Francisco, CA (est. 1916)
+Signature drink: Irish Coffee (American introduction)
+The Irish Coffee was invented at Shannon Airport in Ireland to warm passengers
+after a grueling winter flight. Co-owner Jack Koeppler and San Francisco
+Chronicle travel writer Stanton Delaplane brought it to America in the early
+1950s after Delaplane tasted it at the airport. It took Koeppler months to
+perfect the cream float. The Buena Vista now assembles them in a row of glasses
+on the bar like a production line. One of the rare tourist pilgrimages that
+fully delivers.
+Lore rating: Medium-high. Irish Coffee is in most libraries; the Shannon Airport
+origin and Delaplane backstory add real depth.
+
+--------------------------------------------------------------------------------
+
+TOMMY'S MEXICAN RESTAURANT — San Francisco, CA (est. 1965)
+Signature drink: Tommy's Margarita
+Not a cocktail bar in the conventional sense — a Yucatecan family restaurant in
+the Richmond District. Julio Bermejo (son of founders Tomas and Elmy) conceived
+Tommy's Margarita around 1987–88, replacing triple sec with agave nectar to let
+100% agave tequila take center stage. In 2008 it became the first venue-specific
+cocktail added to the IBA's official drinks list. The Mexican government
+officially recognized Julio as Tequila Ambassador to North America. The Wall
+Street Journal called it "the epicenter of tequila in the United States." Has
+appeared on World's 50 Best Bars six times. A pilgrimage bar.
+Lore rating: High. Tommy's Margarita is a genuine modern classic with a clean
+attribution and a great family story behind it.
+
+--------------------------------------------------------------------------------
+
+CAFFÈ FLORIAN — Venice, Italy (est. 1720)
+Signature drinks: Spritz, Bellini, Negroni (all served, none invented here)
+The oldest continuously operating café in Italy. Opened December 29, 1720, by
+Floriano Francesconi as "Alla Venezia Trionfante." Six ornate gilded rooms.
+Casanova, Dickens, Hemingway, and countless others drank here. The Spritz was
+born in its orbit — Austrian soldiers stationed in Venice during occupation
+diluted wine with soda water; the habit spread. During WWII, waiters reportedly
+served espresso by candlelight during air raids. Three centuries of gossip,
+politics, and aperitivo in one room on the most famous square in the world.
+Note: No single drink is cleanly attributed here; bar is context rather than
+recipe origin. Valuable for Spritz and Venetian Aperitivo lore.
+
+--------------------------------------------------------------------------------
+
+BOADAS COCKTAILS — Barcelona, Spain (est. 1933)
+Signature technique: The thrown Martini / Daiquiri
+Barcelona's oldest cocktail bar, opened by Miguel Boadas who trained at El
+Floridita in Havana. Bartenders in black jackets, white shirts, and bow ties
+throw cocktails theatrically from one vessel to another through the air. The
+drink is a Martini or Daiquiri; the technique is the invention. A direct living
+link between pre-Prohibition Cuba and modern Europe. Revitalized in 2022 under
+Simone Caporale (of acclaimed Sips, also Barcelona). Décor entirely unchanged.
+Note: No single attributable recipe, but strong as context for Cuban technique
+and its European diaspora.
+
+--------------------------------------------------------------------------------
+
+BAR BASSO — Milan, Italy (est. 1947)
+Signature drink: Negroni Sbagliato
+"Sbagliato" means mistaken. A bartender reached for Prosecco instead of gin
+while making a Negroni, noticed only after pouring. The happy accident —
+Prosecco, Campari, sweet vermouth — became a classic. Now a global staple and
+a gateway drink for Negroni-curious drinkers who find the original too bitter.
+Went viral in 2022 when actress Olivia Cooke ordered one on camera. That surge
+is worth noting for lore; it has its own modern cultural moment layered on top
+of the origin story.
+Lore rating: High. Accident origin stories are among the best in cocktail lore.
+
+================================================================================
+NEW ORLEANS — A CITY OF ITS OWN
+================================================================================
+
+New Orleans deserves its own section. No city has produced more canonical
+American cocktails per square block. The French Quarter alone contains:
+
+NAPOLEON HOUSE (building 1797, bar 1914)
+Signature drink: Pimm's Cup (American home)
+A plot to rescue Napoleon from exile on St. Helena and house him in this building
+was hatched by former New Orleans mayor Nicholas Girod in 1821. Napoleon died
+before it could happen. The name stuck. The Pimm's Cup — a British import —
+found its American home here in the late 1940s. Classical music, peeling plaster,
+bust of Napoleon atop an antique cash register. Essentially unchanged in over
+a century.
+
+TUJAGUE'S (est. 1856)
+Signature drink: Grasshopper
+America's oldest stand-up bar — no stools, standing room only. The mirror behind
+the bar was brought from Paris in 1856 and was already 90 years old on arrival,
+making it now over 250 years old. Philip Guichet invented the Grasshopper in 1918
+for a New York competition — crème de menthe, crème de cacao, cream, brandy —
+came in second place, went home, served it at Tujague's ever after. During
+Prohibition, waiters concealed bottles in their apron pockets. A Prohibition agent
+claimed to have witnessed Philip Guichet serving absinthe; Guichet denied it.
+
+LAFITTE'S BLACKSMITH SHOP (building est. 1722–1732)
+Likely the oldest structure used as a bar in the United States. Purportedly used
+by pirate-privateer Jean Lafitte as a cover for smuggling (the timeline is murky
+but the legend is vivid). One of the only surviving Creole cottages in the French
+Quarter. Lit almost entirely by candlelight. Reportedly haunted. The building
+survived the great fires of 1788 and 1794.
+
+PAT O'BRIEN'S (est. 1933 as legal bar)
+Signature drink: Hurricane
+During WWII, bar owners were forced to buy 50 cases of rum to obtain a single
+case of whiskey. Pat O'Brien's team invented the Hurricane to work through
+their surplus — passion fruit syrup, lemon juice, rum — served in a hurricane-
+lamp-shaped glass. Also widely credited with inventing the dueling piano concept.
+
+THE OLD ABSINTHE HOUSE (building early 1800s)
+The Old Absinthe House Frappe was created by Cayetano Ferrer in 1874. Absinthe
+was banned in the US from 1912 to 2007; the drink was unavailable for nearly a
+century. Legend holds that Andrew Jackson met with Jean Lafitte here before the
+Battle of New Orleans. Now fully operational again with legal absinthe.
+
+================================================================================
+THE JAPANESE INFLUENCE — AN UNDERAPPRECIATED THREAD
+================================================================================
+
+ANGEL'S SHARE — New York City (est. 1993, recently relocated)
+Hidden behind a Japanese restaurant in the East Village. Manhattan's first taste
+of the Tokyo cocktail bar style: formality, intimacy, meticulous technique —
+measuring, stirring, and shaking with precision at a time the US bar industry was
+in a widely acknowledged dark age. The house rules posted on the wall directly
+influenced Sasha Petraske when he opened Milk & Honey. Angel's Share quietly
+seeded the entire craft revival before anyone was paying attention.
+
+BAR GOTO — New York City (est. 2015)
+Kenta Goto spent seven years at Pegu Club before opening on the Lower East Side.
+The Sakura Martini — sake, gin, maraschino, cherry blossom — became his defining
+drink. A New York bar with Japanese soul: technique-forward, delicate, aromatic,
+unhurried. Made Japanese-inflected cocktail culture accessible to a broader
+American audience without flattening it. Note: Goto is living/active; creator
+outreach protocol applies.
+
+================================================================================
+THE CONTEMPORARY LEGENDS
+================================================================================
+
+MILK & HONEY — New York City (est. 1999, closed 2020)
+The bar that changed everything. Opened by Sasha Petraske on the Lower East Side.
+Launched the careers of a generation of bartenders and the global proliferation
+of speakeasy-style bars. Birthplace of: Penicillin (Sam Ross), Gold Rush (TJ
+Siegal), Paper Plane (Sam Ross). The Penicillin — blended Scotch, lemon, ginger,
+honey, Islay float — is one of the most-ordered modern classics in the world.
+
+PEGU CLUB — New York City (est. 2005, closed 2020)
+Audrey Saunders opened on West Houston Street and immediately set the national
+standard. Emphasized gin in a world awash in flavored vodka. Trained the
+bartenders who went on to open PDT and Death & Co. The Old Cuban (aged rum, mint,
+lime, Angostura, Champagne) debuted here after originating at Bemelmans. The
+Gin-Gin Mule and Little Italy were also born here. Closed during COVID; a genuine
+loss. Saunders is one of the most important figures in the American craft revival.
+
+BEMELMANS BAR, THE CARLYLE — New York City (est. 1947)
+Art Deco, gold-leaf ceiling, Ludwig Bemelmans murals (the Madeline illustrator —
+the only public space where his original work survives). Audrey Saunders debuted
+the Old Cuban here in 2002 — aged rum, mint, lime, Angostura bitters, Champagne,
+a Mojito through finishing school — before bringing it to Pegu Club. JFK,
+Elizabeth Taylor, Paul McCartney were regulars. The most glamorously
+unreconstructed bar in Manhattan.
+
+DEATH & CO — New York City (est. New Year's Eve 2006, now NYC/Denver/LA)
+Opened New Year's Eve 2006 in the East Village; changed the drinks world. The
+Oaxaca Old-Fashioned (Phil Ward, 2007) — tequila/mezcal riff on the Old-Fashioned
+template — is now on Death & Co merch. The Naked and Famous (Joaquín Simó, 2011)
+— equal parts mezcal, Aperol, yellow Chartreuse, lime — is a modern canon entry.
+Their book is the bestselling cocktail book of all time. Multiple NYC/LA/Denver
+locations. A training ground for the best bartenders of the current era.
+
+PDT (PLEASE DON'T TELL) — New York City (est. 2007)
+Enter through a phone booth inside Crif Dogs. The Benton's Old-Fashioned —
+bourbon fat-washed with Benton's bacon, maple syrup, Angostura bitters —
+essentially invented the fat-washing technique as a cocktail tool. Sells roughly
+150 a week; owner Jeff Bell calls it the drink that defines PDT's legacy. Also
+has a Hong Kong location.
+
+ATTABOY — New York City (est. 2013)
+Occupies the space where Milk & Honey once was, run by two Milk & Honey
+protégés: Sam Ross and Michael McIlroy. No menu — you describe what you want
+and the bartender builds something. 28 seats, no reservations. Named Best Bar
+in North America in 2022. The Penicillin is here, but every drink is bespoke.
+The model has influenced bartender culture worldwide.
+
+EMPLOYEES ONLY — New York City (est. 2004, now global)
+Walk past a tarot card reader to get in. West Village stalwart since 2004. One
+of the first craft revival bars to successfully expand internationally — Singapore,
+LA, Miami, and beyond — without losing its identity. The Mata Hari (brandy,
+Cointreau, apricot, blood orange, bitters) is a house signature.
+
+THE DEAD RABBIT — New York City (est. 2013)
+Founded by Belfast childhood friends Jack McGarry and Sean Muldoon. Ground floor
+is a traditional Irish pub; second-floor Parlor is where the cocktails live. The
+cocktail menu is a hand-illustrated graphic novel. Named World's Best Bar twice
+(2015, 2016). Signature Irish Coffee — Teeling whiskey, Andytown coffee, freshly
+whipped cream — is the modern benchmark for the drink. The name comes from a
+real Irish gang that once roamed the same streets.
+
+FLATIRON LOUNGE — New York City (est. 2003, closed 2018)
+Julie Reiner's first bar. Did what Milk & Honey couldn't: bring craft cocktails
+to the masses. No secret entrance, high volume, consistent quality. Trained Phil
+Ward, Lynnette Marrero, Giuseppe González, and others who defined the next
+generation. The Flatiron Martini — vodka, Cointreau, Lillet — was the drink of
+the craft revival's first wave.
+
+CLOVER CLUB — Brooklyn, New York (est. 2008)
+Julie Reiner opened in Carroll Gardens when Brooklyn was still a gamble for
+serious cocktails. Named for the pre-Prohibition classic: gin, raspberry syrup,
+lemon juice, egg white. Named Best Cocktail Lounge one year after opening at
+Tales of the Cocktail. The bar that brought craft culture to the outer boroughs
+and proved it could sustain there.
+
+DANTE — New York City (est. 1915 as café, relaunched 2015)
+A Greenwich Village café for a century before relaunch as a cocktail destination.
+Named World's Best Bar 2019. The Garibaldi — Campari, freshly whipped "fluffy"
+orange juice — is deceptively simple; the texture transformation from aeration
+is the technique. Probably the best Negroni in New York. Platform for the
+aperitivo revival in America.
+
+VIOLET HOUR — Chicago, IL (est. 2007)
+One of the first serious craft cocktail bars outside New York. The Juliet & Romeo
+(gin, lime, cucumber, sugar, mint, salt, rose water) was invented by Toby Maloney
+who wanted a gin cocktail that would appeal to gin-haters. "I wanted it to taste
+like a walk through an English garden." By 2019, the bar sold 20 a day; only
+the Old-Fashioned outsells it. Brought the New York craft revival to Chicago
+with its own identity.
+
+MAISON PREMIERE — Brooklyn, New York (est. 2011)
+Belle Époque New Orleans meets Brooklyn. The only operational vintage absinthe
+fountain in America — a replica of the one at New Orleans' Old Absinthe House.
+Bartenders in period dress, three-piece vintage suits. Demolished decades of
+absinthe mythology. An extraordinary Ramos Gin Fizz with twelve ingredients.
+James Beard Award winner. The bar that made absinthe a serious American spirit
+again.
+
+TRICK DOG — San Francisco, CA (est. 2013)
+Mission District. The cocktail menu is redesigned twice yearly as a completely
+different creative concept — Pantone swatches, astrology charts, Whole Earth
+Catalog homages, and more. The menu itself is the invention. Regularly on World's
+50 Best. The bar that gave San Francisco a distinct cocktail identity independent
+of New York.
+
+SMUGGLER'S COVE — San Francisco, CA (est. 2009)
+The world's most serious Tiki bar. Owner Martin Cate also wrote the definitive
+Tiki reference book. Largest rum selection in the United States. Where Don the
+Beachcomber invented Tiki as escapism, Smuggler's Cove treats it as scholarship.
+Named Best Bar in the US by Tales of the Cocktail in 2016; on World's 50 Best
+six consecutive years.
+
+CURE — New Orleans, USA (est. 2009)
+The bar that brought craft cocktail culture to post-Katrina New Orleans — and
+did it outside the French Quarter, which takes nerve. Still considered the place
+to go in New Orleans for serious contemporary cocktails. Launched the careers of
+a generation of New Orleans bartenders and elevated the city's international
+cocktail reputation.
+
+CONNAUGHT BAR — London, UK (est. 2008 in current form)
+The Martini is served from a trolley. A selection of aromatic bitters to
+customize; the bartender stirs tableside. The ceremony is the signature.
+Consistently in World's 50 Best top five. The Dukes Martini for a new generation.
+Has its own house-distilled gin.
+
+HANDSHAKE SPEAKEASY — Mexico City, Mexico (est. 2020)
+Hidden behind a secret door. Bar Director Eric van Beek melds tradition and
+innovation via an on-site lab. Named World's Best Bar 2024 — the first Mexican
+bar to hold the title. Signals a genuine shift in the center of gravity of global
+cocktail culture.
+
+PARADISO — Barcelona, Spain (est. 2017)
+Enter through a hidden door in a pastrami sandwich fridge. Dalí-esque décor.
+Named World's Best Bar 2022. Made Barcelona a serious cocktail destination.
+The entry experience as part of the drink.
+
+================================================================================
+ATTRIBUTABLE RECIPES — CLEAN MATCHES FOR LORE DEVELOPMENT
+================================================================================
+
+The following have clear bar-to-drink attribution and are strong candidates for
+Liquid Alchemy lore entries. Starred entries are highest priority based on
+current library gaps.
+
+* Vieux Carré — Carousel Bar / Hotel Monteleone (Walter Bergeron, 1930s)
+* Hanky Panky — American Bar, The Savoy (Ada Coleman, early 1900s)
+* Oaxaca Old-Fashioned — Death & Co (Phil Ward, 2007)
+* Naked and Famous — Death & Co (Joaquín Simó, 2011)
+* Penicillin — Milk & Honey (Sam Ross, early 2000s)
+* Paper Plane — Milk & Honey (Sam Ross, ~2007)
+* Gold Rush — Milk & Honey (TJ Siegal)
+* Benton's Old-Fashioned — PDT (Jim Meehan / Don Lee, 2007)
+* Old Cuban — Bemelmans Bar / Pegu Club (Audrey Saunders, 2002)
+* Juliet & Romeo — Violet Hour (Toby Maloney, 2007)
+* Tommy's Margarita — Tommy's Mexican Restaurant (Julio Bermejo, ~1988)
+* Bellini — Harry's Bar Venice (Giuseppe Cipriani, 1948)
+* Mai Tai (original) — Trader Vic's (Victor Bergeron, 1944)
+* Zombie — Don the Beachcomber (Donn Beach, 1934)
+* Negroni Sbagliato — Bar Basso (accidental, Milan, ~1970s)
+* Hemingway Daiquiri — El Floridita (created to Hemingway's spec)
+* Grasshopper — Tujague's (Philip Guichet, 1918)
+* Hurricane — Pat O'Brien's (invented 1940s from rum surplus)
+* Singapore Sling — Long Bar, Raffles (Ngiam Tong Boon, ~1915) [in library]
+* Irish Coffee — Buena Vista Café (American introduction, early 1950s)
+* Serendipity — Bar Hemingway, Ritz Paris (Colin Field)
+* Sakura Martini — Bar Goto (Kenta Goto) [creator outreach applies]
+* Garibaldi — Dante NYC (contemporary; fluffy orange juice technique)
+
+CONTESTED BUT STRONG:
+- Bloody Mary — Harry's New York Bar Paris
+- Sidecar — Harry's New York Bar Paris (also claimed by Harry's Bar London)
+- French 75 — Harry's New York Bar Paris / Arnaud's French 75 Bar
+
+================================================================================
+LORE NOTES & PATTERNS
+================================================================================
+
+THE HEMINGWAY THREAD
+Hemingway is a direct lore connection across: El Floridita (bronze statue at
+his stool), La Bodeguita (his endorsement quote), Harry's Bar Venice (regular),
+Harry's New York Bar Paris (regular), Bar Hemingway Ritz Paris (liberation story),
+Dukes Bar (Ian Fleming connection by extension). He is practically a through-line
+for half the historic canon. Worth noting but not overusing.
+
+THE WOMEN WHO BUILT THE BAR
+Two stories stand out for their Singapore Sling resonance:
+1. Ada Coleman (Hanky Panky, Savoy) — only female head bartender in the bar's
+   history; credited by name in The Savoy Cocktail Book for exactly one drink.
+2. Ngiam Tong Boon (Singapore Sling) — designed the drink specifically as cover
+   for women to drink publicly in colonial Singapore.
+3. Audrey Saunders (Old Cuban, Pegu Club, Flatiron) — most important woman in
+   the American craft revival; trained a generation.
+4. Julie Reiner (Clover Club, Flatiron Lounge) — democratized craft cocktails,
+   opened Brooklyn's cocktail scene.
+
+THE ACCIDENT ORIGIN STORIES
+Some of the best lore in the canon involves drinks born from mistakes:
+- Negroni Sbagliato: Prosecco grabbed instead of gin
+- Bénédictine in the Vieux Carré: happy addition, not subtraction
+Worth a thematic note in lore writing — accidents as invention.
+
+THE DEGRADATION STORY
+The Mai Tai is the canonical example of a great drink destroyed by popularity
+and then rescued by scholars. The original 1944 recipe (rum-forward, barely
+sweet) vs. the beach bar version (juice-heavy, sweet, unrecognizable) is a
+genuine editorial story worth telling. The Zombie has a similar arc.
+
+THE CODED RECIPES
+Donn Beach encoded his Tiki recipes to prevent replication. Jeff "Beachbum"
+Berry spent decades decoding them. This is the best story in the Tiki canon
+and possibly one of the best stories in all of cocktail lore.
+
+================================================================================
+End of document
+================================================================================
