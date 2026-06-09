@@ -4,6 +4,8 @@ Status codes:
   [ ] Not in workbook
   [~] In workbook, lore needs work
   [X] In workbook, lore complete
+  [✅] In the app
+
 
 Attribution confidence:
   Clean     = one bar, one person, documented
@@ -317,7 +319,7 @@ Est: New Year's Eve 2006
 ────────────────────────────────────────────────────────────────────────────────
 Drink             | Status | Attribution  | Creator              | Creator Status | Source      | Lore Notes
 ──────────────────|────────|──────────────|──────────────────────|────────────────|─────────────|──────────────────────────────────
-Oaxaca            | [ ]    | Clean        | Phil Ward            | Living         | DC / RES    | 2007; tequila + mezcal Old-Fashioned; named for mezcal-producing region
+Oaxaca            | [✅]    | Clean        | Phil Ward            | Living         | DC / RES    | 2007; tequila + mezcal Old-Fashioned; named for mezcal-producing region
 Old-Fashioned     |        |              |                      |                |             | Now on D&C merch; outreach applies
 Naked and Famous  | [~]    | Clean        | Joaquín Simó         | Living         | DC / RES    | 2011; equal parts mezcal/Aperol/yellow Chartreuse/lemon; Last Word riff
                   |        |              |                      |                |             | Outreach applies; check lore quality
