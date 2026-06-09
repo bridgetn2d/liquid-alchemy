@@ -2901,6 +2901,7 @@ const MY_RECIPES_LIST = [
 const CONTENT_STANDARD_PATCH_IDS = new Set([
   "classic-negroni", "moscow-mule", "classic-sidecar", "white-russian",
   "coffee-cocktail", "pineapple-makrut-buck", "rob-roy", "tom-collins",
+  "springs-first-bloom",
 ]);
 
 /* ─── End of My Recipes ─── */
