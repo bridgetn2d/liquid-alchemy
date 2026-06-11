@@ -3080,9 +3080,6 @@ function CocktailPhoto({ cocktail, size = 120 }) {
   );
 }
 
-  --bg-3:      #ede9dc;
-  --text:      #2c2820;
-  --accent:    #b8922a;   /* amber citrus peel */
 /* ─── Stars ─── */
 function Stars({ value, onChange }) {
   const [hover, setHover] = useState(0);
