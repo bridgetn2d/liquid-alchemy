@@ -3731,7 +3731,6 @@ function Originals({ cocktails, setCocktails, inventory }) {
 }
 
 
-      content: "Vive la Revolution — reserved as an original cocktail name. Liminal Space — reserved as an original cocktail name, no spec yet. Just a name worth keeping. Alchemy is large because it is deep, not because it is bloated. Every feature earns its place. The goal is not a simple app — it is a focused one. The knowledge is layered and complex. The interface should look clean and feel effortless to use."
 /* ─── About ─── */
 function About() {
   const sectionLabel = {
