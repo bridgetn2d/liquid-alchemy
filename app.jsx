@@ -3731,77 +3731,72 @@ function Originals({ cocktails, setCocktails, inventory }) {
 }
 
 
-/* ─── Dev Notes ─── */
-function DevNotes() {
-  const sections = [
-    {
-      title: "Design Philosophy",
       content: "Vive la Revolution — reserved as an original cocktail name. Liminal Space — reserved as an original cocktail name, no spec yet. Just a name worth keeping. Alchemy is large because it is deep, not because it is bloated. Every feature earns its place. The goal is not a simple app — it is a focused one. The knowledge is layered and complex. The interface should look clean and feel effortless to use."
-    },
-    {
-      title: "What Alchemy Is",
-      content: "Alchemy started as a cocktail recipe manager and has grown into something harder to categorize. A cocktail compendium. A technique library. A craft preparation guide. A bartender education. A family tree of the entire cocktail canon. A curated archive of the people who shaped modern drinking culture. The word compendium is the closest single word — use it deliberately. Alchemy is not a recipe database. The difference matters: a database contains everything. A compendium contains what is worth knowing. Every recipe earns its place by meeting the Alchemy standard: historically significant, craft-forward, genuinely interesting to learn."
-    },
-    {
-      title: "Brand Language",
-      content: "North star word: compendium. One-liner: Alchemy is a cocktail compendium. Tagline: Transform your craft. Short, active, imperative — the Nike model. A tremendous compendium of knowledge, served up in small sips is good copy for an about page or pitch deck, but not a tagline. Vibe: knowledgeable without being precious. Warm without being rustic. Precise without being cold."
-    },
-    {
-      title: "Mixologists Who Have Shaped This Project",
-      content: "Reid Nelson (@reidbetweenthelimes) — Austin-based home mixologist with over 300,000 Instagram followers. Specializes in craft cocktail technique, elaborate garnishes, and making complex bartending approachable for home mixologists. Popularized the Cold Fashioned from Still Austin Whiskey Co. Known for reinvented classics including the Enzoni and the Rosalita. Jeffrey Morgenthaler — bar manager, author, educator. Rehabilitated the Amaretto Sour. Author of The Bar Book. Ivy Mix — Leyenda founder, Speed Rack co-founder, Spirits of Latin America author. The Educated Barfly (Leandro DiMonriva) — technique-first educator. Satan Tears tincture baked into the Craft library. Charlotte Voisey — William Grant and Sons brand ambassador, Tales of the Cocktail Foundation board member. Erick Castro — Raised by Wolves and Polite Provisions. Guardian Angel creator."
-    },
-    {
-      title: "Creator Attribution System",
-      content: "Recipes are attributed in lore. Search works by creator name. When a creator has multiple recipes in the collection, lore ends with: Search [Name] to find more of their recipes. Currently: Morgenthaler (3 recipes), Ivy Mix (3 recipes). This nudge only earns its place when there are at least two recipes from the same creator."
-    },
-    {
-      title: "The 6 vs 11 Families Question",
-      content: "Common bartending education uses 6 families: Sour, Old Fashioned, Martini, Highball, Flip, Sidecar. Alchemy uses 11. The 6-family model is a skeleton; 11 is the full body. Negroni, Julep, Punch, Tiki, Spritz, and Hot Drinks each have enough structural and cultural depth for their own curriculum. The Sidecar is a Daisy — a sub-family of the Sour — not a root family."
-    },
-    {
-      title: "Visual Assets — Prompt Architecture",
-      content: "Use the Master Alchemy Style Prompt as base DNA on every image request. Five prompt types: Thumbnail Icon, Name Card, Menu Card, Recipe Card, Family Tree. Always end with the Variable Section. Background: warm light cream parchment #f7f4ec. Stable style language + stable composition + only the variable section changes = consistency, scalability, brand cohesion."
-    },
-    {
-      title: "Visual Assets — Master Style Prompt",
-      content: "BASE DNA: Alchemy cocktail illustration aesthetic: elegant watercolor cocktail illustration on a warm light cream parchment background (#f7f4ec), refined editorial style, upscale cocktail book aesthetic, delicate watercolor textures, realistic glassware proportions, subtle soft shadows beneath glass, clean negative space, sophisticated serif typography, restrained gold accent lines, luxurious but minimal, highly detailed garnish illustration, centered composition, airy spacing, no harsh outlines, no cartoon style, no photorealism, no framing boxes unless specified."
-    },
-    {
-      title: "Visual Assets — Family Tree Prompt",
-      content: "Create an Alchemy cocktail family tree infographic. Warm light cream parchment background (#f7f4ec). Standalone watercolor cocktail illustrations with no framing boxes. Elegant serif typography. Thin gold connector lines branching from a central parent cocktail. Soft watercolor shadows beneath each drink. Luxurious editorial infographic aesthetic. Airy spacing and balanced composition. Parent cocktail centered and slightly larger. Sub-family cocktails branch outward symmetrically. Each cocktail should have unique garnish, color, or glassware characteristics. No clutter. No modern UI elements. No photorealism. THEN APPEND THE VARIABLE SECTION: cocktail name, glassware, garnish for each branch, title text, sub-family count."
-    },
-    {
-      title: "Visual Assets — Thumbnail Icon Prompt",
-      content: "Create a small Alchemy cocktail thumbnail icon. Centered isolated cocktail illustration only. Transparent or parchment background (#f7f4ec). Tight crop with breathing room. Watercolor editorial illustration style. Subtle soft shadow beneath glass. Consistent scale and proportions with other Alchemy icons. Optimized for app UI readability at small sizes. No text. No border. No frame. THEN APPEND: cocktail name, glassware, garnish, dominant color."
-    },
-    {
-      title: "Visual Assets — Background Color Note",
-      content: "Correct background: warm light cream parchment #f7f4ec. Earlier family tree graphics have slight color drift. Lock it going forward with the hex value. Beta tester question: does slight background variation read as intentional warmth or unintentional inconsistency?"
-    },
-    {
-      title: "Variations vs Riffs",
-      content: "The terms are often used interchangeably in cocktail culture, and that is fine. But when precision matters: a variation stays within the same spirit, structure, and family — only a single element shifts. A riff makes a more substantial departure: different spirit, different family, or a structural change that produces a meaningfully different drink. Alchemy uses both terms, but lightly — the goal is to teach without lecturing."
-    },
-    {
-      title: "Things Still To Build",
-      content: "Reserved original cocktail names: Vive la Revolution, Liminal Space (no spec yet — just a name worth keeping). Scroll to top FAB. Family-specific placeholder images. Floating shadow treatment for cocktail thumbnails. Creator profiles. One canonical recipe per sub-family in Templates. Vive la Revolution cocktail reserved as an original recipe name. Charlotte Voisey needs one more recipe for search nudge. Erick Castro — one recipe only."
-    },
-    {
-      title: "Beta Notes",
-      content: "The hardest part of beta testing is finding people who are actually engaged, not just politely supportive. What you want: not people who will be nice about it. People who open it on a Tuesday night because they are curious, not because you asked. The only metric that matters: did they open it more than once without being asked to? Key questions to ask: Does the lore get read? Does the Craft section feel interesting or overwhelming? Are there recipes missing that belong in any serious compendium? What would make it a 10?"
-    },
+/* ─── About ─── */
+function About() {
+  const sectionLabel = {
+    fontFamily:"'Jost',sans-serif",fontWeight:700,fontSize:".75rem",letterSpacing:".1em",textTransform:"uppercase",color:"var(--accent)",marginBottom:8,
+  };
+  const body = {fontSize:".9rem",color:"var(--text-2)",lineHeight:1.7,margin:0};
+  const questions = [
+    "How do I make this?",
+    "Why does this work?",
+    "Why does this drink exist?",
+    "What else is out there?",
+  ];
+  const pillars = [
+    { title:"Craft", question:"How do I make this?", content:"Recipes, techniques, and homemade ingredients — explained as concepts, not just instructions." },
+    { title:"Understanding", question:"Why does this work?", content:"Families, templates, and flavor logic. A Margarita is a Daisy. A Daisy is a template. A template is a door to everything." },
+    { title:"Provenance", question:"Why does this drink exist?", content:"The bartenders and bars behind these drinks didn't just create recipes — they helped shape the craft we're all learning from. Their names belong here." },
+    { title:"Discovery", question:"What else is out there?", content:"Rabbit holes, unexpected connections, and the thing you didn't know you were looking for." },
   ];
 
   return (
     <div style={{maxWidth:720,margin:"0 auto",padding:"0 16px 48px"}}>
-      <h1 className="page-title">Dev Notes</h1>
-      <p className="page-sub" style={{marginBottom:24}}>Working notes, decisions, and reminders. Visible to beta testers intentionally — transparency builds better feedback.</p>
-      {sections.map((s,i)=>(
-        <div key={i} style={{marginBottom:24,paddingBottom:24,borderBottom:"1px solid var(--border)"}}>
-          <div style={{fontFamily:"'Jost',sans-serif",fontWeight:700,fontSize:".75rem",letterSpacing:".1em",textTransform:"uppercase",color:"var(--accent)",marginBottom:8}}>{s.title}</div>
-          <p style={{fontSize:".9rem",color:"var(--text-2)",lineHeight:1.7,margin:0}}>{s.content}</p>
-        </div>
-      ))}
+      <h1 className="page-title">About Liquid Alchemy</h1>
+      <p style={{...body,marginBottom:16}}>Liquid Alchemy is a cocktail compendium built around four questions:</p>
+      <ul style={{listStyle:"none",padding:0,margin:"0 0 24px",borderLeft:"2px solid var(--accent)",paddingLeft:20}}>
+        {questions.map(q=>(
+          <li key={q} style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.1rem",fontStyle:"italic",color:"var(--text)",marginBottom:8,lineHeight:1.5}}>{q}</li>
+        ))}
+      </ul>
+      <p style={{...body,marginBottom:16}}>Every recipe earns its place. Every entry teaches something.</p>
+      <p style={{...body,marginBottom:16}}>The classics, properly understood. The best riffs, carefully chosen. The original creations of the world's finest mixologists, brought into your home.</p>
+      <p style={{...body,marginBottom:32}}>This is not a recipe dump. It is a curriculum — and a celebration of the craft, the history, and the curious people who take both seriously.</p>
+
+      <div style={{marginBottom:32,paddingBottom:32,borderBottom:"1px solid var(--border)"}}>
+        <div style={sectionLabel}>The Four Pillars</div>
+        {pillars.map(p=>(
+          <div key={p.title} style={{marginBottom:20}}>
+            <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.15rem",fontWeight:500,color:"var(--text)",marginBottom:4}}>
+              {p.title} <span style={{fontStyle:"italic",color:"var(--text-3)",fontWeight:400}}>— {p.question}</span>
+            </div>
+            <p style={body}>{p.content}</p>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <div style={sectionLabel}>Get in Touch</div>
+        <p style={{...body,marginBottom:16}}>We'd love to hear from you — recipe suggestions, corrections, feedback, bugs, or simply a note about a drink you love.</p>
+        <a
+          href="mailto:LiquidAlchemyApp@gmail.com"
+          style={{
+            display:"inline-block",
+            fontFamily:"'Jost',sans-serif",
+            fontSize:"1.1rem",
+            fontWeight:600,
+            color:"var(--accent)",
+            textDecoration:"none",
+            letterSpacing:".02em",
+            borderBottom:"1px solid rgba(184,146,42,0.35)",
+            paddingBottom:2,
+          }}
+        >
+          LiquidAlchemyApp@gmail.com
+        </a>
+        <p style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.05rem",fontStyle:"italic",color:"var(--text-3)",marginTop:32,marginBottom:0}}>Transform your craft.</p>
+      </div>
     </div>
   );
 }
@@ -4976,7 +4971,7 @@ export default function App() {
             </div>
           </div>
           <nav className="header-nav">
-            {[["cocktails","Cocktails"],["cabinet","Liquor Cabinet"],["craft","Craft"],["templates","Families"],["originals","Create"],["shopping","Shopping List"],["dev","Dev"]].map(([k,l])=>(
+            {[["cocktails","Cocktails"],["cabinet","Liquor Cabinet"],["craft","Craft"],["templates","Families"],["originals","Create"],["shopping","Shopping List"],["about","About"]].map(([k,l])=>(
               <button key={k} className={`nav-btn ${tab===k?"active":""}`} onClick={()=>setTab(k)}>{l}</button>
             ))}
             <button className="nav-btn" title="Export all recipes + images as a backup file" disabled={exporting} onClick={async ()=>{
@@ -5264,7 +5259,7 @@ export default function App() {
 
           {/* ── SHOPPING LIST TAB ── */}
           {tab==="templates"&&<TheTemplates cocktails={cocktails} setTab={setTab} setViewCocktailId={setViewCocktailId} setFilterFamily={setFilterFamily}/>}
-          {tab==="dev"&&<DevNotes/>}
+          {tab==="about"&&<About/>}
       <button onClick={scrollToTop} style={{position:"fixed",bottom:28,right:20,zIndex:999,width:40,height:40,borderRadius:"50%",background:"var(--accent)",color:"white",border:"none",cursor:"pointer",fontSize:"1.1rem",boxShadow:"0 2px 10px rgba(0,0,0,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"sans-serif",opacity:0.85}}>↑</button>
           {tab==="originals"&&<Originals cocktails={cocktails} setCocktails={setCocktails} inventory={inventory}/>}
           {tab==="shopping"&&<ShoppingList
