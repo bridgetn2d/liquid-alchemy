@@ -3731,8 +3731,100 @@ function Originals({ cocktails, setCocktails, inventory }) {
 }
 
 
+/* ─── Feedback Modal ─── */
+const FEEDBACK_CATEGORIES = [
+  "Recipe Suggestion",
+  "Attribution Correction",
+  "Bug Report",
+  "General Inquiry",
+];
+
+function FeedbackModal({ onClose }) {
+  const [category, setCategory] = useState("General Inquiry");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!message.trim()) return;
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
+      <div className="modal" style={{maxWidth:520}}>
+        <div className="modal-image-header" style={{height:50,padding:"12px 0"}}>
+          <button type="button" className="modal-close" onClick={onClose} aria-label="Close">✕</button>
+        </div>
+        <div className="modal-body">
+          <h2 className="modal-title" style={{marginBottom:0}}>Contact Liquid Alchemy</h2>
+          {submitted ? (
+            <>
+              <p style={{fontSize:".92rem",lineHeight:1.75,color:"var(--text-2)",margin:0}}>
+                Thank you for reaching out. Contact functionality is coming soon.
+              </p>
+              <div className="modal-actions">
+                <button type="button" className="btn-primary" onClick={onClose}>Close</button>
+              </div>
+            </>
+          ) : (
+            <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",gap:22}}>
+              <div className="field">
+                <label htmlFor="feedback-category">Category</label>
+                <select
+                  id="feedback-category"
+                  value={category}
+                  onChange={e=>setCategory(e.target.value)}
+                >
+                  {FEEDBACK_CATEGORIES.map(c=>(
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="field">
+                <label htmlFor="feedback-message">Message *</label>
+                <textarea
+                  id="feedback-message"
+                  value={message}
+                  onChange={e=>setMessage(e.target.value)}
+                  placeholder="Tell us what's on your mind…"
+                  required
+                  autoFocus
+                />
+              </div>
+              <div className="field">
+                <label htmlFor="feedback-email">Email (optional)</label>
+                <input
+                  id="feedback-email"
+                  type="email"
+                  value={email}
+                  onChange={e=>setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                />
+              </div>
+              <div style={{paddingTop:4,borderTop:"1px solid var(--border)"}}>
+                <p className="page-sub" style={{margin:"0 0 4px"}}>Prefer email?</p>
+                <p style={{fontSize:".84rem",color:"var(--text-3)",margin:0,letterSpacing:".02em"}}>
+                  LiquidAlchemyApp@gmail.com
+                </p>
+              </div>
+              <div className="modal-actions">
+                <button type="button" className="btn-secondary" onClick={onClose}>Cancel</button>
+                <button type="submit" className="btn-primary" disabled={!message.trim()}>Submit</button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── About ─── */
 function About() {
+  const [showFeedback, setShowFeedback] = useState(false);
   const sectionLabel = {
     fontFamily:"'Jost',sans-serif",fontWeight:700,fontSize:".75rem",letterSpacing:".1em",textTransform:"uppercase",color:"var(--accent)",marginBottom:8,
   };
@@ -3751,6 +3843,7 @@ function About() {
   ];
 
   return (
+    <>
     <div style={{maxWidth:720,margin:"0 auto",padding:"0 16px 48px"}}>
       <h1 className="page-title">About Liquid Alchemy</h1>
       <p style={{...body,marginBottom:16}}>Liquid Alchemy is a cocktail compendium built around four questions:</p>
@@ -3777,26 +3870,19 @@ function About() {
 
       <div>
         <div style={sectionLabel}>Get in Touch</div>
-        <p style={{...body,marginBottom:16}}>We'd love to hear from you — recipe suggestions, corrections, feedback, bugs, or simply a note about a drink you love.</p>
-        <a
-          href="mailto:LiquidAlchemyApp@gmail.com"
-          style={{
-            display:"inline-block",
-            fontFamily:"'Jost',sans-serif",
-            fontSize:"1.1rem",
-            fontWeight:600,
-            color:"var(--accent)",
-            textDecoration:"none",
-            letterSpacing:".02em",
-            borderBottom:"1px solid rgba(184,146,42,0.35)",
-            paddingBottom:2,
-          }}
+        <p style={{...body,marginBottom:16}}>Questions, suggestions, corrections, attribution updates, or bug reports?</p>
+        <button
+          type="button"
+          className="btn-primary"
+          onClick={()=>setShowFeedback(true)}
         >
-          LiquidAlchemyApp@gmail.com
-        </a>
+          Contact Us
+        </button>
         <p style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.05rem",fontStyle:"italic",color:"var(--text-3)",marginTop:32,marginBottom:0}}>Transform your craft.</p>
       </div>
     </div>
+    {showFeedback&&<FeedbackModal onClose={()=>setShowFeedback(false)}/>}
+    </>
   );
 }
 
