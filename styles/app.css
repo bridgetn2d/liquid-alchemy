@@ -448,6 +448,11 @@ body {
   border-top:1px solid var(--border);
 }
 
+.attribution-statement {
+  font-size:0.72rem; font-style:italic; color:var(--text-3);
+  line-height:1.6; margin:10px 0 0;
+}
+
 .pc-lore {
   font-size:0.78rem; font-style:italic; color:#7a7060;
   line-height:1.75; margin-bottom:16px;

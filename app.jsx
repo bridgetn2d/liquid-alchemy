@@ -3731,6 +3731,26 @@ function Originals({ cocktails, setCocktails, inventory }) {
 }
 
 
+/* ─── Legal & Attribution ─── */
+const LEGAL_DISCLAIMER_TEXT =
+  "Liquid Alchemy is an independent educational resource created to celebrate the history, craft, and culture of cocktails. Bar names, bartender names, brand names, and drink titles referenced throughout the app are the property of their respective owners. Liquid Alchemy is not affiliated with, sponsored by, or endorsed by any establishment, brand, author, or individual featured herein. Recipe attributions are provided for historical and educational purposes only.";
+
+const ATTRIBUTION_STATEMENT_TEXT =
+  "Recipes and their stories are presented here as homage. All attributions belong to their creators.";
+
+function LegalDisclaimer() {
+  return (
+    <p style={{fontSize:".82rem",color:"var(--text-3)",lineHeight:1.75,margin:0}}>
+      {LEGAL_DISCLAIMER_TEXT}
+    </p>
+  );
+}
+
+function AttributionStatement() {
+  return <p className="attribution-statement">{ATTRIBUTION_STATEMENT_TEXT}</p>;
+}
+
+
 /* ─── Feedback Modal ─── */
 const FEEDBACK_CATEGORIES = [
   "Recipe Suggestion",
@@ -3879,6 +3899,11 @@ function About() {
           Contact Us
         </button>
         <p style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.05rem",fontStyle:"italic",color:"var(--text-3)",marginTop:32,marginBottom:0}}>Transform your craft.</p>
+      </div>
+
+      <div style={{marginTop:40,paddingTop:32,borderTop:"1px solid var(--border)"}}>
+        <div style={sectionLabel}>Legal</div>
+        <LegalDisclaimer />
       </div>
     </div>
     {showFeedback&&<FeedbackModal onClose={()=>setShowFeedback(false)}/>}
@@ -5615,6 +5640,7 @@ export default function App() {
                     <div className="notes-block">{viewCocktail.notes}</div>
                   </div>
                 )}
+                {viewCocktail.notes&&<AttributionStatement/>}
 
                 {(viewCocktail.tastingNotes || viewCocktail.myPhoto) && (
                   <div>
@@ -5639,6 +5665,8 @@ export default function App() {
                     </a>
                   </div>
                 )}
+
+                {!viewCocktail.notes&&<AttributionStatement/>}
 
                 <div className="modal-actions">
                   <button className="btn-danger" onClick={()=>deleteCocktail(viewCocktail.id)}>Delete</button>
