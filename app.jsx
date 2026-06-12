@@ -3750,6 +3750,54 @@ function AttributionStatement() {
   return <p className="attribution-statement">{ATTRIBUTION_STATEMENT_TEXT}</p>;
 }
 
+const LORE_DISPLAY_STORAGE_KEY = "alchemy_lore_display";
+const LORE_COMPACT_MAX_CHARS = 180;
+
+function compactLoreText(lore) {
+  const lines = lore.split("\n");
+  let text = lines.slice(0, 2).join("\n");
+  if (text.length > LORE_COMPACT_MAX_CHARS) {
+    const cut = text.slice(0, LORE_COMPACT_MAX_CHARS);
+    const lastSpace = cut.lastIndexOf(" ");
+    text = (lastSpace > 100 ? cut.slice(0, lastSpace) : cut).trimEnd();
+  }
+  if (text.length < lore.length && !text.endsWith("…")) text += "…";
+  return text;
+}
+
+function loreExceedsCompact(lore) {
+  return compactLoreText(lore) !== lore;
+}
+
+function LoreSection({ lore, displayMode, expanded, onToggleExpand }) {
+  if (!lore) return null;
+  const isCompactDefault = displayMode === "compact";
+  const showFull = !isCompactDefault || expanded;
+  const needsToggle = isCompactDefault && loreExceedsCompact(lore);
+  const text = showFull ? lore : compactLoreText(lore);
+
+  return (
+    <div>
+      <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".08em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:6}}>Lore</div>
+      <p className="lore-block" style={{borderTop:"none",paddingTop:0,marginTop:0,whiteSpace:"pre-wrap"}}>{text}</p>
+      {needsToggle&&(
+        <button
+          type="button"
+          onClick={onToggleExpand}
+          style={{
+            fontSize:".75rem",color:"var(--accent-2)",fontStyle:"italic",
+            background:"none",border:"none",padding:0,cursor:"pointer",
+            textDecoration:"underline",textUnderlineOffset:"2px",
+            fontFamily:"'Jost',sans-serif",marginTop:4,
+          }}
+        >
+          {expanded ? "Show less" : "Read more"}
+        </button>
+      )}
+    </div>
+  );
+}
+
 
 /* ─── Feedback Modal ─── */
 const FEEDBACK_CATEGORIES = [
@@ -3843,7 +3891,7 @@ function FeedbackModal({ onClose }) {
 }
 
 /* ─── About ─── */
-function About() {
+function About({ loreDisplay, onLoreDisplayChange }) {
   const [showFeedback, setShowFeedback] = useState(false);
   const sectionLabel = {
     fontFamily:"'Jost',sans-serif",fontWeight:700,fontSize:".75rem",letterSpacing:".1em",textTransform:"uppercase",color:"var(--accent)",marginBottom:8,
@@ -3899,6 +3947,28 @@ function About() {
           Contact Us
         </button>
         <p style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.05rem",fontStyle:"italic",color:"var(--text-3)",marginTop:32,marginBottom:0}}>Transform your craft.</p>
+      </div>
+
+      <div style={{marginTop:40,paddingTop:32,borderTop:"1px solid var(--border)"}}>
+        <div style={sectionLabel}>Preferences</div>
+        <p style={{...body,marginBottom:12}}>Choose how cocktail lore appears when you open a recipe.</p>
+        <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:8}}>
+          {[["compact","Compact"],["expanded","Expanded"]].map(([mode,label])=>(
+            <button
+              key={mode}
+              type="button"
+              className={`pill ${loreDisplay===mode?"active":""}`}
+              onClick={()=>onLoreDisplayChange(mode)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <p className="page-sub" style={{margin:0}}>
+          {loreDisplay==="compact"
+            ? "Lore is shortened until you choose Read more."
+            : "Full lore is shown by default."}
+        </p>
       </div>
 
       <div style={{marginTop:40,paddingTop:32,borderTop:"1px solid var(--border)"}}>
@@ -4309,6 +4379,21 @@ export default function App() {
   const [exportData, setExportData] = useState(null);
   const [exporting, setExporting] = useState(false);
   const [showPhilosophy, setShowPhilosophy] = useState(false);
+  const [loreDisplay, setLoreDisplay] = useState("compact");
+  const [loreExpanded, setLoreExpanded] = useState(false);
+
+  useEffect(()=>{
+    store.get(LORE_DISPLAY_STORAGE_KEY).then(pref=>{
+      if (pref==="compact"||pref==="expanded") setLoreDisplay(pref);
+    });
+  },[]);
+
+  const updateLoreDisplay = (mode) => {
+    setLoreDisplay(mode);
+    store.set(LORE_DISPLAY_STORAGE_KEY, mode);
+  };
+
+  useEffect(()=>{ setLoreExpanded(false); },[viewCocktailId]);
 
   useEffect(()=>{
     (async()=>{
@@ -5369,7 +5454,7 @@ export default function App() {
 
           {/* ── SHOPPING LIST TAB ── */}
           {tab==="templates"&&<TheTemplates cocktails={cocktails} setTab={setTab} setViewCocktailId={setViewCocktailId} setFilterFamily={setFilterFamily}/>}
-          {tab==="about"&&<About/>}
+          {tab==="about"&&<About loreDisplay={loreDisplay} onLoreDisplayChange={updateLoreDisplay}/>}
       <button onClick={scrollToTop} style={{position:"fixed",bottom:28,right:20,zIndex:999,width:40,height:40,borderRadius:"50%",background:"var(--accent)",color:"white",border:"none",cursor:"pointer",fontSize:"1.1rem",boxShadow:"0 2px 10px rgba(0,0,0,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"sans-serif",opacity:0.85}}>↑</button>
           {tab==="originals"&&<Originals cocktails={cocktails} setCocktails={setCocktails} inventory={inventory}/>}
           {tab==="shopping"&&<ShoppingList
@@ -5411,7 +5496,14 @@ export default function App() {
                     {viewCocktail.family&&<span className="serve-badge" style={{marginLeft:4,background:"rgba(184,146,42,0.1)",color:"var(--accent)",borderColor:"rgba(184,146,42,0.3)"}}>⬡ {viewCocktail.family}{viewCocktail.subFamily?" › "+viewCocktail.subFamily:""}</span>}
                     {viewCocktail.difficulty&&<span className={`difficulty-badge difficulty-${viewCocktail.difficulty}`}>{viewCocktail.difficulty}</span>}
                   </div>
-                  {viewCocktail.lore&&<p className="lore-block">{viewCocktail.lore}</p>}
+                  {viewCocktail.lore&&(
+                    <LoreSection
+                      lore={viewCocktail.lore}
+                      displayMode={loreDisplay}
+                      expanded={loreExpanded}
+                      onToggleExpand={()=>setLoreExpanded(x=>!x)}
+                    />
+                  )}
                 {viewCocktail.riffs&&(
                   <div style={{marginTop:12}}>
                     <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".08em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:6}}>Riffs & Variations</div>
