@@ -4132,7 +4132,6 @@ function TheTemplates({ cocktails, setTab, setViewCocktailId, setFilterFamily })
   });
 
   const openCocktail = (id) => {
-    setTab("cocktails");
     setViewCocktailId(id);
   };
 
