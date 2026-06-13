@@ -4,6 +4,8 @@ Proof-of-concept exporter: Liquid Alchemy workbook → app-import JSON.
 
 Reads canonical workbook tabs, filters by App_JSON_Export.export_ready = YES,
 and writes { cocktails, inventory } JSON for the app Import UI.
+
+Preserves optional Lore.citations as cocktails[].citations when populated.
 """
 
 from __future__ import annotations
@@ -331,6 +333,9 @@ def build_cocktail(
             cocktail["riffs"] = riffs
         if tasting:
             cocktail["tastingNotes"] = tasting
+        citations = lore.get("citations", "").strip()
+        if citations:
+            cocktail["citations"] = citations
 
     aka = recipe.get("aka", "").strip()
     if aka:

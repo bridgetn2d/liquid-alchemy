@@ -1,6 +1,6 @@
 # Data contributing — canonical cocktails
 
-How to add or update **permanent** recipes baked into the app. This describes the **current** workflow in `app.jsx` (pre–Phase 1 extraction).
+How to add or update **permanent** recipes baked into the app. This describes the current pre-recipe-extraction workflow, where canonical recipes still live primarily in `app.jsx`.
 
 ## Overview
 
@@ -13,13 +13,15 @@ Illustrations are **not** stored inside the cocktail JSON in `alchemy_cocktails`
 
 ## Where to edit
 
-| Step | Location in `app.jsx` (approx.) |
-|------|----------------------------------|
-| Define the recipe object | **My Recipes** block, lines 397–2769 |
-| Register for merge | `MY_RECIPES_LIST`, lines 2660–2769 |
-| Comment marker | “Add new recipes above this line” ~653–654 |
+| Step | Location |
+|------|----------|
+| Define the recipe object | **My Recipes** block in `app.jsx` (individual `const` recipe constants) |
+| Register for merge | `MY_RECIPES_LIST` array in `app.jsx` |
+| Comment marker | “Add new recipes above this line” in the My Recipes section |
 
 Follow an existing recipe (e.g. `CLASSIC_MARGARITA`, `NEGRONI`) as a template.
+
+For a section-level map of `app.jsx`, see [project-map.md](project-map.md).
 
 ## Recipe object checklist
 
@@ -31,13 +33,13 @@ Follow an existing recipe (e.g. `CLASSIC_MARGARITA`, `NEGRONI`) as a template.
 | `name` | Display name |
 | `family` | Primary family (align with Families tab / `TEMPLATES_DATA`) |
 | `subFamily` | Subfamily label (can be `""`) |
-| `baseSpirit` | One of `SPIRIT_OPTIONS` (~line 372) |
+| `baseSpirit` | One of `SPIRIT_OPTIONS` |
 | `glass` | One of `GLASS_OPTIONS` |
 | `occasion` | One of `OCCASION_OPTIONS` |
 | `season` | One of `SEASON_OPTIONS` |
 | `difficulty` | `Easy`, `Medium`, or `Advanced` |
 | `serveStyle` | One of `SERVE_STYLES` |
-| `tags` | Array from `CHAR_TAGS` (lines 55–59) |
+| `tags` | Array from `CHAR_TAGS` |
 | `sliders` | Object with keys: `boozy`, `sweet`, `sour`, `bitter`, `fruity`, `herbal`, `smoky`, `spicy`, `rich` (0–10) |
 | `ingredients` | `[{ name, amount, unit }]` — `unit` typically `oz`, `ml`, `dash`, `whole`, etc. |
 | `instructions` | Prose |
@@ -59,9 +61,26 @@ Follow an existing recipe (e.g. `CLASSIC_MARGARITA`, `NEGRONI`) as a template.
 | `obscura` | `true` — surfaces under Obscura filter (“best cocktails you’ve never heard of”) |
 | `rating` | Usually `0` in canon; users set in app |
 | `craftLinks` | Array of craft item `id`s from `alchemy_craft` |
-| `sourceUrl` | External reference |
+| `sourceUrl` | External reference — where the recipe spec itself originated |
+| `citations` | Optional. Sources supporting lore, history, provenance, creator context, or educational claims. Distinct from recipe `sourceUrl`. Preserved in export when populated; not shown in app UI yet. |
 | `imageUrl` | `""` in source — seed may set; runtime uses `alchemy_img_{id}` |
 | `myPhoto` | Always `""` in canon |
+
+### Workbook provenance fields (`Lore` tab)
+
+For workbook-driven content, provenance-related fields live on the `Lore` tab in the canonical workbook (`content/workbook/`). Column order near provenance content:
+
+| Workbook field | App field (when exported) | Notes |
+|----------------|---------------------------|--------|
+| `creator_id` | — | Join key to `Creators` tab; not exported to app JSON today |
+| `source_urls` | `sourceUrl` (first URL) | Recipe / spec source URLs |
+| `citations` | `citations` | Optional. Sources supporting lore, history, provenance, creator context, or educational claims. Distinct from recipe `sourceUrl`. Preserved in export when populated; not shown in app UI yet. |
+| `why_it_works` | — | Editorial framing; workbook-only |
+| `story` | `lore` | Historical narrative |
+
+Do not auto-populate `citations`. Leave blank until editorially sourced.
+
+Workbook → app export is handled by `scripts/workbook_to_json.py`. See [architecture.md](architecture.md) for the export pipeline.
 
 ### Slider defaults
 
@@ -69,7 +88,7 @@ If unsure, start from `DEFAULT_SLIDERS` (all zeros) and adjust to match `tags`, 
 
 ## Ingredient names and ABV
 
-- `calcABV` uses `ABV_TABLE` / `SUGAR_TABLE` (lines 174–299). Unknown ingredients are skipped in ABV math but still show in the recipe.
+- `calcABV` uses `ABV_TABLE` / `SUGAR_TABLE` in `app.jsx`. Unknown ingredients are skipped in ABV math but still show in the recipe.
 - Prefer names that match table keys or common variants (lowercase substring matching).
 - For inventory **Can Make**, naming should be close to cabinet item names (fuzzy word match).
 
@@ -97,7 +116,7 @@ Missing this step = recipe **never** ships to users who already have other data 
 
 ## Families and templates
 
-- Set `family` / `subFamily` to match [Families tab](architecture.md) curriculum (`TEMPLATES_DATA`, ~4391).
+- Set `family` / `subFamily` to match [Families tab](architecture.md) curriculum (`TEMPLATES_DATA` in `app.jsx`).
 - Optional: add cocktail `id` to a subfamily’s `appIds` in `TEMPLATES_DATA` so it appears in family navigation links.
 
 ## Load-time patches
@@ -122,12 +141,12 @@ Search `app.jsx` for `x.id === "your-id"` before adding duplicate patches.
 - [ ] `family` / `subFamily` consistent with taxonomy
 - [ ] Optional: `obscura`, `craftLinks`, `appIds` in templates
 
-## Future (Phase 1+)
+## Future extraction
 
-[refactor-plan.md](refactor-plan.md) will move recipes to `data/recipes/{id}.json` + `data/recipes/index.json`. Until then, use the workflow above.
+[refactor-plan.md](refactor-plan.md) describes moving recipes out of `app.jsx` into structured data files. Until that migration lands, use the workflow above.
 
 ## Related docs
 
-- [architecture.md](architecture.md) — persistence and merge pipeline
-- [project-map.md](project-map.md) — line map for `app.jsx`
+- [architecture.md](architecture.md) — persistence, merge pipeline, and workbook export
+- [project-map.md](project-map.md) — section map for `app.jsx` (line numbers may drift)
 - [AGENTS.md](../AGENTS.md) — AI task routing

@@ -179,6 +179,8 @@ sequenceDiagram
 
 **Persisted fields (typical):** `id`, `name`, `baseSpirit`, `glass`, `occasion`, `season`, `difficulty`, `serveStyle`, `family`, `subFamily`, `tags[]`, `sliders{}`, `ingredients[]`, `instructions`, `notes`, `riffs`, `tastingNotes`, `lore`, `rating`, `wantToTry`, `tried`, `favorite`, `obscura`, `craftLinks[]`, `sourceUrl`, `addedAt`.
 
+**Workbook-only / export-preserved (optional):** `citations` — from `Lore.citations` in the canonical workbook; included in workbook→JSON export when populated; no app UI yet. Import merge preserves unknown fields on cocktail objects.
+
 **Runtime / side storage:** `imageUrl`, `myPhoto`, `_thumb`.
 
 ### 6.2 Inventory item
