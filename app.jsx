@@ -5383,11 +5383,16 @@ export default function App() {
                       </div>
                        <div>
                          <div className="card-meta">
-                          {c.baseSpirit&&c.baseSpirit!=="None"&&<span>{c.baseSpirit}</span>}
-                          {c.baseSpirit&&c.baseSpirit!=="None"&&c.serveStyle&&<span className="meta-sep">·</span>}
-                           {c.serveStyle&&<span>{c.serveStyle}</span>}
-                           {(c.baseSpirit||c.serveStyle)&&c.occasion&&<span className="meta-sep">·</span>}
-                           {c.occasion&&<span>{c.occasion}</span>}
+                          {[
+                            c.baseSpirit && c.baseSpirit !== "None" ? c.baseSpirit : null,
+                            c.serveStyle || null,
+                            c.occasion || null,
+                          ].filter(Boolean).map((item, i) => (
+                            <React.Fragment key={i}>
+                              {i > 0 && <span className="meta-sep">·</span>}
+                              <span>{item}</span>
+                            </React.Fragment>
+                          ))}
                          </div>
                          {(c.family||c.season||c.baseSpirit==="None")&&(
                          <div className="card-meta" style={{display:"flex",justifyContent:"space-between",marginTop:2}}>
@@ -5532,8 +5537,16 @@ export default function App() {
                   <div className="modal-title">{viewCocktail.name}</div>
                   {viewCocktail.aka&&<div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:".85rem",color:"var(--text-3)",marginTop:2}}>also known as {viewCocktail.aka}</div>}
                   <div className="modal-meta">
-                    {[viewCocktail.baseSpirit==="None"?null:viewCocktail.baseSpirit,viewCocktail.glass,viewCocktail.season,viewCocktail.occasion].filter(Boolean).map((m,i,a)=>(
-                      <span key={i}>{m}{i<a.length-1?" ·":""}</span>
+                    {[
+                      viewCocktail.baseSpirit === "None" ? null : viewCocktail.baseSpirit,
+                      viewCocktail.glass || null,
+                      viewCocktail.season || null,
+                      viewCocktail.occasion || null,
+                    ].filter(Boolean).map((item, i) => (
+                      <React.Fragment key={i}>
+                        {i > 0 && " · "}
+                        <span>{item}</span>
+                      </React.Fragment>
                     ))}
                     {viewCocktail.serveStyle&&<span className="serve-badge" style={{marginLeft:4}}>🥃 {viewCocktail.serveStyle}</span>}
                     {(viewCocktail.family||viewCocktail.baseSpirit==="None")&&<span className="serve-badge" style={{marginLeft:4,background:"rgba(184,146,42,0.1)",color:"var(--accent)",borderColor:"rgba(184,146,42,0.3)"}}>⬡ {viewCocktail.baseSpirit==="None"?"Zero-Proof":viewCocktail.family}{viewCocktail.subFamily?" › "+viewCocktail.subFamily:""}</span>}
