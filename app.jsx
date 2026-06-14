@@ -2906,6 +2906,12 @@ const CONTENT_STANDARD_PATCH_IDS = new Set([
   "springs-first-bloom",
 ]);
 
+// Full content patch: overwrite editorial fields from the canonical const on
+// every load, so corrections to already-seeded recipes reach all browsers.
+const CONTENT_FULL_PATCH_IDS = new Set([
+  "last-word", "paper-plane", "monte-cassino", "naked-and-famous",
+]);
+
 /* ─── End of My Recipes ─── */
 
 const SPIRIT_HIERARCHY = {
@@ -4486,6 +4492,13 @@ export default function App() {
         if (x.id === "rosemary-gin-smash") return {...x,
           riffs:"The direct ancestor of this drink is the Gin Basil Smash, created by German bartender Jorg Meyer at Le Lion in Hamburg in 2008 — same template, basil instead of rosemary. Worth making both back to back.",
           lore:"The Smash is one of cocktailing oldest templates — spirit, herb, sugar, and seasonal fruit, dating to at least 1862. The modern gin-and-herb interpretation was pioneered by German bartender Jorg Meyer, whose Gin Basil Smash (created in 2008 at Le Lion in Hamburg) inspired a generation of herb-forward riffs. This rosemary version follows that lineage: clean, aromatic, and deeply refreshing. Found on a German cocktail website featuring The Great Eight Gin, an Austrian craft dry gin from the Peter Affenzeller distillery.",
+        }
+        if (CONTENT_FULL_PATCH_IDS.has(x.id)) {
+          const canonical = MY_RECIPES_LIST.find(r => r.id === x.id);
+          if (canonical) return { ...x,
+            family: canonical.family, subFamily: canonical.subFamily,
+            lore: canonical.lore, notes: canonical.notes, riffs: canonical.riffs,
+            instructions: canonical.instructions, source: canonical.source };
         }
         if (CONTENT_STANDARD_PATCH_IDS.has(x.id)) {
           const canonical = MY_RECIPES_LIST.find(r => r.id === x.id);
