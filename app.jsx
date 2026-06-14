@@ -2819,7 +2819,7 @@ const MAXIMILIAN_AFFAIR = {
 // content/exports/liquid_alchemy_pack_003_tiki_tropical.json (objects verbatim).
 const TIKI_PACK_003 = [
   {
-    id:"zombie-1934", name:"Zombie", family:"Tiki & Tropical", subFamily:"Grog",
+    id:"zombie-1934", name:"Zombie", family:"Tiki & Tropical", subFamily:"Zombie / Strong Tropical",
     baseSpirit:"Rum", glass:"Tiki Mug", occasion:"Party/Batch", season:"Summer",
     difficulty:"Advanced", serveStyle:"On the Rocks",
     tags:["Tropical","Boozy","Fruity","Spicy","Elegant"],
@@ -2844,7 +2844,7 @@ const TIKI_PACK_003 = [
     imageUrl:"", myPhoto:"",
   },
   {
-    id:"painkiller", name:"Painkiller", family:"Tiki & Tropical", subFamily:"Tropical Sour",
+    id:"painkiller", name:"Painkiller", family:"Tiki & Tropical", subFamily:"Creamy Tropical",
     baseSpirit:"Rum", glass:"Tiki Mug", occasion:"Party/Batch", season:"Summer",
     difficulty:"Easy", serveStyle:"On the Rocks",
     tags:["Tropical","Fruity","Creamy/Rich","Sweet","Light/Refreshing"],
@@ -2911,7 +2911,7 @@ const TIKI_PACK_003 = [
     imageUrl:"", myPhoto:"",
   },
   {
-    id:"jet-pilot", name:"Jet Pilot", family:"Tiki & Tropical", subFamily:"Grog",
+    id:"jet-pilot", name:"Jet Pilot", family:"Tiki & Tropical", subFamily:"Zombie / Strong Tropical",
     baseSpirit:"Rum", glass:"Rocks/Old Fashioned", occasion:"Nightcap", season:"Year-Round",
     difficulty:"Advanced", serveStyle:"On the Rocks",
     tags:["Tropical","Boozy","Spicy","Fruity","Elegant"],
@@ -3064,6 +3064,8 @@ const CONTENT_STANDARD_PATCH_IDS = new Set([
 // every load, so corrections to already-seeded recipes reach all browsers.
 const CONTENT_FULL_PATCH_IDS = new Set([
   "last-word", "paper-plane", "monte-cassino", "naked-and-famous", "americano",
+  // Tiki subfamily re-classification — overwrite stale stored subFamily values.
+  "zombie-1934", "jet-pilot", "painkiller",
 ]);
 
 /* ─── End of My Recipes ─── */
@@ -4224,10 +4226,10 @@ const TEMPLATES_DATA = [
     description:"Tiki is not one formula — it is a style-world built from sours, punches, highballs, and crushed-ice drinks. The common traits are layered flavors, tropical ingredients, complex syrups, rum blends, and dramatic presentation. Serious tiki is serious craft.",
     subfamilies:[
       { name:"Mai Tai Style", template:"Rum + lime + orange liqueur + orgeat", description:"One of the most important tiki templates. Essentially a rum Daisy with orgeat. Balance, depth, and restraint.", examples:["Mai Tai","Tia Mia"], appIds:["mai-tai","tia-mia"] },
-      { name:"Grog", template:"Rum + citrus + sweetener + dilution, over crushed ice", description:"Relatively dry, strong, and spice-forward. Punch-adjacent but served individually over crushed ice.", examples:["Navy Grog"], appIds:["navy-grog","fog-cutter"] },
-      { name:"Zombie / Strong Tropical", template:"Multiple rums + citrus + spice syrups + high-proof elements", description:"Intense, layered, and often high-ABV. Handle with respect.", examples:["Zombie","Jet Pilot"], appIds:["zombie-1934","jet-pilot"] },
+      { name:"Grog", template:"Rum + citrus + sweetener + dilution, over crushed ice", description:"Relatively dry, strong, and spice-forward. Punch-adjacent but served individually over crushed ice.", examples:["Navy Grog"], appIds:[] },
+      { name:"Zombie / Strong Tropical", template:"Multiple rums + citrus + spice syrups + high-proof elements", description:"Intense, layered, and often high-ABV. Handle with respect.", examples:["Zombie","Jet Pilot"], appIds:[] },
       { name:"Tropical Sour", template:"Spirit + tropical fruit or citrus + syrup or liqueur", description:"Structurally a sour but with tropical modifiers. Versatile.", examples:["Jungle Bird","Saturn"], appIds:["jungle-bird"] },
-      { name:"Creamy Tropical", template:"Spirit + fruit + coconut or cream", description:"Lush, vacation-style drinks. The coconut or cream is as important as the spirit.", examples:["Painkiller","Pina Colada"], appIds:["painkiller"] },
+      { name:"Creamy Tropical", template:"Spirit + fruit + coconut or cream", description:"Lush, vacation-style drinks. The coconut or cream is as important as the spirit.", examples:["Painkiller","Pina Colada"], appIds:[] },
     ]
   },
   {
@@ -4321,6 +4323,10 @@ function TheTemplates({ cocktails, setTab, setViewCocktailId, setFilterFamily })
         {TEMPLATES_DATA.map(family => {
           const isOpen = expanded.has(family.id);
           const treeFile = FAMILY_TREE_IMAGES[family.name];
+          // IDs curated anywhere in this family. Curation pins a cocktail to a
+          // specific subfamily, so it is excluded from data-driven derivation in
+          // sibling subfamilies (prevents duplicate pills across subfamilies).
+          const curatedFamilyIds = new Set(family.subfamilies.flatMap(s=>s.appIds));
           return (
             <div key={family.id} style={{borderRadius:"var(--radius)",border:"1px solid var(--border)",background:"var(--bg)",overflow:"hidden"}}>
               <div onClick={()=>toggle(family.id)} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"16px 20px",cursor:"pointer",background:isOpen?"var(--bg-2)":"var(--bg)",transition:"background .15s"}}>
@@ -4353,7 +4359,14 @@ function TheTemplates({ cocktails, setTab, setViewCocktailId, setFilterFamily })
                     {family.subfamilies.map((sub,i) => {
                       const subKey = family.id+"-"+i;
                       const subOpen = expandedSub.has(subKey);
-                      const appCocktails = sub.appIds.map(id=>cocktails.find(c=>c.id===id)).filter(Boolean);
+                      // Curated appIds define preferred order/curation; any
+                      // cocktail whose family + subFamily match this subfamily is
+                      // then appended so new imports appear automatically without
+                      // manual registration. Cocktails curated elsewhere in this
+                      // family are skipped so they aren't duplicated across pills.
+                      const curated = sub.appIds.map(id=>cocktails.find(c=>c.id===id)).filter(Boolean);
+                      const derived = cocktails.filter(c=>c.family===family.name&&c.subFamily===sub.name&&!curatedFamilyIds.has(c.id));
+                      const appCocktails = [...curated, ...derived];
                       return (
                         <div key={subKey} style={{borderRadius:"var(--radius-sm)",border:"1px solid var(--border)",background:"var(--bg-2)",overflow:"hidden"}}>
                           <div onClick={()=>toggleSub(subKey)} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 14px",cursor:"pointer"}}>
