@@ -4282,6 +4282,22 @@ const BETA_SEED_DATA = {"cocktails":[{"id":"last-of-the-oaxacans","name":"Last o
 export default function App() {
   const scrollRef = useRef(null);
   const scrollToTop = () => { try{ scrollRef.current.scrollIntoView({behavior:"smooth"}); }catch(e){} };
+  const cocktailResultsRef = useRef(null);
+  const cocktailResultsAnchorRef = useRef(null);
+  const scrollToCocktailResults = () => {
+    if (!cocktailResultsAnchorRef.current) return;
+    const headerEl = document.querySelector(".header");
+    const headerH = headerEl ? headerEl.getBoundingClientRect().height : 0;
+    const gap = 12;
+    const y = cocktailResultsAnchorRef.current.getBoundingClientRect().top + window.scrollY - headerH - gap;
+    window.scrollTo({ top: Math.max(y, 0), behavior: "smooth" });
+  };
+  const handleCocktailSearchKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      scrollToCocktailResults();
+    }
+  };
   const [tab, setTab] = useState("cocktails");
   const [craftDeepLink, setCraftDeepLink] = useState(null);
 
@@ -5285,7 +5301,7 @@ export default function App() {
             <div className="toolbar">
               <div className="search-wrap">
                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                <input className="search-input" placeholder="Search by name, spirit, ingredient, creator, or bar…" value={search} onChange={e=>setSearch(e.target.value)}/>
+                <input className="search-input" placeholder="Search by name, spirit, ingredient, creator, or bar…" value={search} onChange={e=>setSearch(e.target.value)} onKeyDown={handleCocktailSearchKeyDown}/>
                 {search&&<button onClick={()=>setSearch("")} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",color:"var(--text-3)",fontSize:"1rem",lineHeight:1,padding:0}}>✕</button>}
                 {search&&<button onClick={()=>setSearch("")} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",color:"var(--text-3)",fontSize:"1rem",lineHeight:1,padding:0}}>✕</button>}
               </div>
@@ -5363,6 +5379,8 @@ export default function App() {
               <button className={"sort-btn" + (shuffleOrder?" active":"")} onClick={shuffle} title="Shuffle order">🔀 Shuffle</button>
             </div>
 
+            <div ref={cocktailResultsAnchorRef} />
+            <div ref={cocktailResultsRef}>
             {filtered.length===0?(
               <div className="empty-state">
                 <h3>{cocktails.length===0?"Start your collection":"No matches"}</h3>
@@ -5431,6 +5449,7 @@ export default function App() {
                 ))}
               </div>
             )}
+            </div>
           </>}
 
           {/* ── LIQUOR CABINET ── */}
