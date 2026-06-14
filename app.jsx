@@ -5383,15 +5383,15 @@ export default function App() {
                       </div>
                        <div>
                          <div className="card-meta">
-                           {c.baseSpirit&&<span>{c.baseSpirit}</span>}
-                           {c.baseSpirit&&c.serveStyle&&<span className="meta-sep">·</span>}
+                          {c.baseSpirit&&c.baseSpirit!=="None"&&<span>{c.baseSpirit}</span>}
+                          {c.baseSpirit&&c.baseSpirit!=="None"&&c.serveStyle&&<span className="meta-sep">·</span>}
                            {c.serveStyle&&<span>{c.serveStyle}</span>}
                            {(c.baseSpirit||c.serveStyle)&&c.occasion&&<span className="meta-sep">·</span>}
                            {c.occasion&&<span>{c.occasion}</span>}
                          </div>
-                         {(c.family||c.season)&&(
+                         {(c.family||c.season||c.baseSpirit==="None")&&(
                          <div className="card-meta" style={{display:"flex",justifyContent:"space-between",marginTop:2}}>
-                           <span style={{color:"var(--accent)"}}>{c.family}{c.subFamily?" › "+c.subFamily:""}</span>
+                           <span style={{color:"var(--accent)"}}>{c.baseSpirit==="None"?"Zero-Proof":c.family}{c.subFamily?" › "+c.subFamily:""}</span>
                            {c.season&&<span style={{marginLeft:"auto"}}>{c.season}</span>}
                          </div>
                          )}
@@ -5532,11 +5532,11 @@ export default function App() {
                   <div className="modal-title">{viewCocktail.name}</div>
                   {viewCocktail.aka&&<div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:".85rem",color:"var(--text-3)",marginTop:2}}>also known as {viewCocktail.aka}</div>}
                   <div className="modal-meta">
-                    {[viewCocktail.baseSpirit,viewCocktail.glass,viewCocktail.season,viewCocktail.occasion].filter(Boolean).map((m,i,a)=>(
+                    {[viewCocktail.baseSpirit==="None"?null:viewCocktail.baseSpirit,viewCocktail.glass,viewCocktail.season,viewCocktail.occasion].filter(Boolean).map((m,i,a)=>(
                       <span key={i}>{m}{i<a.length-1?" ·":""}</span>
                     ))}
                     {viewCocktail.serveStyle&&<span className="serve-badge" style={{marginLeft:4}}>🥃 {viewCocktail.serveStyle}</span>}
-                    {viewCocktail.family&&<span className="serve-badge" style={{marginLeft:4,background:"rgba(184,146,42,0.1)",color:"var(--accent)",borderColor:"rgba(184,146,42,0.3)"}}>⬡ {viewCocktail.family}{viewCocktail.subFamily?" › "+viewCocktail.subFamily:""}</span>}
+                    {(viewCocktail.family||viewCocktail.baseSpirit==="None")&&<span className="serve-badge" style={{marginLeft:4,background:"rgba(184,146,42,0.1)",color:"var(--accent)",borderColor:"rgba(184,146,42,0.3)"}}>⬡ {viewCocktail.baseSpirit==="None"?"Zero-Proof":viewCocktail.family}{viewCocktail.subFamily?" › "+viewCocktail.subFamily:""}</span>}
                     {viewCocktail.difficulty&&<span className={`difficulty-badge difficulty-${viewCocktail.difficulty}`}>{viewCocktail.difficulty}</span>}
                   </div>
                   {viewCocktail.lore&&(
