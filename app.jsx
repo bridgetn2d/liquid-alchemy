@@ -4224,10 +4224,10 @@ const TEMPLATES_DATA = [
     description:"Tiki is not one formula — it is a style-world built from sours, punches, highballs, and crushed-ice drinks. The common traits are layered flavors, tropical ingredients, complex syrups, rum blends, and dramatic presentation. Serious tiki is serious craft.",
     subfamilies:[
       { name:"Mai Tai Style", template:"Rum + lime + orange liqueur + orgeat", description:"One of the most important tiki templates. Essentially a rum Daisy with orgeat. Balance, depth, and restraint.", examples:["Mai Tai","Tia Mia"], appIds:["mai-tai","tia-mia"] },
-      { name:"Grog", template:"Rum + citrus + sweetener + dilution, over crushed ice", description:"Relatively dry, strong, and spice-forward. Punch-adjacent but served individually over crushed ice.", examples:["Navy Grog"], appIds:[] },
-      { name:"Zombie / Strong Tropical", template:"Multiple rums + citrus + spice syrups + high-proof elements", description:"Intense, layered, and often high-ABV. Handle with respect.", examples:["Zombie","Jet Pilot"], appIds:[] },
+      { name:"Grog", template:"Rum + citrus + sweetener + dilution, over crushed ice", description:"Relatively dry, strong, and spice-forward. Punch-adjacent but served individually over crushed ice.", examples:["Navy Grog"], appIds:["navy-grog","fog-cutter"] },
+      { name:"Zombie / Strong Tropical", template:"Multiple rums + citrus + spice syrups + high-proof elements", description:"Intense, layered, and often high-ABV. Handle with respect.", examples:["Zombie","Jet Pilot"], appIds:["zombie-1934","jet-pilot"] },
       { name:"Tropical Sour", template:"Spirit + tropical fruit or citrus + syrup or liqueur", description:"Structurally a sour but with tropical modifiers. Versatile.", examples:["Jungle Bird","Saturn"], appIds:["jungle-bird"] },
-      { name:"Creamy Tropical", template:"Spirit + fruit + coconut or cream", description:"Lush, vacation-style drinks. The coconut or cream is as important as the spirit.", examples:["Painkiller","Pina Colada"], appIds:[] },
+      { name:"Creamy Tropical", template:"Spirit + fruit + coconut or cream", description:"Lush, vacation-style drinks. The coconut or cream is as important as the spirit.", examples:["Painkiller","Pina Colada"], appIds:["painkiller"] },
     ]
   },
   {
