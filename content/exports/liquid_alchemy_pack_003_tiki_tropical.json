@@ -1,0 +1,410 @@
+{
+  "cocktails": [
+    {
+      "id": "zombie-1934",
+      "name": "Zombie",
+      "family": "Tiki & Tropical",
+      "subFamily": "Grog",
+      "baseSpirit": "Rum",
+      "glass": "Tiki Mug",
+      "occasion": "Party/Batch",
+      "season": "Summer",
+      "difficulty": "Advanced",
+      "serveStyle": "On the Rocks",
+      "tags": [
+        "Tropical",
+        "Boozy",
+        "Fruity",
+        "Spicy",
+        "Elegant"
+      ],
+      "sliders": {
+        "boozy": 10,
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "fruity": 4,
+        "herbal": 1,
+        "smoky": 0,
+        "spicy": 1,
+        "rich": 2
+      },
+      "ingredients": [
+        {
+          "name": "Gold Puerto Rican rum",
+          "amount": "1.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Dark Jamaican rum",
+          "amount": "1.5",
+          "unit": "oz"
+        },
+        {
+          "name": "151-proof Demerara rum (Hamilton or Lemon Hart)",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lime juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Don's Mix (2 parts white grapefruit juice : 1 part cinnamon syrup)",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Falernum",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Grenadine",
+          "amount": "1",
+          "unit": "tsp"
+        },
+        {
+          "name": "Pernod or Herbsaint",
+          "amount": "6",
+          "unit": "drop"
+        },
+        {
+          "name": "Angostura bitters",
+          "amount": "1",
+          "unit": "dash"
+        }
+      ],
+      "instructions": "Combine all ingredients in a blender. Add 6 oz (3/4 cup) of crushed ice. Blend at high speed for no more than 5 seconds — set a timer. Open pour unstrained into a tall Tiki mug. Add more crushed ice to fill. Garnish with a mint sprig. Limit two per person. This is not a suggestion.",
+      "notes": "Don's Mix is the key proprietary component: 2 parts white grapefruit juice to 1 part cinnamon syrup. Make it fresh and make more than you need. For the cinnamon syrup: bring 1 cup water, 1 cup sugar, and 3 cinnamon sticks to a boil, stir until dissolved, cool, and strain. The three-rum structure — light Puerto Rican, dark Jamaican, and 151-proof Demerara — is not negotiable. Each rum contributes something the others cannot. Hamilton makes a Beachbum Berry Zombie Blend that can substitute for the three-rum structure in a pinch. Blend at high speed for no more than 5 seconds — over-blending warms the drink and kills the texture. Flash blend and pour unstrained into a tall Tiki mug over crushed ice. The two-drink limit is not a gimmick. Respect it.",
+      "lore": "Donn Beach called the Zombie \"a mender of broken dreams.\" He was not being poetic — he was being practical. His customers at Don the Beachcomber in Hollywood needed an excuse for how the night had gone, and the Zombie was the alibi. Beach opened Don the Beachcomber in 1934, just after Prohibition ended, and the Zombie was among the founding drinks of American Tiki culture. He was obsessively protective of the recipe, labeling the bottles behind his bar with numbers rather than names so that even his own staff could not give away the formula. Not even two Zombies per customer — he put it on the menu as a rule, not a suggestion, because the drink was genuinely that strong. The mystery endured for most of a century. In 1994, Jeff \"Beachbum\" Berry began a decade-long quest to find the original recipe. In 2005 the answer arrived in the form of Jennifer Santiago, whose father Dick had been a waiter at Don the Beachcomber for fifteen years and had kept a notebook of recipes in his shirt pocket. The notebook was marked \"old\" on the Zombie entry, suggesting it predated even 1937. The last missing piece — a cryptic ingredient called \"Spices #4\" — was finally identified by veteran Tiki bartender Bob Esmino as cinnamon syrup. The recipe had been hidden in plain sight for seventy years. Berry published the decoded original in his 2007 book Beachbum Berry's Sippin' Safari. The Zombie is not a drink you make casually. It is a drink you make because you respect what it took to find it.",
+      "riffs": "The 1950 Donn Beach version adds passionfruit syrup for additional tropical sweetness — worth making for comparison. The Zombie Punch is essentially the same drink served in larger format for a crowd: scale all ingredients proportionally, pre-batch, and serve over a block of ice in a punch bowl. The Test Pilot (1941) is the leaner ancestor: Jamaican rum, Puerto Rican rum, Cointreau, falernum, lime, Pernod, bitters — the architecture of the Zombie without the full rum payload.",
+      "tastingNotes": "",
+      "rating": 0,
+      "addedAt": 1781438400000,
+      "obscura": true,
+      "craftLinks": [],
+      "sourceUrl": "https://www.diffordsguide.com/cocktails/recipe/2131/zombie",
+      "imageUrl": "",
+      "myPhoto": ""
+    },
+    {
+      "id": "painkiller",
+      "name": "Painkiller",
+      "family": "Tiki & Tropical",
+      "subFamily": "Tropical Sour",
+      "baseSpirit": "Rum",
+      "glass": "Tiki Mug",
+      "occasion": "Party/Batch",
+      "season": "Summer",
+      "difficulty": "Easy",
+      "serveStyle": "On the Rocks",
+      "tags": [
+        "Tropical",
+        "Fruity",
+        "Creamy/Rich",
+        "Sweet",
+        "Light/Refreshing"
+      ],
+      "sliders": {
+        "boozy": 6,
+        "sweet": 5,
+        "sour": 2,
+        "bitter": 0,
+        "fruity": 7,
+        "herbal": 1,
+        "smoky": 0,
+        "spicy": 0,
+        "rich": 5
+      },
+      "ingredients": [
+        {
+          "name": "Pusser's Rum (Gunpowder Proof preferred)",
+          "amount": "2",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh pineapple juice",
+          "amount": "4",
+          "unit": "oz"
+        },
+        {
+          "name": "Cream of coconut (Coco Lopez)",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh orange juice",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "Freshly grated nutmeg",
+          "amount": "1",
+          "unit": "whole"
+        }
+      ],
+      "instructions": "Combine rum, pineapple juice, cream of coconut, and orange juice in a cocktail shaker with ice. Shake hard for 20 to 30 seconds — the cream of coconut needs to be fully integrated. Strain into a Tiki mug or tall glass over fresh ice. Grate fresh nutmeg generously over the surface immediately before serving. Garnish with a pineapple wedge and cherry if desired.",
+      "notes": "Pusser's Gunpowder Proof (black label) is the traditional choice and the most flavorful. Shake hard for 20 to 30 seconds — the cream of coconut needs to be thoroughly integrated or the drink separates. Freshly grated nutmeg on top is not optional; it is a defining aromatic of the drink and changes the experience from the first sip. Do not substitute coconut cream for cream of coconut — they are different products. Coco Lopez is the standard commercial choice for cream of coconut. Fresh pineapple juice is significantly better than bottled; if using bottled, choose unsweetened.",
+      "lore": "The Soggy Dollar Bar sits on a long stretch of white sand beach at White Bay on the island of Jost Van Dyke in the British Virgin Islands. There is no dock. The only way in is to swim from your boat anchored in the bay, which is exactly what sailors, boaters, and rum pilgrims have been doing since Daphne Henderson opened the bar in the 1970s. Your dollars arrive wet. Hence the name. Henderson's Painkiller became quietly famous among the sailing community — word spreading the way things spread before the internet, from anchorage to anchorage, island to island, person to person. Charles Tobias, founder of Pusser's Rum, was among those who made the pilgrimage. He loved the drink enough to replicate it and trademark the name in the 1980s, specifying that any bar serving a Painkiller on the menu must use Pusser's Rum. This created a minor controversy in the cocktail world that has never entirely settled. Henderson created the drink. Tobias owns the name. Pusser's Rum itself has a legitimate historical claim to the occasion — it is made to the recipe of the British Royal Navy rum blend, the same rum that sailors in the Royal Navy were issued as a daily ration for three centuries. The Painkiller is, in some sense, a descendant of British naval tradition served at a beach bar accessible only by swimming. That is a very good story.",
+      "riffs": "Increase the rum to 4 oz for the traditional Soggy Dollar strength — the original is not shy. The Bushwacker is a frozen Painkiller variation with Kahlua and Baileys added, popular throughout the Florida Panhandle and Caribbean. For a less sweet version, reduce the cream of coconut to 0.5 oz and increase orange juice to 1.5 oz.",
+      "tastingNotes": "",
+      "rating": 0,
+      "addedAt": 1781438460000,
+      "obscura": false,
+      "craftLinks": [],
+      "sourceUrl": "https://www.diffordsguide.com/cocktails/recipe/1454/painkiller",
+      "imageUrl": "",
+      "myPhoto": ""
+    },
+    {
+      "id": "fog-cutter",
+      "name": "Fog Cutter",
+      "family": "Tiki & Tropical",
+      "subFamily": "Grog",
+      "baseSpirit": "Rum",
+      "glass": "Tiki Mug",
+      "occasion": "Party/Batch",
+      "season": "Summer",
+      "difficulty": "Medium",
+      "serveStyle": "On the Rocks",
+      "tags": [
+        "Tropical",
+        "Boozy",
+        "Fruity",
+        "Herbal/Botanical",
+        "Elegant"
+      ],
+      "sliders": {
+        "boozy": 9,
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "fruity": 4,
+        "herbal": 2,
+        "smoky": 0,
+        "spicy": 0,
+        "rich": 2
+      },
+      "ingredients": [
+        {
+          "name": "Light Puerto Rican rum",
+          "amount": "2",
+          "unit": "oz"
+        },
+        {
+          "name": "Brandy or Cognac",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "London dry gin",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lemon juice",
+          "amount": "2",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh orange juice",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "Orgeat",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Fino or amontillado sherry",
+          "amount": "0.5",
+          "unit": "oz"
+        }
+      ],
+      "instructions": "Combine rum, brandy, gin, lemon juice, orange juice, and orgeat in a shaker with ice. Shake well and strain into a 14-oz Tiki mug or tall glass over fresh crushed ice. Float the sherry on top by pouring it slowly over the back of a bar spoon held just above the surface of the drink. Garnish with a bouquet of mint sprigs. Serve with straws.",
+      "notes": "The sherry float is the defining feature — use a good medium-dry sherry (fino or amontillado) rather than a sweet cream sherry for a cleaner result. Float it carefully over the back of a bar spoon after the drink is built so it sits on the surface. Lemon juice rather than lime is correct here and important — it is what makes this Trader Vic rather than Don the Beachcomber. Use fresh lemon only. The triple spirit structure — rum, brandy, gin — requires balance; do not adjust proportions or one spirit will dominate. The orgeat provides the almond sweetness that ties the three spirits together.",
+      "lore": "Victor Bergeron — Trader Vic — published the Fog Cutter in his 1946 Book of Food and Drink with a characteristically direct warning: \"This is delicious but a triple threat. You can get pretty stinking on these, no fooling.\" He only served two per customer at his restaurants, the same limit Donn Beach had imposed on the Zombie at Don the Beachcomber. The rivalry between Beach and Bergeron was the creative engine of the Tiki era — each watching the other, borrowing, refining, competing. Beach opened Don the Beachcomber in Hollywood in 1934 and invented the genre. Bergeron opened Trader Vic's in Oakland and systematized it. Between them they built an aesthetic that defined American escapism for two decades. The Fog Cutter is distinctively Bergeron's creation: where Beach favored lime and opacity, Bergeron reached for lemon, orange, and — in this drink — a combination of rum, brandy, and gin that no other Tiki drink had attempted. The sherry float was another Bergeron signature, adding a nutty, oxidative note that sits above the tropical blend and announces itself on the nose before the first sip. Jeff \"Beachbum\" Berry credits the Fog Cutter as Trader Vic's second most historically significant cocktail, behind only the Mai Tai. It was also the first Tiki drink served in a bespoke ceramic mug designed specifically for it — the fog-cutter mug — initiating a tradition of purpose-built drinkware that defines Tiki culture to this day.",
+      "riffs": "The Samoan Fog Cutter is Bergeron's own lighter revision: reduce rum to 1.5 oz, brandy to 0.5 oz, flash blend instead of shaking, serve frozen. The Viking Fog Cutter substitutes a float of aquavit for sherry — a 1955 variation from Seattle's Norselander restaurant. The Pisco Fog Cutter (Smuggler's Cove version) substitutes pisco for brandy, adding a floral grape note that pairs beautifully with the citrus.",
+      "tastingNotes": "",
+      "rating": 0,
+      "addedAt": 1781438520000,
+      "obscura": true,
+      "craftLinks": [],
+      "sourceUrl": "https://www.diffordsguide.com/cocktails/recipe/778/fog-cutter",
+      "imageUrl": "",
+      "myPhoto": ""
+    },
+    {
+      "id": "navy-grog",
+      "name": "Navy Grog",
+      "family": "Tiki & Tropical",
+      "subFamily": "Grog",
+      "baseSpirit": "Rum",
+      "glass": "Rocks/Old Fashioned",
+      "occasion": "Nightcap",
+      "season": "Year-Round",
+      "difficulty": "Medium",
+      "serveStyle": "On the Rocks",
+      "tags": [
+        "Tropical",
+        "Boozy",
+        "Sour/Tart",
+        "Herbal/Botanical",
+        "Elegant"
+      ],
+      "sliders": {
+        "boozy": 9,
+        "sweet": 2,
+        "sour": 5,
+        "bitter": 0,
+        "fruity": 2,
+        "herbal": 2,
+        "smoky": 0,
+        "spicy": 0,
+        "rich": 2
+      },
+      "ingredients": [
+        {
+          "name": "Light Puerto Rican rum",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "Dark Jamaican rum",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "Demerara rum",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lime juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "White grapefruit juice",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Honey syrup (1:1 honey and warm water)",
+          "amount": "1",
+          "unit": "oz"
+        },
+        {
+          "name": "Club soda",
+          "amount": "0.75",
+          "unit": "oz"
+        }
+      ],
+      "instructions": "Combine all three rums, lime juice, grapefruit juice, and honey syrup in a shaker with ice. Shake vigorously. Strain into a double rocks glass over a large ice cube or crushed ice. Add club soda and stir once gently to incorporate. Garnish with a lime wedge and mint sprig. For the traditional serve: pack a pilsner glass with shaved ice, insert a straw through the center, and pack more shaved ice to form a cone around the straw.",
+      "notes": "The three-rum split is the drink: light Puerto Rican for clean sweetness, dark Jamaican for funk and molasses depth, Demerara for weight and tropical richness. Do not substitute one rum for another. For the honey syrup: dissolve equal parts clover honey and warm water, stir until combined, refrigerate. The ice cone is authentic but not essential at home — serve over a large rock or crushed ice in a double rocks glass. Shake all ingredients except soda vigorously with ice, strain into the glass, add soda last to preserve carbonation.",
+      "lore": "The Navy Grog has a lineage that runs directly to the British Royal Navy. In 1740, Admiral Edward Vernon commanded the Royal Navy's West Indies fleet and issued an order that has shaped Caribbean drinking culture ever since: the sailors' daily rum ration — a half-pint per man, served straight — would henceforth be diluted with water and mixed with lime juice and sugar to prevent scurvy. The sailors called the drink \"grog\" after Vernon's nickname, \"Old Grog,\" earned for the grogram cloak he habitually wore. Donn Beach took that two-hundred-year-old maritime drink, dressed it in the Tiki idiom, and put it on the menu at Don the Beachcomber in 1941. The structure is essentially unchanged — rum, citrus, sweetener — but the rum became three rums, the lime became lime and white grapefruit, and the sweetener became honey. The result is one of the cleanest drinks in the Tiki canon: no orgeat, no falernum, no cinnamon syrup, none of the elaborate proprietary mixes Beach used in the Zombie or the Test Pilot. The Navy Grog is a Tiki drink that trusts its ingredients. The ice cone serve — a cone of shaved ice with a straw running through it, placed in a rocks glass so the drink chills as it is consumed — was Beach's invention and one of the most distinctive serving presentations in cocktail history. The cone melts slowly, diluting and chilling the drink progressively as you drink it.",
+      "riffs": "Trader Vic's Navy Grog splits the sweetener between Demerara syrup and allspice dram, adding a warming spice note that differs from Beach's cleaner honey version — both are excellent. Martin Cate's Smuggler's Cove version follows Trader Vic's proportions. For a stronger drink, omit the soda and increase rum to 1.5 oz each. Passionfruit juice substituted for grapefruit adds a tropical sweetness that pushes the drink toward Tiki rather than maritime.",
+      "tastingNotes": "",
+      "rating": 0,
+      "addedAt": 1781438580000,
+      "obscura": true,
+      "craftLinks": [],
+      "sourceUrl": "https://www.diffordsguide.com/cocktails/recipe/4866/navy-grog",
+      "imageUrl": "",
+      "myPhoto": ""
+    },
+    {
+      "id": "jet-pilot",
+      "name": "Jet Pilot",
+      "family": "Tiki & Tropical",
+      "subFamily": "Grog",
+      "baseSpirit": "Rum",
+      "glass": "Rocks/Old Fashioned",
+      "occasion": "Nightcap",
+      "season": "Year-Round",
+      "difficulty": "Advanced",
+      "serveStyle": "On the Rocks",
+      "tags": [
+        "Tropical",
+        "Boozy",
+        "Spicy",
+        "Fruity",
+        "Elegant"
+      ],
+      "sliders": {
+        "boozy": 10,
+        "sweet": 3,
+        "sour": 4,
+        "bitter": 1,
+        "fruity": 3,
+        "herbal": 2,
+        "smoky": 0,
+        "spicy": 2,
+        "rich": 2
+      },
+      "ingredients": [
+        {
+          "name": "Dark Jamaican rum",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Gold Puerto Rican rum",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "151-proof Demerara rum (Hamilton or Lemon Hart)",
+          "amount": "0.75",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh lime juice",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Fresh grapefruit juice",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Cinnamon syrup",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Falernum",
+          "amount": "0.5",
+          "unit": "oz"
+        },
+        {
+          "name": "Pernod or Herbsaint",
+          "amount": "6",
+          "unit": "drop"
+        },
+        {
+          "name": "Angostura bitters",
+          "amount": "1",
+          "unit": "dash"
+        }
+      ],
+      "instructions": "Combine all ingredients in a blender with 4 oz of crushed ice. Flash blend at high speed for exactly 5 seconds. Open pour unstrained into a double rocks glass. The ice is part of the drink. Garnish with a cocktail cherry and a cinnamon stick.",
+      "notes": "Three-rum structure is the architecture: dark Jamaican for funk, gold Puerto Rican for body, 151-proof Demerara for heat and proof. The 151 is not optional — it is what makes the drink. Hamilton Demerara 151 or Lemon Hart 151 are the standard choices. The absinthe is measured in drops, not dashes — 6 drops is correct. Herbsaint is a good substitute if absinthe is unavailable. Flash blend with crushed ice for exactly 5 seconds — no more. Over-blending warms the drink and dilutes it past the point of interest. Open pour unstrained into a double rocks glass; the ice is part of the texture. For the cinnamon syrup: 1 cup water, 1 cup sugar, 3 cinnamon sticks, boil, stir until dissolved, cool, strain.",
+      "lore": "Steve Crane opened The Luau in Beverly Hills in 1953 and made it one of the most celebrated restaurants in Los Angeles. Crane had been an actor, a restaurateur, and — most importantly for cocktail history — a keen student of Don the Beachcomber's work. The Jet Pilot, which he introduced at The Luau in the late 1950s, is a direct riff on Donn Beach's 1941 Test Pilot: a three-rum build with cinnamon syrup, falernum, citrus, and a whisper of absinthe and bitters. Crane made it his own by adding grapefruit juice alongside the lime, swapping Cointreau for cinnamon syrup, and leaning into the overproof rum more aggressively. The result is tighter and more aerodynamic than the Zombie — same architectural DNA, smaller format, more focused delivery. The name reflects the era: Tiki culture coincided precisely with the Golden Age of aviation and the early space race, and beach bars from Hollywood to Fort Lauderdale named their most potent drinks after the machines and test pilots pushing the boundaries of what seemed possible. Jeff \"Beachbum\" Berry documented the Jet Pilot lineage fully in his research, tracing the chain from the Test Pilot through the Astronaut, the Space Pilot, and finally to Crane's Jet Pilot as the version that stuck. In certain Tiki circles, the Jet Pilot is considered the canonical apex of the genre — not the Mai Tai, not the Zombie, but this: three rums, two citrus, two syrups, absinthe, and bitters, flash blended and served over crushed ice.",
+      "riffs": "The Test Pilot (Donn Beach, 1941) is the ancestor — substitute Cointreau for cinnamon syrup and omit grapefruit, add lime only, for the earlier form. The Astronaut and Space Pilot are contemporary variations from the same template. For a less potent version, replace the 151 Demerara with standard Demerara and reduce total rum to 2 oz. A cinnamon syrup made with Ceylon cinnamon rather than cassia reads more floral and delicate; cassia cinnamon is bolder and more assertive — both work.",
+      "tastingNotes": "",
+      "rating": 0,
+      "addedAt": 1781438640000,
+      "obscura": true,
+      "craftLinks": [],
+      "sourceUrl": "https://www.diffordsguide.com/cocktails/recipe/4963/jet-pilot",
+      "imageUrl": "",
+      "myPhoto": ""
+    }
+  ],
+  "inventory": []
+}
