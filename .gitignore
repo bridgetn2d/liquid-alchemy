@@ -49,6 +49,8 @@ coverage/
 
 # Vite
 .vite/
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 
 # Optional caches
 .cache/
