@@ -3156,6 +3156,133 @@ const CONTENT_FULL_PATCH_IDS = new Set([
   "zombie-1934", "jet-pilot", "painkiller",
 ]);
 
+// Creator attribution lookup — merged onto every recipe at load (new + returning users).
+// Single source of truth for the structured Created-By fields. Blank name => UI shows "Creator unknown".
+const CREATOR_ATTRIBUTION = {
+  "americano": { creatorName:"", creatorYear:"", creatorVenue:"Italy", creatorEra:"historical" },
+  "ancho-problem": { creatorName:"Ezra Star", creatorYear:"", creatorVenue:"Drink, Boston", creatorEra:"modern" },
+  "aperol-spritz": { creatorName:"", creatorYear:"", creatorVenue:"Veneto, Italy", creatorEra:"historical" },
+  "army-and-navy": { creatorName:"", creatorYear:"", creatorVenue:"Army and Navy Club, Washington D.C.", creatorEra:"historical" },
+  "bad-birdy-sangria": { creatorName:"Bad Birdy", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "bees-knees": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "bellini": { creatorName:"Giuseppe Cipriani", creatorYear:1948, creatorVenue:"Harry's Bar, Venice", creatorEra:"historical" },
+  "berry-gin-fizz": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "bicycle-thief": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "bitter-giuseppe": { creatorName:"Stephen Cole", creatorYear:2008, creatorVenue:"The Violet Hour, Chicago", creatorEra:"revival" },
+  "black-prince": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "boulevardier": { creatorName:"Erskine Gwynne", creatorYear:1927, creatorVenue:"Paris", creatorEra:"historical" },
+  "bourbon-renewal": { creatorName:"Jeffrey Morgenthaler", creatorYear:2001, creatorVenue:"Bel Ami Lounge, Eugene, Oregon", creatorEra:"revival" },
+  "brandy-alexander": { creatorName:"", creatorYear:1915, creatorVenue:"", creatorEra:"historical" },
+  "brandy-crusta": { creatorName:"Joseph Santini", creatorYear:1850, creatorVenue:"City Exchange, New Orleans", creatorEra:"historical" },
+  "caipirinha": { creatorName:"", creatorYear:"", creatorVenue:"Sao Paulo, Brazil", creatorEra:"historical" },
+  "camerons-kick": { creatorName:"Harry MacElhone", creatorYear:1922, creatorVenue:"Harry's New York Bar, Paris", creatorEra:"historical" },
+  "cantaloupe-fresno-chile-spritzer": { creatorName:"Hannah Fenton", creatorYear:2022, creatorVenue:"America's Test Kitchen", creatorEra:"modern" },
+  "carajillo": { creatorName:"", creatorYear:"", creatorVenue:"Spain / Latin America", creatorEra:"historical" },
+  "champagne-cocktail": { creatorName:"", creatorYear:1862, creatorVenue:"", creatorEra:"historical" },
+  "chestnut-cup": { creatorName:"", creatorYear:"", creatorVenue:"Chestnut Club, Santa Monica, California", creatorEra:"modern" },
+  "classic-cosmopolitan": { creatorName:"Toby Cecchini", creatorYear:1988, creatorVenue:"The Odeon, New York", creatorEra:"revival" },
+  "classic-daiquiri": { creatorName:"Jennings Cox", creatorYear:1900, creatorVenue:"Daiquiri, Cuba", creatorEra:"historical" },
+  "classic-gimlet": { creatorName:"", creatorYear:"", creatorVenue:"Royal Navy", creatorEra:"historical" },
+  "classic-manhattan": { creatorName:"", creatorYear:"", creatorVenue:"Manhattan Club, New York City", creatorEra:"historical" },
+  "classic-margarita": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "classic-martini": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "classic-mojito": { creatorName:"", creatorYear:"", creatorVenue:"Cuba", creatorEra:"historical" },
+  "classic-negroni": { creatorName:"Count Camillo Negroni", creatorYear:1919, creatorVenue:"Florence, Italy", creatorEra:"historical" },
+  "classic-sidecar": { creatorName:"", creatorYear:"", creatorVenue:"Paris", creatorEra:"historical" },
+  "classic-whiskey-sour": { creatorName:"", creatorYear:1862, creatorVenue:"", creatorEra:"historical" },
+  "clover-club": { creatorName:"", creatorYear:"", creatorVenue:"Bellevue-Stratford Hotel, Philadelphia", creatorEra:"historical" },
+  "coffee-cocktail": { creatorName:"", creatorYear:1887, creatorVenue:"", creatorEra:"historical" },
+  "cold-fashioned": { creatorName:"", creatorYear:"", creatorVenue:"Still Austin Whiskey Co., Austin", creatorEra:"modern" },
+  "corpse-reviver-2": { creatorName:"Harry Craddock", creatorYear:1930, creatorVenue:"American Bar at the Savoy Hotel, London", creatorEra:"historical" },
+  "dame-blanche-au-poire": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "dangerous-passion": { creatorName:"", creatorYear:"", creatorVenue:"beachside bar in Aruba", creatorEra:"modern" },
+  "dark-and-stormy": { creatorName:"", creatorYear:"", creatorVenue:"Bermuda", creatorEra:"historical" },
+  "death-flip": { creatorName:"Chris Hysted-Adams", creatorYear:2010, creatorVenue:"Black Pearl, Fitzroy, Melbourne", creatorEra:"modern" },
+  "distant-lover": { creatorName:"Mel Tate", creatorYear:"", creatorVenue:"Dovetail", creatorEra:"modern" },
+  "dove-dispatch": { creatorName:"Meaghan Dorman", creatorYear:2014, creatorVenue:"Dear Irving, New York City", creatorEra:"modern" },
+  "el-diablo": { creatorName:"Victor Bergeron (Trader Vic)", creatorYear:1946, creatorVenue:"Trader Vic's", creatorEra:"historical" },
+  "first-class-pass": { creatorName:"Jack McGarry", creatorYear:"", creatorVenue:"The Irish Exit, New York City", creatorEra:"modern" },
+  "flor-de-jerez": { creatorName:"Joaquin Simo", creatorYear:2010, creatorVenue:"Death & Co, New York City", creatorEra:"modern" },
+  "fog-cutter": { creatorName:"Victor Bergeron (Trader Vic)", creatorYear:1946, creatorVenue:"Trader Vic's", creatorEra:"historical" },
+  "french-007": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "french-75": { creatorName:"Harry MacElhone", creatorYear:1915, creatorVenue:"Harry's New York Bar, Paris", creatorEra:"historical" },
+  "french-blonde": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "fresh-fruit-citronade": { creatorName:"", creatorYear:"", creatorVenue:"Applebee's", creatorEra:"modern" },
+  "gargoyle": { creatorName:"George White", creatorYear:1937, creatorVenue:"Gargoyle Club, Soho, London", creatorEra:"historical" },
+  "genovese-smash": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "gin-and-tonic": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "gin-basil-smash": { creatorName:"Jorg Meyer", creatorYear:2008, creatorVenue:"Le Lion - Bar de Paris, Hamburg", creatorEra:"revival" },
+  "grapefruit-rosemary-spritzer": { creatorName:"Lawman Johnson", creatorYear:2021, creatorVenue:"Cook's Illustrated / America's Test Kitchen", creatorEra:"modern" },
+  "guardian-angel": { creatorName:"Erick Castro", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "guava-mojito": { creatorName:"", creatorYear:"", creatorVenue:"Mojitos Bistro", creatorEra:"modern" },
+  "guillotine": { creatorName:"Franky Marshall", creatorYear:"", creatorVenue:"Le Boudoir, Brooklyn Heights", creatorEra:"modern" },
+  "hibiscus-guava-agua-fresca": { creatorName:"Sara Mayer", creatorYear:2020, creatorVenue:"America's Test Kitchen", creatorEra:"modern" },
+  "infante": { creatorName:"Giuseppe Gonzalez", creatorYear:2009, creatorVenue:"Dutch Kills, Long Island City, New York", creatorEra:"revival" },
+  "irish-maid": { creatorName:"Jack McGarry", creatorYear:"", creatorVenue:"The Dead Rabbit, New York City", creatorEra:"modern" },
+  "jasmine": { creatorName:"Paul Harrington", creatorYear:1995, creatorVenue:"Townhouse Bar & Grill, Emeryville, California", creatorEra:"revival" },
+  "jet-pilot": { creatorName:"Steve Crane", creatorYear:1958, creatorVenue:"The Luau, Beverly Hills", creatorEra:"historical" },
+  "jungle-bird": { creatorName:"", creatorYear:1978, creatorVenue:"Aviary Bar, Kuala Lumpur Hilton", creatorEra:"historical" },
+  "kentucky-buck": { creatorName:"Erick Castro", creatorYear:2011, creatorVenue:"Rickhouse, San Francisco", creatorEra:"modern" },
+  "kir-royale": { creatorName:"Canon Felix Kir", creatorYear:1950, creatorVenue:"Dijon, France", creatorEra:"historical" },
+  "last-of-the-oaxacans": { creatorName:"Rick Dobbs", creatorYear:2016, creatorVenue:"The Last Word, Livermore, California", creatorEra:"modern" },
+  "last-word": { creatorName:"Frank Fogarty", creatorYear:1916, creatorVenue:"Detroit Athletic Club", creatorEra:"historical" },
+  "le-coucher-de-soleil": { creatorName:"Wini Moranville", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "mai-tai": { creatorName:"Victor Bergeron (Trader Vic)", creatorYear:1944, creatorVenue:"Trader Vic's, Oakland", creatorEra:"historical" },
+  "maximilian-affair": { creatorName:"Misty Kalkofen", creatorYear:2008, creatorVenue:"Green Street, Cambridge, Massachusetts", creatorEra:"revival" },
+  "mexico-navy": { creatorName:"", creatorYear:"", creatorVenue:"Palomar, Portland, Oregon", creatorEra:"modern" },
+  "mint-julep": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "monella-sour": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "monte-cassino": { creatorName:"Damon Dyer", creatorYear:2010, creatorVenue:"Louis 649, New York City", creatorEra:"modern" },
+  "morgenthaler-amaretto-sour": { creatorName:"Jeffrey Morgenthaler", creatorYear:2012, creatorVenue:"Clyde Common, Portland", creatorEra:"modern" },
+  "morgenthaler-sbagliato": { creatorName:"Jeffrey Morgenthaler", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "moscow-mule": { creatorName:"John Martin and Jack Morgan", creatorYear:1941, creatorVenue:"Cock 'n' Bull pub, Los Angeles", creatorEra:"historical" },
+  "muddled-mission": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "naked-and-famous": { creatorName:"Joaquin Simo", creatorYear:2011, creatorVenue:"Death & Co, New York City", creatorEra:"modern" },
+  "navy-grog": { creatorName:"Donn Beach", creatorYear:"", creatorVenue:"Don the Beachcomber", creatorEra:"historical" },
+  "negroni-sbagliato": { creatorName:"Mirko Stocchetto", creatorYear:1970, creatorVenue:"Bar Basso, Milan", creatorEra:"historical" },
+  "new-brunswick": { creatorName:"Ehren Ashkenazi", creatorYear:"", creatorVenue:"The Modern, New York City", creatorEra:"modern" },
+  "oaxacan-old-fashioned": { creatorName:"Phil Ward", creatorYear:2007, creatorVenue:"Death and Co, New York City", creatorEra:"revival" },
+  "old-fashioned-classic": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "painkiller": { creatorName:"Daphne Henderson", creatorYear:1970, creatorVenue:"Soggy Dollar Bar, Jost Van Dyke, BVI", creatorEra:"historical" },
+  "paloma": { creatorName:"", creatorYear:"", creatorVenue:"La Capilla, Tequila, Jalisco", creatorEra:"historical" },
+  "paper-plane": { creatorName:"Sam Ross", creatorYear:2008, creatorVenue:"The Violet Hour, Chicago / Milk & Honey, New York", creatorEra:"revival" },
+  "pineapple-makrut-buck": { creatorName:"Camila Chaparro", creatorYear:2025, creatorVenue:"America's Test Kitchen", creatorEra:"modern" },
+  "pisco-sour": { creatorName:"Victor Vaughen Morris", creatorYear:1920, creatorVenue:"Lima, Peru", creatorEra:"historical" },
+  "pomegranate-spritzer": { creatorName:"", creatorYear:2025, creatorVenue:"America's Test Kitchen", creatorEra:"modern" },
+  "porto-flip": { creatorName:"", creatorYear:1887, creatorVenue:"", creatorEra:"historical" },
+  "prado": { creatorName:"", creatorYear:1977, creatorVenue:"", creatorEra:"historical" },
+  "rabbit-szn": { creatorName:"", creatorYear:"", creatorVenue:"R&D, Philadelphia", creatorEra:"modern" },
+  "ramble": { creatorName:"Phil Ward", creatorYear:2014, creatorVenue:"Death and Co, New York", creatorEra:"modern" },
+  "ramble-on": { creatorName:"Matthew Belanger", creatorYear:"", creatorVenue:"Death and Co, New York", creatorEra:"modern" },
+  "raspberry-lime-rickey": { creatorName:"", creatorYear:2018, creatorVenue:"America's Test Kitchen", creatorEra:"modern" },
+  "rattlesnake": { creatorName:"Natasha David", creatorYear:"", creatorVenue:"New York City", creatorEra:"modern" },
+  "rob-roy": { creatorName:"", creatorYear:1894, creatorVenue:"Waldorf Astoria, New York", creatorEra:"historical" },
+  "rosemary-fizz": { creatorName:"Damon Williams", creatorYear:"", creatorVenue:"Baytowne Provisions, South Walton, Florida", creatorEra:"modern" },
+  "rosemary-gin-smash": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "shakedown-street": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "sicilian-sojourn": { creatorName:"Camila Chaparro", creatorYear:2020, creatorVenue:"America's Test Kitchen", creatorEra:"modern" },
+  "siesta": { creatorName:"Katie Stipe", creatorYear:2006, creatorVenue:"Flatiron Lounge, New York", creatorEra:"revival" },
+  "singapore-sling": { creatorName:"Ngiam Tong Boon", creatorYear:1915, creatorVenue:"Long Bar, Raffles Hotel, Singapore", creatorEra:"historical" },
+  "six-seeds": { creatorName:"Ali Martin", creatorYear:2019, creatorVenue:"The Up and Up, Greenwich Village", creatorEra:"modern" },
+  "sonambula": { creatorName:"Ivy Mix", creatorYear:"", creatorVenue:"Fort Defiance / Leyenda, Brooklyn", creatorEra:"modern" },
+  "southside": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "springs-first-bloom": { creatorName:"Charlotte Voisey", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "strawberry-caipirinha": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "thou-shall-not-be-named": { creatorName:"Alicia Perry", creatorYear:2022, creatorVenue:"Polite Provisions, San Diego", creatorEra:"modern" },
+  "three-dots-and-a-dash": { creatorName:"Donn Beach", creatorYear:1944, creatorVenue:"Don the Beachcomber, Hollywood", creatorEra:"historical" },
+  "tia-mia": { creatorName:"Ivy Mix", creatorYear:2010, creatorVenue:"Lani Kai, New York", creatorEra:"modern" },
+  "tom-collins": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "tommys-margarita": { creatorName:"Julio Bermejo", creatorYear:1989, creatorVenue:"Tommy's Mexican, San Francisco", creatorEra:"revival" },
+  "toreador": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"historical" },
+  "triple-crown": { creatorName:"Jay Zimmerman", creatorYear:"", creatorVenue:"ba'sik, Williamsburg, Brooklyn", creatorEra:"modern" },
+  "vieux-carre": { creatorName:"Walter Bergeron", creatorYear:1937, creatorVenue:"Hotel Monteleone, New Orleans", creatorEra:"historical" },
+  "white-lady": { creatorName:"Harry Craddock", creatorYear:1930, creatorVenue:"American Bar at the Savoy, London", creatorEra:"historical" },
+  "white-russian": { creatorName:"Gustave Tops", creatorYear:1949, creatorVenue:"Hotel Metropole, Brussels", creatorEra:"historical" },
+  "wildberry-lillet": { creatorName:"", creatorYear:"", creatorVenue:"", creatorEra:"modern" },
+  "zombie-1934": { creatorName:"Donn Beach", creatorYear:1934, creatorVenue:"Don the Beachcomber, Hollywood", creatorEra:"historical" },
+  "zuzus-petals": { creatorName:"Matt Piacentini", creatorYear:2016, creatorVenue:"The Up and Up, Greenwich Village, New York", creatorEra:"modern" },
+};
+
 /* ─── End of My Recipes ─── */
 
 const SPIRIT_HIERARCHY = {
@@ -4711,6 +4838,8 @@ export default function App() {
 
       const LEGACY_IDS = ["s1","s2","s3","americano-cocktail"];
       const finalCocktails = (c || []).filter(x => !LEGACY_IDS.includes(x.id)).map(x => {
+        const _ca = CREATOR_ATTRIBUTION[x.id];
+        if (_ca) x = { ...x, ..._ca };
         if (x.id === "morgenthaler-amaretto-sour") return {...x, notes:"The overproof bourbon is non-negotiable — it provides the backbone that makes this drink work. Without it, the amaretto overwhelms. Overproof means 100 proof (50% ABV) or higher; the higher the better. Morgenthaler recommends Bookers (typically 120-130 proof, uncut and unfiltered straight from the barrel), and he also recommends Old Grand-Dad 114 as an excellent, more accessible option. Any cask-strength bourbon in the 110-130 proof range will work beautifully. Dry shake first to build the foam, then shake with ice. Fine strain to keep it clean. Luxardo amaretto is also recommended.", lore:"In 2012, Jeffrey Morgenthaler published a post titled I Make the Best Amaretto Sour in the World. The craft cocktail world had spent a decade treating the Amaretto Sour as a punchline. Morgenthaler disagreed. His revamped version adds overproof bourbon for backbone and egg white for texture, transforming a drink everyone had written off into something genuinely elegant. It is now considered a modern classic and a defining moment of the cocktail revival — proof that rehabilitation is possible. Search Morgenthaler to find all three of his recipes in the collection."}
         if (x.id === "dame-blanche-au-poire") return {...x, family:"Sour", subFamily:"Daisy", lore:"The Dame Blanche is a classic gin sour from the golden age of cocktails, named after the Belgian legend of a white-robed spirit said to haunt mountain passes. Structurally it belongs to the Sour family — spirit, citrus, sweetener — here elevated with pear liqueur for a delicate floral character.", notes:"Recipe by @bridget7487049 via ReciMe. Citadelle gin is recommended but any quality London Dry works well.", riffs:""}
         if (x.id === "french-007" && !x.family) return {...x, family:"Sour", subFamily:"Fizz"}
@@ -6047,12 +6176,33 @@ export default function App() {
                   </div>
                 )}
 
-                {viewCocktail.sourceUrl&&(
+                {(viewCocktail.creatorName || viewCocktail.creatorEra) && (
+                  <div>
+                    <div className="section-label">Created By</div>
+                    {viewCocktail.creatorName ? (
+                      <div style={{fontSize:".875rem",color:"var(--text)"}}>
+                        {viewCocktail.creatorName}
+                        {(viewCocktail.creatorVenue || viewCocktail.creatorYear) && (
+                          <span style={{color:"var(--text-2)"}}>
+                            {" — "}
+                            {viewCocktail.creatorVenue}
+                            {viewCocktail.creatorVenue && viewCocktail.creatorYear ? ", " : ""}
+                            {viewCocktail.creatorYear}
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      <div style={{fontSize:".875rem",color:"var(--text-2)"}}>Creator unknown</div>
+                    )}
+                  </div>
+                )}
+
+                {(viewCocktail.sourceUrl||viewCocktail.source)&&(
                   <div>
                     <div className="section-label">Source</div>
-                    <a href={viewCocktail.sourceUrl} target="_blank" rel="noopener noreferrer"
+                    <a href={viewCocktail.sourceUrl||viewCocktail.source} target="_blank" rel="noopener noreferrer"
                       style={{fontSize:".875rem",color:"var(--accent)",wordBreak:"break-all",textDecoration:"none",display:"inline-flex",alignItems:"center",gap:4}}>
-                      🔗 {viewCocktail.sourceUrl}
+                      🔗 {viewCocktail.sourceUrl||viewCocktail.source}
                     </a>
                   </div>
                 )}
