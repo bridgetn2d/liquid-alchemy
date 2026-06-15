@@ -316,7 +316,6 @@ const SUGAR_TABLE = {
   "whiskey": 0, "bourbon": 0, "scotch": 0, "brandy": 0, "cognac": 0,
   "pisco": 0, "cachaça": 0, "applejack": 0,
   "club soda": 0, "soda water": 0, "sparkling water": 0, "mineral water": 0,
-  "schweppes wild berry": 0, "thomas henry wild berry": 0,
   "schweppes wild berry": 0.08, "thomas henry wild berry": 0.08,
   "tonic water": 0.08, "ginger beer": 0.08, "ginger ale": 0.08,
   "water": 0, "bitters": 0,
@@ -2169,7 +2168,6 @@ const SONAMBULA = {
 
 const NEGRONI_SBAGLIATO = {
   id:"negroni-sbagliato", family:"Negroni", subFamily:"Sbagliato Style", name:"Negroni Sbagliato", baseSpirit:"Campari",
-  family:"Negroni", subFamily:"Sbagliato Style",
   glass:"Rocks/Old Fashioned", occasion:"Aperitivo", season:"Year-Round", difficulty:"Easy", serveStyle:"On the Rocks",
   tags:["Bitter","Fruity","Elegant","Sparkling","Light/Refreshing"], rating:0, obscura:false,
   addedAt:Date.now()-80, imageUrl:"", myPhoto:"",
