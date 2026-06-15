@@ -4431,7 +4431,7 @@ const TEMPLATES_DATA = [
     subfamilies:[
       { name:"Classic Bowl Punch", template:"Spirit + citrus + sugar + water + spice", description:"The traditional communal version. Designed around balance and dilution over time — it improves as the ice melts.", examples:["Fish House Punch","Rum Punch"], appIds:[] },
       { name:"Milk Punch", template:"Spirit + citrus or sweetener + milk clarification or dairy", description:"Milk punch is two things: clarified (silky and translucent) or creamy (rich and opaque). Both are extraordinary.", examples:["Clarified Milk Punch","Brandy Milk Punch"], appIds:[] },
-      { name:"Single-Serving Punch", template:"Punch structure scaled to one glass", description:"Many tiki and tropical cocktails are structurally punches even when not served in a bowl.", examples:["Jungle Bird","Rum Runner"], appIds:[] },
+      { name:"Single-Serving Punch", template:"Punch structure scaled to one glass", description:"Many tiki and tropical cocktails are structurally punches even when not served in a bowl.", examples:["Rum Runner"], appIds:[] },
     ]
   },
   {
@@ -4516,9 +4516,10 @@ function TheTemplates({ cocktails, setTab, setViewCocktailId, setFilterFamily })
       <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",flexWrap:"wrap",gap:10,marginBottom:20}}>
         <div style={{width:"100%"}}>
           <h1 className="page-title">Cocktail Families</h1>
-          <p className="page-sub" style={{maxWidth:600,marginTop:8}}>Every cocktail belongs to a family — a structural template that defines how it is built. Understanding the family means understanding every drink in it, and every drink you have not tried yet.</p>
-          <p className="page-sub" style={{maxWidth:600,marginTop:8,fontSize:"0.8rem"}}>You may have encountered the six-family framework — Sour, Old Fashioned, Martini, Highball, Flip, and Sidecar — which is a common starting point in bartending education. Alchemy uses eleven families. The six-family model is a useful skeleton; the eleven-family model is the full body.</p>
-          <p className="page-sub" style={{maxWidth:600,marginTop:8,fontSize:"0.8rem"}}>A note on the Sidecar: in the six-family model it is treated as a root family. In Alchemy it lives as a sub-family of the Sour — specifically the Daisy — because that is what it is structurally.</p>
+          <p className="page-sub" style={{maxWidth:600,marginTop:8}}>Every cocktail belongs to a family — a structural template that defines how it is built or served. Understand the family and you understand every drink in it, including the ones you haven't even tried yet.</p>
+          <p className="page-sub" style={{maxWidth:600,marginTop:8,fontSize:"0.8rem"}}>You may know the classic six-family framework: the Old Fashioned, Martini, Daiquiri, Sidecar, Highball, and Flip. It is not a beginner's lesson to be outgrown — it is the bedrock the best bartenders in the world build on. Alchemy keeps that bedrock and extends it to eleven families. The six are the skeleton; the eleven are the full body.</p>
+          <p className="page-sub" style={{maxWidth:600,marginTop:8,fontSize:"0.8rem"}}>Two of our names differ from the classic set, by design. We call the Daiquiri family the Sour, naming it for its structure — spirit, citrus, sweetener — rather than for a single member of it. And we call the Martini family Martini & Manhattan, because the dry and the sweet poles each earn the billing.</p>
+          <p className="page-sub" style={{maxWidth:600,marginTop:8,fontSize:"0.8rem"}}>A note on the Sidecar: the six-family model treats it as a root. In Alchemy it lives within the Sour, as the Daisy — because that is what it is structurally, a sour sweetened with a liqueur in place of syrup.</p>
         </div>
       </div>
 
