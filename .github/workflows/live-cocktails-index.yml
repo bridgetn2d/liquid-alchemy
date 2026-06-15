@@ -1,0 +1,47 @@
+name: Regenerate live cocktail index
+
+# Keeps LIVE_COCKTAILS.md in sync with app.jsx no matter who commits or how
+# (GitHub Desktop, github.com web editor, CLI). Runs the same generator Claude
+# runs locally, then self-commits the index ONLY if it actually drifted.
+#
+# Loop safety: the path filter is app.jsx only. The bot's commit touches just
+# LIVE_COCKTAILS.md, so it never re-triggers this workflow.
+
+on:
+  push:
+    branches: [main, beta]
+    paths:
+      - "app.jsx"
+      - "scripts/list_live_cocktails.py"
+
+# Allow the workflow to push the regenerated index back to the branch.
+permissions:
+  contents: write
+
+jobs:
+  regenerate-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the pushed branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Regenerate LIVE_COCKTAILS.md from app.jsx
+        run: python3 scripts/list_live_cocktails.py
+
+      - name: Commit the index only if it changed
+        run: |
+          if git diff --quiet -- LIVE_COCKTAILS.md; then
+            echo "Index already in sync — nothing to commit."
+            exit 0
+          fi
+          echo "Index drifted — committing regenerated LIVE_COCKTAILS.md."
+          git config user.name  "liquid-alchemy-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add LIVE_COCKTAILS.md
+          git commit -m "chore: regenerate live cocktail index [skip ci]"
+          git push
