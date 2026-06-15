@@ -53,3 +53,5 @@ coverage/
 # Optional caches
 .cache/
 *.tsbuildinfo
+content/workbook/pack_003_tiki_QA_checklist.md
+content/workbook/Liquid_Alchemy_Content_Database_v1_repo_ready.BACKUP_pre_tiki_20260614.xlsx

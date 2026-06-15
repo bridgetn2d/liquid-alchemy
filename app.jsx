@@ -2937,6 +2937,93 @@ const TIKI_PACK_003 = [
   },
 ];
 
+const CLASSICS_PACK_004 = [
+  {
+    id:"camerons-kick", name:"Cameron's Kick", family:"Sour", subFamily:"Core Sour",
+    baseSpirit:"Whiskey", glass:"Coupe", occasion:"Aperitivo", season:"Year-Round",
+    difficulty:"Easy", serveStyle:"Up",
+    tags:["Boozy", "Sour/Tart", "Rich", "Elegant"],
+    sliders:{"boozy": 6, "sweet": 4, "sour": 5, "bitter": 1, "fruity": 1, "herbal": 1, "smoky": 2, "spicy": 1, "rich": 4},
+    ingredients:[
+      { name:"Blended Scotch whisky", amount:"1", unit:"oz" },
+      { name:"Irish whiskey", amount:"1", unit:"oz" },
+      { name:"Fresh lemon juice", amount:"0.5", unit:"oz" },
+      { name:"Orgeat", amount:"0.5", unit:"oz" }
+    ],
+    instructions:"Combine the Scotch, Irish whiskey, lemon juice, and orgeat in a shaker with ice. Shake until well chilled. Double-strain into a chilled coupe. Garnish with a lemon twist.",
+    notes:"Reach for a blended Scotch, not an aggressively smoky single malt — the point is for the Scotch and Irish whiskeys to lean on each other, not wrestle. Orgeat is doing the work simple syrup usually does, but it also brings nutty body and a whisper of orange-flower aroma, so don't substitute plain syrup unless you want a different, lesser drink. Shake hard and double-strain into a chilled coupe.",
+    riffs:"A first cousin to the Whiskey Sour, with orgeat standing in for simple syrup. Sits near the Penicillin and other split-base whiskey drinks. Modern bartenders sometimes nudge the orgeat up or add a touch of simple, but the classic leans on orgeat alone for sweetness.",
+    lore:"Cameron's Kick first appeared in Harry MacElhone's ABC of Mixing Cocktails in 1922 and remains one of the strangest whiskey sours in the classic canon. It pours equal measures of blended Scotch and Irish whiskey, then balances them not with simple syrup but with orgeat — an almond syrup far more at home in a tiki bar than a whiskey drink. Who Cameron was, nobody knows; the name has survived without its owner. The drink slipped into obscurity for decades before the modern revival pulled it back, with cocktail historian David Wondrich helping restore the original specs after years of garbled reproductions in bar guides.",
+    tastingNotes:"Soft and nutty, with almond and a faint floral lift sitting over a gentle malt-and-grain backbone; lemon keeps it bright and stops the orgeat from turning cloying.",
+    rating:0, addedAt:1781560000000, obscura:true, craftLinks:[],
+    sourceUrl:"https://vinepair.com/articles/camerons-kick-st-patricks-day/",
+    imageUrl:"", myPhoto:"",
+  },
+  {
+    id:"tommys-margarita", name:"Tommy's Margarita", family:"Sour", subFamily:"Daisy",
+    baseSpirit:"Tequila", glass:"Rocks/Old Fashioned", occasion:"Warm Weather", season:"Summer",
+    difficulty:"Easy", serveStyle:"On the Rocks",
+    tags:["Sour/Tart", "Light/Refreshing", "Fruity", "Boozy"],
+    sliders:{"boozy": 6, "sweet": 4, "sour": 6, "bitter": 0, "fruity": 2, "herbal": 1, "smoky": 1, "spicy": 1, "rich": 2},
+    ingredients:[
+      { name:"Blanco tequila (100% agave)", amount:"2", unit:"oz" },
+      { name:"Fresh lime juice", amount:"1", unit:"oz" },
+      { name:"Agave nectar", amount:"0.5", unit:"oz" }
+    ],
+    instructions:"Combine the tequila, lime juice, and agave nectar in a shaker with ice. Shake until well chilled. Strain over fresh ice into a rocks glass (salt rim optional). Garnish with a lime wheel or wedge.",
+    notes:"With only three ingredients, quality is exposed — use a good 100% agave blanco. If your agave nectar is thick, cut it slightly with warm water (about 2:1 agave to water) so it integrates rather than sinking. Shake and serve over fresh ice in a rocks glass; salt rim optional.",
+    riffs:"A riff on the classic Margarita itself, and the parent of a whole generation of tequila-forward, low-or-no-orange-liqueur drinks. Sits beside the Classic Margarita, Ranch Water, and the broader school of contemporary agave sours.",
+    lore:"Julio Bermejo built Tommy's Margarita at his family's restaurant, Tommy's Mexican, in San Francisco around 1989–1990. The move was simple and radical: drop the orange liqueur and sweeten with agave nectar instead. That single swap pulled the drink's focus off citrus-and-Cointreau and onto the tequila itself, which Bermejo was busy championing at a time when 100% agave bottlings were still a hard sell. A house variation became, over the years, the template most bartenders now reach for by default, and the IBA eventually recognized it as a modern classic.",
+    tastingNotes:"Clean and tequila-forward, with bright lime acidity and a rounded vegetal-honeyed sweetness from the agave rather than the orange-candy note of a standard Margarita.",
+    rating:0, addedAt:1781560060000, obscura:false, craftLinks:[],
+    sourceUrl:"https://punchdrink.com/articles/how-the-tommys-margarita-became-modern-classic-cocktail-recipe/",
+    imageUrl:"", myPhoto:"",
+  },
+  {
+    id:"jasmine", name:"Jasmine", family:"Sour", subFamily:"Daisy",
+    baseSpirit:"Gin", glass:"Coupe", occasion:"Aperitivo", season:"Year-Round",
+    difficulty:"Easy", serveStyle:"Up",
+    tags:["Bitter", "Sour/Tart", "Herbal/Botanical", "Elegant"],
+    sliders:{"boozy": 5, "sweet": 3, "sour": 5, "bitter": 4, "fruity": 3, "herbal": 3, "smoky": 0, "spicy": 1, "rich": 1},
+    ingredients:[
+      { name:"Gin", amount:"1.5", unit:"oz" },
+      { name:"Fresh lemon juice", amount:"0.75", unit:"oz" },
+      { name:"Cointreau", amount:"0.25", unit:"oz" },
+      { name:"Campari", amount:"0.25", unit:"oz" }
+    ],
+    instructions:"Combine the gin, lemon juice, Cointreau, and Campari in a shaker with ice. Shake until well chilled. Fine-strain into a chilled coupe. Garnish with a lemon twist.",
+    notes:"The Campari is a seasoning, not a base — at a quarter ounce it tints and bitters the drink without taking over. Many drinkers swear they taste grapefruit despite there being none; that's the Campari, citrus, and gin botanicals talking to each other. Fine-strain into a chilled coupe for a clean surface.",
+    riffs:"A direct descendant of the Pegu Club, often described as the love child of a Pegu and a gin Cosmopolitan. Belongs to a family of citrus-driven Daisy cocktails and foreshadows later bittersweet modern classics. Sits near the Pegu Club, Paper Plane, Siesta, and Enzoni.",
+    lore:"Paul Harrington mixed the first Jasmine at Townhouse Bar & Grill in Emeryville, California, in the early days of the cocktail revival, after his friend Matt Jasmin asked for something he'd never made before. Working off the Pegu Club, Harrington swapped its bitters for Campari and its lime for lemon, and landed on something brighter and unexpectedly elegant. He named it for his friend — and only later realized he'd misspelled the surname, by which point “Jasmine” had stuck. The drink reached a wider audience through his 1998 book Cocktail: The Drinks Bible for the 21st Century, with Tony Abou-Ganim championing it in San Francisco and Las Vegas.",
+    tastingNotes:"Pale pink and citrus-forward, with lemon and gin up front, a bittersweet Campari edge through the middle, and a phantom grapefruit note on the finish.",
+    rating:0, addedAt:1781560120000, obscura:true, craftLinks:[],
+    sourceUrl:"https://punchdrink.com/articles/jasmine-became-modern-classic-campari-cocktail-recipe/",
+    imageUrl:"", myPhoto:"",
+  },
+  {
+    id:"el-diablo", name:"El Diablo", family:"Highball", subFamily:"Ginger Highball / Buck",
+    aka:"Mexican El Diablo",
+    baseSpirit:"Tequila", glass:"Collins/Highball", occasion:"Warm Weather", season:"Summer",
+    difficulty:"Easy", serveStyle:"On the Rocks",
+    tags:["Fruity", "Spicy", "Light/Refreshing", "Sparkling"],
+    sliders:{"boozy": 4, "sweet": 5, "sour": 3, "bitter": 1, "fruity": 5, "herbal": 1, "smoky": 1, "spicy": 5, "rich": 2},
+    ingredients:[
+      { name:"Reposado tequila", amount:"1.5", unit:"oz" },
+      { name:"Creme de cassis", amount:"0.5", unit:"oz" },
+      { name:"Fresh lime juice", amount:"0.5", unit:"oz" },
+      { name:"Ginger beer", amount:"3", unit:"oz" }
+    ],
+    instructions:"Combine the tequila, creme de cassis, and lime juice in a shaker with ice. Shake until well chilled. Strain into a Collins glass filled with fresh ice. Top with ginger beer and stir gently. Garnish with a lime wedge.",
+    notes:"Ginger beer is the backbone — use a good spicy one, since it has to stand up to both the earthy tequila and the dark-fruit cassis. Reposado is traditional and adds a touch of oak, but blanco makes an excellent, brighter version. Build the shaken base over fresh ice, top with ginger beer, and stir gently to combine.",
+    riffs:"A member of the Buck family — spirit, citrus, ginger beer — alongside the Moscow Mule, Kentucky Buck, and Dark 'n Stormy. May itself be an evolution of earlier rum-based Diablo cocktails, with tequila taking rum's place.",
+    lore:"El Diablo first appeared in print as the “Mexican El Diablo” in Trader Vic's Book of Food and Drink in 1946, when tequila was barely a footnote on American bar menus dominated by rum, whiskey, and gin. The combination reads oddly on paper — tequila, lime, crème de cassis, and ginger beer — yet it lands as a remarkably harmonious highball. It drifted in and out of favor for decades before the modern revival rediscovered it, and it now sits alongside the Margarita and Paloma among the great classic tequila drinks. Its exact origin is debated; some historians point to earlier rum-based “Diablo” drinks that may have inspired the tequila version.",
+    tastingNotes:"Spicy and refreshing, with ginger heat over earthy agave, dark cassis berry in the background, and lime cutting through to keep it lively. Long and effervescent.",
+    rating:0, addedAt:1781560180000, obscura:false, craftLinks:[],
+    sourceUrl:"https://www.liquor.com/recipes/el-diablo/",
+    imageUrl:"", myPhoto:"",
+  },
+];
+
 const MY_RECIPES_LIST = [
   CLASSIC_MARGARITA,
   FRENCH_007,
@@ -3052,6 +3139,7 @@ const MY_RECIPES_LIST = [
   TRIPLE_CROWN,
   OLD_FASHIONED,
   ...TIKI_PACK_003,
+  ...CLASSICS_PACK_004,
 ];
 
 const CONTENT_STANDARD_PATCH_IDS = new Set([
