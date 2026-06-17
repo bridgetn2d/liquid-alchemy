@@ -446,12 +446,12 @@ const CLASSIC_MARGARITA = {
   addedAt:Date.now()-500, imageUrl:"", myPhoto:"",
   sliders:{ boozy:6, sweet:4, sour:8, bitter:1, fruity:3, herbal:1, smoky:0, spicy:0, rich:1 },
   ingredients:[
-    { name:"Tequila blanco",      amount:"2",   unit:"oz" },
-    { name:"Cointreau",           amount:"0.5", unit:"oz" },
-    { name:"Fresh lime juice",    amount:"1",   unit:"oz" },
-    { name:"Agave syrup (1:1)",   amount:"0.5", unit:"oz" },
-    { name:"Salt",                amount:"1",   unit:"whole" },
-    { name:"Lime wheel",          amount:"1",   unit:"whole" },
+    { name:"Tequila blanco",      amount:"2",   unit:"oz",   role:"base" },
+    { name:"Cointreau",           amount:"0.5", unit:"oz",   role:"modifier" },
+    { name:"Fresh lime juice",    amount:"1",   unit:"oz",   role:"acid" },
+    { name:"Agave syrup (1:1)",   amount:"0.5", unit:"oz",   role:"sweetener" },
+    { name:"Salt",                amount:"1",   unit:"whole",role:"seasoning" },
+    { name:"Lime wheel",          amount:"1",   unit:"whole",role:"garnish" },
   ],
   instructions:"Prepare a margarita glass with a salted rim. Add tequila, Cointreau, lime juice, and agave syrup to a shaker tin. Add ice and shake hard for 15 seconds. Strain over fresh ice into the prepared glass. Garnish with a lime wheel.",
   notes:"Use the best blanco tequila you can — it makes an enormous difference. Agave syrup at 1:1 (agave:water) keeps the sweetness clean and true to the spirit.",
@@ -549,11 +549,11 @@ const WHISKEY_SOUR = {
   addedAt:Date.now()-820, imageUrl:"", myPhoto:"",
   sliders:{ boozy:6, sweet:5, sour:7, bitter:1, fruity:2, herbal:0, smoky:0, spicy:1, rich:4 },
   ingredients:[
-    { name:"Bourbon",            amount:"2",    unit:"oz" },
-    { name:"Fresh lemon juice",  amount:"0.75", unit:"oz" },
-    { name:"Simple syrup",       amount:"0.75", unit:"oz" },
-    { name:"Egg white",          amount:"1",    unit:"whole" },
-    { name:"Angostura Aromatic Bitters", amount:"2", unit:"dash" },
+    { name:"Bourbon",            amount:"2",    unit:"oz",   role:"base" },
+    { name:"Fresh lemon juice",  amount:"0.75", unit:"oz",   role:"acid" },
+    { name:"Simple syrup",       amount:"0.75", unit:"oz",   role:"sweetener" },
+    { name:"Egg white",          amount:"1",    unit:"whole",role:"texture" },
+    { name:"Angostura Aromatic Bitters", amount:"2", unit:"dash", role:"bitter" },
   ],
   instructions:"Dry shake all ingredients without ice for 15 seconds to emulsify the egg white. Add ice and shake hard for another 15 seconds. Strain into a rocks glass over ice. Dash bitters on the foam and drag a toothpick through for a decorative pattern.",
   notes:"The egg white is optional but transforms the texture — silky and luxurious. The dry shake first is essential to build the foam. For a Boston Sour, serve up in a coupe.",
@@ -5728,6 +5728,229 @@ function IngRow({ ing, idx, suggestions, onChange, onRemove, disableRemove }) {
 }
 
 
+/* ─── CocktailCompositionDiagram ─── */
+
+function inferRole(ingredient) {
+  const name = (ingredient.name || "").toLowerCase();
+  const unit = (ingredient.unit || "").toLowerCase();
+  // salt/saline first — unit "whole" would otherwise be caught as garnish below
+  if (name.match(/\bsalt\b|saline/i) && !name.match(/syrup/i)) return "seasoning";
+  if (["wheel","slice","peel","twist","strip","sprig","leaf","whole","each"].includes(unit)) return "garnish";
+  if (name.match(/egg white|aquafaba/i)) return "texture";
+  if (name.match(/\bcream\b/i) && !name.match(/creme? de/i)) return "texture";
+  if (name.match(/soda|tonic|champagne|prosecco|sparkling/i)) return "effervescent";
+  if (name.match(/juice/i) && name.match(/lemon|lime|grapefruit|orange|yuzu|pineapple/i)) return "acid";
+  if (name.match(/bitters?|campari|aperol|cynar|fernet|suze/i)) return "bitter";
+  if (name.match(/vermouth|amaro|sherry|port|madeira/i)) return "modifier";
+  // spirit-forward modifier liqueurs — classify before the generic sweetener sweep
+  if (name.match(/cointreau|triple sec|grand marnier|cura[cç]ao|orange liqueur|st[.\-]?germain|elderflower liqueur|benedictine|chartreuse|maraschino|lillet/i)) return "modifier";
+  if (name.match(/syrup|liqueur|honey|agave|falernum|orgeat/i)) return "sweetener";
+  return "base";
+}
+
+const ROLE_STYLES = {
+  base:         { stroke:"#2A2A28", fill:"#F4F3EF" },
+  acid:         { stroke:"#5C7034", fill:"#EFF4E6" },
+  sweetener:    { stroke:"#A85820", fill:"#FAF0E6" },
+  modifier:     { stroke:"#4A5A7A", fill:"#E8EEF8" },
+  bitter:       { stroke:"#7A2E50", fill:"#F5E8EF" },
+  effervescent: { stroke:"#2E6678", fill:"#E8F2F4" },
+  texture:      { stroke:"#5A6878", fill:"#E8F0F4" },
+  seasoning:    { stroke:"#9A9A92", fill:"#F4F4F2" },
+  garnish:      { stroke:"#9A9A92", fill:"#F4F4F2", dashed:true },
+  aromatic:     { stroke:"#6B5A7A", fill:"#F0ECF4" },
+};
+
+const ROLE_EDUCATION = {
+  base:         { label:"Base Spirit",   description:"The structural and flavor foundation. Everything else is in service of the base — its ABV, body, and aromatic identity define the drink's character before any other element is added.", riff:"Swapping the base moves the entire drink. Tequila → mezcal adds smoke. Bourbon → rye adds spice and dryness. Gin → vodka strips botanicals. The whole drink follows the spirit." },
+  acid:         { label:"Acid",          description:"Fresh citrus juice brings brightness and balance. Acid lifts the other flavors, cuts through sweetness, and provides the tartness that makes a sour feel alive rather than flat.", riff:"Lemon reads brighter and more floral. Lime is sharper and more tropical. Grapefruit is bitter-edged. Yuzu is complex and delicate. The acid choice shapes the drink's whole personality." },
+  sweetener:    { label:"Sweetener",     description:"Balances the acid and softens the spirit. A good sweetener isn't just sweet — it contributes texture and its own flavor. Simple syrup is neutral. Honey adds warmth. Agave echoes tequila. Orgeat adds nuttiness.", riff:"Adjust the ratio to shift the balance. A drier spec (less sweetener) reads spirit-forward and complex. A richer spec is rounder and more approachable. Try replacing simple syrup with honey syrup — same volume, different drink." },
+  modifier:     { label:"Modifier",      description:"A secondary spirit, fortified wine, or spirit-forward liqueur that adds complexity without becoming the focus. The modifier contributes a flavor dimension the base alone cannot achieve.", riff:"The modifier is where you teach the drink something new. Cointreau vs. Grand Marnier is a volume-and-richness decision. Dry vermouth vs. Lillet shifts the herbal register. An amaro modifier adds bitterness and depth simultaneously." },
+  bitter:       { label:"Bitter",        description:"Bitters, amari, and bitter liqueurs add complexity, length, and structural integration. Even a few dashes transforms a drink — bitters act as seasoning, binding the other elements together.", riff:"Angostura adds spice and warmth. Peychaud's adds anise and florals. Campari adds red-fruit bitterness at volume. More bitter = more complexity, but balance is the experiment." },
+  effervescent: { label:"Effervescent",  description:"Carbonation adds length, lifts aromatics, and changes how the drink sits on the palate. A highball is fundamentally a spirit-forward base extended with bubbles — the mixer is not just dilution.", riff:"Soda water is neutral length. Tonic adds quinine bitterness. Ginger beer adds heat and flavor. Sparkling wine adds yeast and complexity. Each choice changes the drink's character, not just its size." },
+  texture:      { label:"Texture",       description:"Egg white, aquafaba, and cream change the physical feel of the drink without adding dominant flavor. Egg white adds silky weight and a white foam. Cream adds richness and rounds sharp edges.", riff:"Egg white requires a dry shake first to emulsify before adding ice. Without it the foam collapses. The texture element often defines a cocktail family: Fizz, Flip, Boston Sour." },
+  seasoning:    { label:"Seasoning",     description:"Saline solution and salt work the way seasoning works in cooking — at the right dose they don't add saltiness, they add brightness and integration. Two or three drops of 20% saline can transform a flat drink.", riff:"A salted rim is declarative. Saline drops added to the shaker are invisible but structural. Remove the salt from a Margarita — the drink collapses without it." },
+  garnish:      { label:"Garnish",       description:"The garnish is the first impression and the last aromatic note. An expressed citrus peel changes what you smell before every sip. A fresh herb sprig adds an aromatic frame around the drink.", riff:"Not cosmetic. Expressed oils from a lemon twist coat the surface and change the drink's aromatic character. A garnish that doesn't contribute aromatics is pure theatre." },
+  aromatic:     { label:"Aromatic",      description:"Expressed oils, rinses, and atomized spirits deliver aroma without volume. An absinthe rinse adds anise presence without adding significant alcohol. A citrus peel expressed over the drink, then discarded, changes what you smell.", riff:"Rinses, spritzes, and expressed oils are the subtlest form of seasoning. They add perception without dilution — the most powerful tools in the toolkit." },
+};
+
+const MAX_R = 68;
+const MIN_R = 28;
+const GARNISH_R = 30;
+
+function hexRadius(oz, maxOz) {
+  if (!oz || oz <= 0) return GARNISH_R;
+  return Math.round(MIN_R + (oz / maxOz) * (MAX_R - MIN_R));
+}
+
+function hexPoints(cx, cy, r) {
+  // flat-top orientation: start at 30° offset
+  return Array.from({length:6}, (_,i) => {
+    const a = Math.PI / 180 * (60 * i + 30);
+    return `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`;
+  }).join(" ");
+}
+
+// Strip parenthetical notes: "Agave syrup (1:1)" → "Agave syrup"
+function simplifyIngName(name) {
+  return (name || "").replace(/\s*\([^)]*\)/g, "").trim();
+}
+
+function toOzVal(amount, unit) {
+  const n = parseFloat(amount);
+  if (isNaN(n)) return 0;
+  const u = (unit||"").toLowerCase();
+  if (u === "ml") return n / 29.5735;
+  if (u === "tsp") return n * 0.1667;
+  if (u === "tbsp") return n * 0.5;
+  if (u === "dash") return n * 0.031;
+  if (u === "drop") return n * 0.0017;
+  return n;
+}
+
+function CocktailCompositionDiagram({ cocktail, onNodeClick, selectedRole }) {
+  const ings = (cocktail.ingredients || []).filter(i => i.name);
+  if (ings.length < 2) return null;
+
+  const resolved = ings.map(ing => ({
+    ...ing,
+    resolvedRole: ing.role || inferRole(ing),
+    ozVal: toOzVal(ing.amount, ing.unit),
+  }));
+
+  // Split base from satellites; if multiple "base" inferred, pick the largest
+  const bases = resolved.filter(i => i.resolvedRole === "base");
+  const centerIng = bases.length
+    ? bases.reduce((a,b) => a.ozVal >= b.ozVal ? a : b)
+    : resolved.reduce((a,b) => a.ozVal >= b.ozVal ? a : b);
+  const satellites = resolved.filter(i => i !== centerIng);
+
+  // Sizing
+  const volumetricRoles = new Set(["base","acid","sweetener","modifier","bitter","effervescent","texture"]);
+  const maxOz = Math.max(...resolved.filter(i => volumetricRoles.has(i.resolvedRole)).map(i => i.ozVal), 0.01);
+  const centerR = hexRadius(centerIng.ozVal, maxOz);
+
+  const satData = satellites.map(ing => {
+    const r = volumetricRoles.has(ing.resolvedRole) ? hexRadius(ing.ozVal, maxOz) : GARNISH_R;
+    return { ...ing, r };
+  });
+
+  // Layout: place satellites at 6 vertex angles, spacing them out from center
+  const ANGLES = [0, 60, 120, 180, 240, 300];
+  const W = 460;
+  const H = 340;
+  const cx = W / 2;
+  const cy = H / 2;
+
+  const placed = satData.map((ing, i) => {
+    const angle = ANGLES[i % 6] * (Math.PI / 180);
+    const dist = centerR + ing.r + 24;
+    return {
+      ...ing,
+      sx: cx + dist * Math.cos(angle),
+      sy: cy + dist * Math.sin(angle),
+    };
+  });
+
+  const roleLabel = r => r.toUpperCase();
+
+  function fmtAmount(ing) {
+    const n = parseFloat(ing.amount);
+    if (isNaN(n)) return ing.amount || "";
+    const frac = {0.25:"¼", 0.5:"½", 0.75:"¾", 0.33:"⅓", 0.67:"⅔", 0.125:"⅛"};
+    const key = Object.keys(frac).find(k => Math.abs(n - parseFloat(k)) < 0.02);
+    const display = key ? frac[key] : n;
+    return `${display}${ing.unit ? " " + ing.unit : ""}`;
+  }
+
+  function truncate(str, max) {
+    return str.length > max ? str.slice(0, max - 1) + "…" : str;
+  }
+
+  const centerStyle = ROLE_STYLES[centerIng.resolvedRole] || ROLE_STYLES.base;
+
+  return (
+    <div style={{marginTop:16,marginBottom:4}}>
+      <div className="section-label" style={{marginBottom:6}}>Composition</div>
+      <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch"}}>
+        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:W,display:"block",margin:"0 auto",fontFamily:"'Jost',monospace,sans-serif"}}>
+          {/* connector lines */}
+          {placed.map((ing,i) => (
+            <line key={`line-${i}`}
+              x1={cx} y1={cy} x2={ing.sx} y2={ing.sy}
+              stroke="#C8C6C0" strokeWidth="1" strokeOpacity="0.7"
+            />
+          ))}
+          {/* junction circles at midpoints */}
+          {placed.map((ing,i) => {
+            const mx = (cx + ing.sx) / 2;
+            const my = (cy + ing.sy) / 2;
+            return <circle key={`junc-${i}`} cx={mx} cy={my} r="3" fill="none" stroke="#C8C6C0" strokeWidth="1"/>;
+          })}
+
+          {/* satellite hexagons */}
+          {placed.map((ing,i) => {
+            const st = ROLE_STYLES[ing.resolvedRole] || ROLE_STYLES.base;
+            const active = selectedRole === ing.resolvedRole;
+            return (
+              <g key={`sat-${i}`}
+                onClick={onNodeClick ? ()=>onNodeClick(ing.resolvedRole, ing) : undefined}
+                style={{cursor: onNodeClick ? "pointer" : "default"}}
+              >
+                <polygon
+                  points={hexPoints(ing.sx, ing.sy, ing.r)}
+                  fill={active ? st.fill : st.fill}
+                  stroke={st.stroke}
+                  strokeWidth={active ? "3" : "1.5"}
+                  strokeDasharray={st.dashed ? "4 3" : undefined}
+                  opacity={selectedRole && !active ? 0.45 : 1}
+                />
+                <text x={ing.sx} y={ing.sy - 10} textAnchor="middle" fontSize="8.5" fontWeight="700" fill={st.stroke} letterSpacing="0.06em" opacity={selectedRole && !active ? 0.45 : 1}>
+                  {roleLabel(ing.resolvedRole)}
+                </text>
+                <text x={ing.sx} y={ing.sy + 3} textAnchor="middle" fontSize="8" fill="#4A4A46" opacity={selectedRole && !active ? 0.45 : 1}>
+                  {truncate(simplifyIngName(ing.name), 16)}
+                </text>
+                <text x={ing.sx} y={ing.sy + 14} textAnchor="middle" fontSize="7.5" fill="#7A7A74" opacity={selectedRole && !active ? 0.45 : 1}>
+                  {fmtAmount(ing)}
+                </text>
+              </g>
+            );
+          })}
+
+          {/* center hexagon */}
+          {(()=>{
+            const active = selectedRole === centerIng.resolvedRole;
+            return (
+              <g
+                onClick={onNodeClick ? ()=>onNodeClick(centerIng.resolvedRole, centerIng) : undefined}
+                style={{cursor: onNodeClick ? "pointer" : "default"}}
+              >
+                <polygon
+                  points={hexPoints(cx, cy, centerR)}
+                  fill={centerStyle.fill}
+                  stroke={centerStyle.stroke}
+                  strokeWidth={active ? "3.5" : "2"}
+                  opacity={selectedRole && !active ? 0.45 : 1}
+                />
+                <text x={cx} y={cy - 12} textAnchor="middle" fontSize="9" fontWeight="700" fill={centerStyle.stroke} letterSpacing="0.08em" opacity={selectedRole && !active ? 0.45 : 1}>
+                  {roleLabel(centerIng.resolvedRole)}
+                </text>
+                <text x={cx} y={cy + 3} textAnchor="middle" fontSize="9.5" fontWeight="600" fill="#2A2A28" opacity={selectedRole && !active ? 0.45 : 1}>
+                  {truncate(simplifyIngName(centerIng.name), 18)}
+                </text>
+                <text x={cx} y={cy + 16} textAnchor="middle" fontSize="8.5" fill="#5A5A56" opacity={selectedRole && !active ? 0.45 : 1}>
+                  {fmtAmount(centerIng)}
+                </text>
+              </g>
+            );
+          })()}
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Placeholder Images by Family ─── */
 
 
@@ -5744,8 +5967,21 @@ function Originals({ cocktails, setCocktails, inventory }) {
     spiritCount:1, spirit1:"", spirit2:"", familyLock:"",
     flavors:[], characters:[], texture:[], serve:""
   });
+  const [selectedTemplate, setSelectedTemplate] = React.useState(null);
+  const [selectedRole, setSelectedRole] = React.useState(null);
   const set = (k,v) => setBuild(x=>({...x,[k]:v}));
   const toggle = (k,v) => setBuild(x=>({...x,[k]:x[k].includes(v)?x[k].filter(i=>i!==v):[...x[k],v]}));
+
+  const RIFF_TEMPLATE_DEFS = [
+    { id:"classic-margarita",     label:"Margarita",     familyNote:"Sour · Daisy",          structNote:"Base · Acid · Modifier · Sweetener" },
+    { id:"classic-daiquiri",      label:"Daiquiri",      familyNote:"Sour · Core",           structNote:"Base · Acid · Sweetener" },
+    { id:"classic-whiskey-sour",  label:"Whiskey Sour",  familyNote:"Sour · Egg White",      structNote:"Base · Acid · Sweetener · Texture" },
+    { id:"classic-negroni",       label:"Negroni",       familyNote:"Negroni · Equal Parts", structNote:"Base · Bitter · Modifier" },
+    { id:"old-fashioned-classic", label:"Old Fashioned", familyNote:"Old Fashioned",         structNote:"Base · Sweetener · Bitter" },
+    { id:"classic-gimlet",        label:"Gimlet",        familyNote:"Sour · Core",           structNote:"Base · Acid · Sweetener" },
+    { id:"dark-and-stormy",       label:"Dark & Stormy", familyNote:"Highball · Buck",       structNote:"Base · Acid · Effervescent" },
+    { id:"moscow-mule",           label:"Moscow Mule",   familyNote:"Highball · Buck",       structNote:"Base · Acid · Effervescent" },
+  ];;
 
   const SPIRITS = ["Gin","Vodka","Rum","Cachaca","Tequila","Mezcal","Whiskey","Bourbon","Rye","Scotch","Brandy","Cognac","Pisco","Amaro","Neutral"];
   const SPLIT_BASE_OPTIONS = ["Gin","Vodka","Rum","Cachaca","Tequila","Mezcal","Whiskey","Bourbon","Rye","Brandy","Cognac","Amaro","Amaro Sfumato","Campari","Aperol","St-Germain","Cointreau","Chartreuse","Benedictine","Maraschino","Falernum","Lillet Blanc","Lillet Rose"];
@@ -5779,14 +6015,14 @@ function Originals({ cocktails, setCocktails, inventory }) {
 
   function familyDescription(family, sub) {
     const descs = {
-      "Sour": "You think like a classic bartender. Spirit, citrus, sweetener — the most important template in cocktail making.",
-      "Negroni": "Bold and bitter. You are working in the Italian aperitivo tradition — equal parts spirit, bitter, and vermouth.",
-      "Old Fashioned": "Spirit-forward and stirred. You let the base spirit speak and use bitters and sweetener to shape it.",
-      "Highball": "Long, refreshing, and easy. You are extending a spirit with a mixer over ice.",
-      "Tiki & Tropical": "Bold, layered, and unapologetically fun. You are working with tropical flavors.",
-      "Flip, Nog & Creamy": "Rich and indulgent. You are using cream or egg to add texture and body.",
+      "Sour":             "The Sour is the most fundamental template: base spirit, acid, sweetener. Master the ratio and you have the key to an entire family of drinks. Change one element — the spirit, the citrus, the sweetener — and observe what shifts.",
+      "Negroni":          "The Negroni is an equal-parts structure: base spirit, bitter liqueur, and vermouth. Every element carries equal weight. Swap any single slot and the balance resets — which makes it one of the most riff-able templates in the canon.",
+      "Old Fashioned":    "The Old Fashioned strips a cocktail to its minimum: spirit, sweetener, bitters. It is a framework for studying what bitters and sweetener do to a base spirit. Change the spirit and the drink changes entirely.",
+      "Highball":         "The Highball is a spirit extended with a mixer. The ratio between spirit and mixer determines character. The mixer is not neutral — tonic, ginger beer, and soda water each teach the spirit something different.",
+      "Tiki & Tropical":  "Tiki structures layer multiple spirits and flavor elements to achieve complexity through volume. The experiment here is in balance — tropical drinks fail when sweetness dominates. The acid and the bitters are what keep it alive.",
+      "Flip, Nog & Creamy":"Cream and egg-based structures separate texture from flavor. The texture element — egg white, cream, aquafaba — changes the physical experience of the drink without adding significant flavor. Study that separation.",
     };
-    return descs[family] || "You have built something genuinely original. The template will reveal itself when you make it.";
+    return descs[family] || "The template will emerge from the ingredients. Make it once as written, note what dominates, and adjust one element at a time from there.";
   }
 
   const pill = (label, active, onClick) => (
@@ -5903,16 +6139,22 @@ function Originals({ cocktails, setCocktails, inventory }) {
 
   if (step === 0) return (
     <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 48px",textAlign:"center"}}>
-      <h1 className="page-title">Originals</h1>
+      <h1 className="page-title">Riff Lab</h1>
       <div style={{height:16}}/>
-      <p style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1.25rem",color:"var(--text-2)",lineHeight:1.7,maxWidth:480,margin:"0 auto"}}>
-        Every great bartender has a signature. A drink that is entirely their own.
+      <p style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1.3rem",color:"var(--text-2)",lineHeight:1.7,maxWidth:460,margin:"0 auto"}}>
+        Great cocktails are not accidents. They are structures.
       </p>
       <div style={{height:1,background:"var(--border)",margin:"24px auto",maxWidth:200}}/>
-      <p style={{fontSize:".9rem",color:"var(--text-3)",lineHeight:1.7,maxWidth:400,margin:"0 auto 32px"}}>
-        Answer a few questions and Alchemy will identify your cocktail family, suggest a starting spec, and help you name and save your original creation.
+      <p style={{fontSize:".9rem",color:"var(--text-3)",lineHeight:1.8,maxWidth:440,margin:"0 auto 12px"}}>
+        Start with a proven template, study its composition, then change one element at a time. Swap the base. Shift the acid. Adjust the sweetener. Add texture, bitterness, aroma, or length.
       </p>
-      <button onClick={()=>setStep(1)} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"14px 32px",borderRadius:"999px",background:"var(--accent)",color:"white",border:"none",cursor:"pointer"}}>Begin</button>
+      <p style={{fontSize:".9rem",color:"var(--text-3)",lineHeight:1.8,maxWidth:440,margin:"0 auto 32px"}}>
+        The goal is not to generate a perfect drink out of thin air. The goal is to learn how a cocktail changes.
+      </p>
+      <button onClick={()=>setStep(7)} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"14px 32px",borderRadius:"999px",background:"var(--accent)",color:"white",border:"none",cursor:"pointer"}}>Choose a Template</button>
+      <div style={{marginTop:20}}>
+        <button onClick={()=>setStep(1)} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Jost',sans-serif",fontSize:".75rem",letterSpacing:".08em",color:"var(--text-3)",textDecoration:"underline",textUnderlineOffset:3}}>Build from scratch instead →</button>
+      </div>
     </div>
   );
 
@@ -5999,7 +6241,7 @@ function Originals({ cocktails, setCocktails, inventory }) {
       <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:24}}>{SERVES.map(s=>pill(s, build.serve===s, ()=>set("serve",s)))}</div>
       <div style={{display:"flex",justifyContent:"space-between",marginTop:24}}>
         <button onClick={()=>setStep(4)} style={{fontFamily:"'Jost',sans-serif",fontWeight:400,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 28px",borderRadius:"999px",background:"var(--bg-2)",color:"var(--text-2)",border:"1px solid var(--border)",cursor:"pointer"}}>Back</button>
-        <button onClick={()=>setStep(6)} disabled={!build.serve} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 28px",borderRadius:"999px",background:build.serve?"var(--accent)":"var(--border)",color:build.serve?"white":"var(--text-3)",border:"none",cursor:build.serve?"pointer":"default"}}>See My Drink</button>
+        <button onClick={()=>setStep(6)} disabled={!build.serve} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 28px",borderRadius:"999px",background:build.serve?"var(--accent)":"var(--border)",color:build.serve?"white":"var(--text-3)",border:"none",cursor:build.serve?"pointer":"default"}}>Generate Baseline</button>
       </div>
     </div>
   );
@@ -6011,15 +6253,15 @@ function Originals({ cocktails, setCocktails, inventory }) {
     const extras = getFlavorIngredients(build.flavors, build.characters);
     return (
       <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 48px",textAlign:"center"}}>
-        <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".15em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:4}}>Your cocktail family</div>
+        <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".15em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:4}}>Template Family</div>
         <h1 className="page-title" style={{marginBottom:4}}>{family}</h1>
         {sub&&<div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1.1rem",color:"var(--accent)",marginBottom:12}}>{sub}</div>}
         <div style={{height:1,background:"var(--border)",margin:"16px auto",maxWidth:160}}/>
-        <p style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1.1rem",color:"var(--text-2)",lineHeight:1.7,maxWidth:480,margin:"0 auto 20px"}}>
+        <p style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1.05rem",color:"var(--text-2)",lineHeight:1.7,maxWidth:480,margin:"0 auto 20px"}}>
           {familyDescription(family, sub)}
         </p>
         <div style={{background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"16px 20px",marginBottom:16,textAlign:"left"}}>
-          <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:8}}>Your build</div>
+          <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:8}}>Experiment Parameters</div>
           <div style={{fontSize:".875rem",color:"var(--text-2)",lineHeight:1.8}}>
             <div><strong>Spirit:</strong> {spiritLabel}</div>
             {build.flavors.length>0&&<div><strong>Flavors:</strong> {build.flavors.join(", ")}</div>}
@@ -6029,12 +6271,12 @@ function Originals({ cocktails, setCocktails, inventory }) {
           </div>
         </div>
         <div style={{background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"16px 20px",marginBottom:20,textAlign:"left"}}>
-          <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:8}}>Starting spec</div>
+          <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:8}}>Baseline Spec</div>
           {[...spec, ...extras.suggestions].map((ing,i)=>(
             <div key={i} style={{fontSize:".875rem",color:"var(--text-2)",lineHeight:1.8}}>{ing.amount} {ing.unit} {ing.name}</div>
           ))}
-          <div style={{fontSize:".75rem",color:"var(--text-3)",marginTop:8,fontStyle:"italic"}}>These are starting points — taste and adjust.</div>
-            <div style={{fontSize:".78rem",color:"var(--text-2)",marginTop:10,lineHeight:1.65,borderTop:"1px solid var(--border)",paddingTop:10}}>This spec is a confident starting point, not a finished cocktail. Every spirit, every citrus, every palate is different. Make it once as written, taste it, then make it yours. Save it as a recipe and use the edit mode to refine ratios, add notes, and build toward something that is entirely your own.</div>
+          <div style={{fontSize:".75rem",color:"var(--text-3)",marginTop:8,fontStyle:"italic"}}>This is the baseline. Make it as written before changing anything.</div>
+            <div style={{fontSize:".78rem",color:"var(--text-2)",marginTop:10,lineHeight:1.65,borderTop:"1px solid var(--border)",paddingTop:10}}>Make this spec exactly as written first. Taste it. Note what dominates, what is missing, what is out of balance. Then change one element — and only one — and make it again. The riff starts with understanding the baseline, not with declaring the result.</div>
           {extras.notes.length>0&&(
             <div style={{marginTop:12,borderTop:"1px solid var(--border)",paddingTop:10}}>
               {extras.notes.map((n,i)=>(
@@ -6043,9 +6285,20 @@ function Originals({ cocktails, setCocktails, inventory }) {
             </div>
           )}
         </div>
+        {(()=>{
+          const diagramCocktail = { ingredients: [...spec, ...extras.suggestions] };
+          return (
+            <div style={{background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"16px 20px",marginBottom:20,textAlign:"left"}}>
+              <div style={{fontSize:".7rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:4}}>Composition</div>
+              <p style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:".95rem",color:"var(--text-3)",lineHeight:1.6,margin:"0 0 8px"}}>Start with a proven structure. Change one element at a time.</p>
+              <CocktailCompositionDiagram cocktail={diagramCocktail} />
+            </div>
+          );
+        })()}
+
         {build.characters.length > 0 && (
           <div style={{background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"16px 20px",marginBottom:20,textAlign:"left",width:"100%"}}>
-            <div style={{fontSize:".7rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:12}}>Taking it further</div>
+            <div style={{fontSize:".7rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:12}}>Experiment Directions</div>
             <div style={{display:"flex",flexDirection:"column",gap:10}}>
               {build.characters.map(c => {
                 const sugg = CHARACTER_SUGGESTIONS[c];
@@ -6076,8 +6329,8 @@ function Originals({ cocktails, setCocktails, inventory }) {
           <button onClick={()=>{setStep(0);setBuild({spiritCount:1,spirit1:"",spirit2:"",familyLock:"",flavors:[],characters:[],texture:[],serve:""});}} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 24px",borderRadius:"999px",background:"var(--bg-2)",color:"var(--text-2)",border:"1px solid var(--border)",cursor:"pointer"}}>Start Over</button>
           <button onClick={()=>{
             const newCocktail = {
-              id:"original-"+Date.now(),
-              name:"My "+family+" Cocktail",
+              id:"riff-"+Date.now(),
+              name:"Riff: "+family+" ("+build.spirit1+")",
               baseSpirit:build.spirit1,
               family:family, subFamily:sub,
               serveStyle:build.serve,
@@ -6085,11 +6338,107 @@ function Originals({ cocktails, setCocktails, inventory }) {
               addedAt:Date.now(), imageUrl:"", myPhoto:"",
               sliders:{boozy:5,sweet:5,sour:5,bitter:1,fruity:3,herbal:3,smoky:0,spicy:0,rich:2},
               ingredients:[...spec, ...extras.suggestions],
-              instructions:"", notes:"", riffs:"", lore:"", tastingNotes:"",
+              instructions:"", notes:"Riff baseline — make as written, then change one element at a time.", riffs:"", lore:"", tastingNotes:"",
             };
             setCocktails(prev=>[...prev, newCocktail]);
-            alert("Draft saved! Find it in your collection and edit to complete it.");
-          }} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 24px",borderRadius:"999px",background:"var(--accent)",color:"white",border:"none",cursor:"pointer"}}>Save as Recipe</button>
+            alert("Baseline saved as a riff. Find it in your collection, make it once as written, then use the notes field to track what you change.");
+          }} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 24px",borderRadius:"999px",background:"var(--accent)",color:"white",border:"none",cursor:"pointer"}}>Save Riff Baseline</button>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Step 7: Template picker ─────────────────────────────────────────────
+  if (step === 7) return (
+    <div style={{maxWidth:640,margin:"0 auto",padding:"0 16px 48px"}}>
+      <div style={{textAlign:"center",marginBottom:28}}>
+        <h1 className="page-title" style={{marginBottom:6}}>Choose a Template</h1>
+        <p style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1rem",color:"var(--text-3)",lineHeight:1.6,margin:0}}>
+          Each template is a proven structure. Choose one to study its composition.
+        </p>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:12,marginBottom:28}}>
+        {RIFF_TEMPLATE_DEFS.map(def => {
+          const cocktail = cocktails.find(c => c.id === def.id);
+          if (!cocktail) return null;
+          return (
+            <button key={def.id} onClick={()=>{ setSelectedTemplate(cocktail); setSelectedRole(null); setStep(8); }}
+              style={{textAlign:"left",background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"14px 16px",cursor:"pointer",transition:"border-color .15s, box-shadow .15s"}}
+              onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--accent)";e.currentTarget.style.boxShadow="0 2px 8px rgba(0,0,0,0.07)";}}
+              onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--border)";e.currentTarget.style.boxShadow="none";}}
+            >
+              <div style={{fontFamily:"'Cormorant Garamond',serif",fontWeight:700,fontSize:"1.05rem",color:"var(--text)",marginBottom:2}}>{def.label}</div>
+              <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".08em",textTransform:"uppercase",color:"var(--accent)",marginBottom:6}}>{def.familyNote}</div>
+              <div style={{fontSize:".72rem",color:"var(--text-3)",letterSpacing:".04em"}}>{def.structNote}</div>
+            </button>
+          );
+        })}
+      </div>
+      <div style={{textAlign:"center"}}>
+        <button onClick={()=>setStep(0)} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"'Jost',sans-serif",fontSize:".75rem",letterSpacing:".08em",color:"var(--text-3)",textDecoration:"underline",textUnderlineOffset:3}}>← Back</button>
+      </div>
+    </div>
+  );
+
+  // ── Step 8: Template composition view ───────────────────────────────────
+  if (step === 8 && selectedTemplate) {
+    const edu = selectedRole ? ROLE_EDUCATION[selectedRole] : null;
+    return (
+      <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 48px"}}>
+        <div style={{textAlign:"center",marginBottom:20}}>
+          <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".15em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:4}}>Template</div>
+          <h1 className="page-title" style={{marginBottom:4}}>{selectedTemplate.name}</h1>
+          {selectedTemplate.family&&(
+            <div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1rem",color:"var(--accent)"}}>
+              {selectedTemplate.family}{selectedTemplate.subFamily ? " · " + selectedTemplate.subFamily : ""}
+            </div>
+          )}
+        </div>
+
+        <div style={{background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"16px 20px",marginBottom:12}}>
+          <div style={{fontSize:".7rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:4}}>Composition</div>
+          <p style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:".95rem",color:"var(--text-3)",lineHeight:1.6,margin:"0 0 4px"}}>
+            Start with a proven structure. Change one element at a time.
+          </p>
+          <CocktailCompositionDiagram
+            cocktail={selectedTemplate}
+            onNodeClick={(role) => setSelectedRole(r => r === role ? null : role)}
+            selectedRole={selectedRole}
+          />
+          {!selectedRole && (
+            <p style={{textAlign:"center",fontSize:".72rem",color:"var(--text-3)",marginTop:6,letterSpacing:".04em"}}>
+              Tap a node to learn what each role contributes.
+            </p>
+          )}
+        </div>
+
+        {edu ? (
+          <div style={{background:"var(--bg)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"16px 20px",marginBottom:12,position:"relative"}}>
+            <button
+              onClick={()=>setSelectedRole(null)}
+              style={{position:"absolute",top:12,right:12,background:"none",border:"none",cursor:"pointer",fontSize:"1rem",color:"var(--text-3)",lineHeight:1}}
+              title="Dismiss"
+            >×</button>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
+              <span style={{display:"inline-block",width:10,height:10,borderRadius:2,background:ROLE_STYLES[selectedRole]?.fill,border:"1.5px solid "+(ROLE_STYLES[selectedRole]?.stroke||"#ccc"),flexShrink:0}}/>
+              <span style={{fontSize:".7rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:ROLE_STYLES[selectedRole]?.stroke||"var(--text-3)"}}>{edu.label}</span>
+            </div>
+            <p style={{fontSize:".85rem",color:"var(--text-2)",lineHeight:1.7,margin:"0 0 10px"}}>{edu.description}</p>
+            <div style={{borderTop:"1px solid var(--border)",paddingTop:10}}>
+              <span style={{fontSize:".68rem",fontWeight:700,letterSpacing:".1em",textTransform:"uppercase",color:"var(--text-3)"}}>Riff direction · </span>
+              <span style={{fontSize:".8rem",color:"var(--text-2)",lineHeight:1.6,fontStyle:"italic"}}>{edu.riff}</span>
+            </div>
+          </div>
+        ) : null}
+
+        <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",marginTop:8}}>
+          <button onClick={()=>{ setStep(7); setSelectedRole(null); }} style={{fontFamily:"'Jost',sans-serif",fontWeight:400,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 24px",borderRadius:"999px",background:"var(--bg-2)",color:"var(--text-2)",border:"1px solid var(--border)",cursor:"pointer"}}>Choose Different</button>
+          <button onClick={()=>{
+            const spirit = (selectedTemplate.baseSpirit||"").split("/")[0].trim();
+            if (spirit) set("spirit1", spirit);
+            setSelectedRole(null);
+            setStep(1);
+          }} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 24px",borderRadius:"999px",background:"var(--accent)",color:"white",border:"none",cursor:"pointer"}}>Riff This Template →</button>
         </div>
       </div>
     );
