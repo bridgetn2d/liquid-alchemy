@@ -688,6 +688,49 @@ const DANGEROUS_PASSION = {
   lore:"Created at a beachside bar in Aruba, the Dangerous Passion — El Azarosa Passionato in its original Spanish-Italian — is a masterclass in the seductive tension between tropical sweetness and slow-building heat. The passion fruit opens bright and floral, the ginger adds warmth, and the Ancho Reyes delivers a long, smoky chile finish. The flamed garnish is theatre as much as technique — the scorched habanero releases capsaicin aromatics that prime the palate before the first sip. A cocktail that lives up to its name.",
 };
 
+const OLD_CUBAN = {
+  id:"old-cuban", family:"Spritz & Aperitivo", subFamily:"Champagne Cocktail", name:"Old Cuban", baseSpirit:"Rum",
+  glass:"Coupe", occasion:"Celebration", season:"All Year", difficulty:"Intermediate", serveStyle:"Up",
+  tags:["Sour/Tart","Herbal/Botanical","Light/Refreshing","Elegant"], rating:0,
+  addedAt:1781600000001, imageUrl:"", myPhoto:"",
+  sliders:{ boozy:5, sweet:4, sour:5, bitter:2, fruity:2, herbal:4, smoky:0, spicy:1, rich:3 },
+  ingredients:[
+    { name:"Aged rum", amount:"1.5", unit:"oz" },
+    { name:"Fresh lime juice", amount:"0.75", unit:"oz" },
+    { name:"Simple syrup", amount:"0.75", unit:"oz" },
+    { name:"Angostura bitters", amount:"2", unit:"dashes" },
+    { name:"Fresh mint leaves", amount:"8", unit:"leaves" },
+    { name:"Brut Champagne", amount:"2", unit:"oz" },
+  ],
+  instructions:"Gently muddle the mint leaves with the simple syrup in the bottom of a shaker tin — press to bruise, not tear. Add the aged rum, fresh lime juice, and Angostura bitters. Fill with ice and shake hard for 12–15 seconds. Double-strain through a fine-mesh strainer into a chilled coupe. Top with brut Champagne, pouring gently down the side of the glass to preserve the bubbles. Garnish with a fresh mint leaf or a small mint sprig on the surface.",
+  notes:"Aged rum is non-negotiable — the vanilla and caramel depth is what separates this from a standard Mojito. Appleton Estate Signature, El Dorado 3-Year, or Diplomatico Planas are reliable choices. Avoid white rum.\n\nBrut Champagne is correct; Prosecco is workable but reads sweeter. The dryness of the Champagne counterbalances the simple syrup and lets the rum and bitters breathe.\n\nMuddle the mint gently and double-strain carefully — the drink should taste of mint without green bitterness. Strain out all leaf fragments before adding the Champagne.",
+  riffs:"The template is the Mojito skeleton — aged rum, lime, sugar, mint — with Champagne doing what soda normally would. To walk it back toward the Mojito, swap the Champagne for club soda and use white rum.\n\nFor a Cognac version, substitute aged Cognac for the rum — essentially a French 75 with Mojito DNA. Replacing simple syrup with elderflower liqueur gives a softer, more floral result.",
+  tastingNotes:"Bright lime and fresh mint on the nose. The first sip delivers citrus and herb, then the aged rum's vanilla and caramel emerge mid-palate, lifted by the Champagne's effervescence. Angostura bitters add a whisper of spice at the finish. Elegant and refreshing at once — exactly the \"Mojito in a little black dress\" Saunders envisioned.",
+  lore:"Audrey Saunders described her vision simply: \"a Mojito in a little black dress.\" Created in 2001 while she was building the cocktail program at Bemelmans Bar inside The Carlyle Hotel, the Old Cuban was her formal introduction to New York's cocktail world — and the drink that announced her aesthetic before Pegu Club existed.\n\nThe Mojito was the era's most-ordered drink. Saunders had no interest in merely serving it. She swapped the white rum for aged rum — its vanilla and caramel bringing warmth and depth — added Angostura bitters for spice and complexity, and replaced club soda with two ounces of brut Champagne. \"My goal was to create a lively yet elegant Champagne cocktail with a neotropical edge,\" she says. \"Something with a sharp, clean, yet tangy profile that also provides complexity and effervescence.\"\n\nIt debuted at Bemelmans in early 2002 and, per Saunders, \"took off like a horse out of the gate.\" Later that year, The Carlyle sent her to London for a pop-up at The Ritz. She brought the Old Cuban with her. It landed on menus in London, Paris, and Berlin within months. The Experimental Cocktail Club in Paris has kept it on the menu since opening day in 2007. It was eventually named an IBA official cocktail. Today it remains a bestseller at Bemelmans — the bar where it was born, still serving it more than two decades on.",
+  source:"https://punchdrink.com/articles/old-cuban-modern-classic-champagne-mojito-cocktail-recipe/",
+};
+
+const GIN_GIN_MULE = {
+  id:"gin-gin-mule", family:"Highball", subFamily:"Ginger Highball / Buck", name:"Gin-Gin Mule", baseSpirit:"Gin",
+  glass:"Highball", occasion:"Party", season:"Summer", difficulty:"Intermediate", serveStyle:"On the Rocks",
+  tags:["Herbal/Botanical","Sour/Tart","Spicy","Light/Refreshing"], rating:0,
+  addedAt:1781600000002, imageUrl:"", myPhoto:"",
+  sliders:{ boozy:5, sweet:3, sour:5, bitter:1, fruity:2, herbal:6, smoky:0, spicy:4, rich:1 },
+  ingredients:[
+    { name:"Gin (juniper-forward)", amount:"1.5", unit:"oz" },
+    { name:"Fresh lime juice", amount:"0.75", unit:"oz" },
+    { name:"Simple syrup", amount:"0.75", unit:"oz" },
+    { name:"Fresh mint leaves", amount:"8", unit:"leaves" },
+    { name:"Ginger beer", amount:"2", unit:"oz" },
+  ],
+  instructions:"Gently muddle the mint leaves with the simple syrup in the bottom of a shaker tin. Add the gin, fresh lime juice, and ice. Shake hard for 12–15 seconds. Fill a highball glass with fresh ice. Double-strain the shaken mixture into the glass. Top with ginger beer, pouring gently to preserve carbonation. Garnish with a mint sprig — slap it once between your palms before placing to open the aroma.",
+  notes:"Gin selection is critical. Saunders specifies a juniper-forward profile — Tanqueray, Beefeater, or Fords are the right choices. A soft or floral gin will disappear against the ginger. The botanical muscle of a classic London Dry is what makes the drink work.\n\nGinger beer: house-made is the ideal. Bundaberg or Fever-Tree Ginger Beer (not ginger ale) are the best commercial options. Avoid anything too sweet — the ginger spice needs to be forward.\n\nMuddle the mint gently with simple syrup before adding spirit and lime. Double-strain for a clean drink.",
+  riffs:"The Moscow Mule is the direct parallel — swap gin for vodka and drop the mint. The Mojito is the other half of the DNA — swap ginger beer for club soda.\n\nFor a more botanical version, a small barspoon of Green Chartreuse or Genepy amplifies the gin's botanicals beautifully. A Thai Basil Mule replaces mint with Thai basil for a more savory, anise-tinged riff. Dark rum in place of gin and you're essentially building a Dark & Stormy with mint.",
+  tastingNotes:"Fresh mint and lime on the nose, with gin's juniper just behind. The palate opens with citrus and herb, then the ginger beer asserts itself — spicy, fresh, uncompromised by sweetness. The gin's botanical structure gives the drink backbone that a vodka mule simply can't replicate. Long, clean finish with a linger of ginger heat.",
+  lore:"Audrey Saunders created the Gin-Gin Mule around 2000, before Pegu Club existed. At the time, treacly commercial mixers dominated even the best bars, and vodka was the default spirit for nearly everyone. \"Overcoming the public's fear of gin was a big deal back then,\" she recalls.\n\nThe concept crossed two drinks: the Mojito's mint-and-lime freshness and the Moscow Mule's ginger-and-lime snap — but built on gin instead of rum or vodka. The double \"gin\" in the name is deliberate: the spirit and ginger, the two flavors that drive the drink. The result was simultaneously familiar and genuinely new.\n\nThe trick, per Saunders, is house-made ginger beer. \"It's non-negotiable. Commercially produced ginger beer is laden with sugar, which suppresses the bright, bold flavor profile of this drink.\" At Pegu Club, the ginger beer was made in-house, strained fresh, and used to order. It helped transform how people thought about both gin and about what a highball could be. The Gin-Gin Mule became one of Pegu Club's signature drinks and one of the most influential highball recipes of the modern cocktail revival.",
+  source:"https://imbibemagazine.com/recipe/gin-gin-mule-recipe/",
+};
+
 // Add new recipes above this line — follow the same pattern.
 // Then add the constant name to MY_RECIPES_LIST below.
 
@@ -3558,6 +3601,8 @@ const MY_RECIPES_LIST = [
   ROYAL_HAWAIIAN,
   ...PACK_006,
   ...PACK_007,
+  OLD_CUBAN,
+  GIN_GIN_MULE,
 ];
 
 const CONTENT_STANDARD_PATCH_IDS = new Set([

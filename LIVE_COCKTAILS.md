@@ -1,6 +1,6 @@
 # Live Cocktails — master index
 
-Auto-generated from `app.jsx` (`MY_RECIPES_LIST`) on 2026-06-17. **146 cocktails live.**
+Auto-generated from `app.jsx` (`MY_RECIPES_LIST`) on 2026-06-17. **148 cocktails live.**
 
 Regenerate after adding any cocktail or pack: `python3 scripts/list_live_cocktails.py`
 
@@ -63,98 +63,100 @@ Search this file (Cmd/Ctrl-F) by name, alias, id, or family before adding a new 
 | 53 | Gimlet |  | Sour / Core Sour | `classic-gimlet` | core |
 | 54 | Gin & Tonic |  | Highball / Tonic Highball | `gin-and-tonic` | core |
 | 55 | Gin Basil Smash |  | Sour / Smash | `gin-basil-smash` | core |
-| 56 | Grapefruit-Rosemary Spritzer |  | Highball / Spritz | `grapefruit-rosemary-spritzer` | core |
-| 57 | Greenpoint |  | Martini & Manhattan / Manhattan Style | `greenpoint` | PACK_007 |
-| 58 | Guardian Angel |  | Tiki & Tropical / Tropical Sour | `guardian-angel` | core |
-| 59 | Guava Mojito |  | Sour / Collins | `guava-mojito` | core |
-| 60 | Guillotine |  | Old Fashioned / Core Old Fashioned | `guillotine` | core |
-| 61 | Hemingway Daiquiri |  | Sour / Daisy | `hemingway-daiquiri` | PACK_006 |
-| 62 | Hibiscus Guava Agua Fresca |  | Highball / Agua Fresca | `hibiscus-guava-agua-fresca` | core |
-| 63 | Hotel Nacional Special |  | Sour / Daisy | `hotel-nacional` | PACK_007 |
-| 64 | Hugo Spritz |  | Spritz & Aperitivo / Classic Spritz | `hugo-spritz` | PACK_007 |
-| 65 | Humuhumunukunukuāpuaʻa |  | Tiki & Tropical / Tropical Sour | `humuhumunukunukuapuaa` | PACK_006 |
-| 66 | Infante |  | Sour / Daisy | `infante` | core |
-| 67 | Irish Maid |  | Sour / Smash | `irish-maid` | core |
-| 68 | Jasmine |  | Sour / Daisy | `jasmine` | CLASSICS_PACK_004 |
-| 69 | Jet Pilot |  | Tiki & Tropical / Zombie / Strong Tropical | `jet-pilot` | TIKI_PACK_003 |
-| 70 | John Collins |  | Sour / Collins | `john-collins` | PACK_007 |
-| 71 | Jungle Bird |  | Tiki & Tropical / Tropical Sour | `jungle-bird` | core |
-| 72 | Kentucky Buck |  | Highball / Ginger Highball / Buck | `kentucky-buck` | core |
-| 73 | Kir Royale |  | Spritz & Aperitivo / Classic Spritz | `kir-royale` | core |
-| 74 | Large-Batch Negroni Sbagliato |  | Negroni / Sbagliato Style | `morgenthaler-sbagliato` | core |
-| 75 | Last of the Oaxacans |  | Sour / Core Sour | `last-of-the-oaxacans` | core |
-| 76 | Last Word |  | Sour / Core Sour | `last-word` | core |
-| 77 | Le Coucher de Soleil | Sunset | Sour / Daisy | `le-coucher-de-soleil` | core |
-| 78 | Little Wing |  | Sour / Core Sour | `little-wing` | core |
-| 79 | Mai Tai |  | Tiki & Tropical / Mai Tai Style | `mai-tai` | core |
-| 80 | Manhattan |  | Martini & Manhattan / Manhattan Style | `classic-manhattan` | core |
-| 81 | Martinez |  | Martini & Manhattan / Martini Style | `martinez` | PACK_006 |
-| 82 | Maximilian Affair |  | Sour / Core Sour | `maximilian-affair` | core |
-| 83 | Mexico Navy |  | Sour / Core Sour | `mexico-navy` | core |
-| 84 | Mint Julep |  | Julep / Core Julep | `mint-julep` | core |
-| 85 | Mojito |  | Sour / Collins | `classic-mojito` | core |
-| 86 | Monella Sour |  | Sour / Core Sour | `monella-sour` | core |
-| 87 | Monkeypod Mai Tai | Honey-Lilikoi Mai Tai | Tiki & Tropical / Mai Tai Style | `monkeypod-mai-tai` | core |
-| 88 | Monte Cassino |  | Sour / Core Sour | `monte-cassino` | core |
-| 89 | Moscow Mule |  | Highball / Ginger Highball / Buck | `moscow-mule` | core |
-| 90 | Muddled Mission |  | Sour / Smash | `muddled-mission` | core |
-| 91 | Naked and Famous |  | Sour / Core Sour | `naked-and-famous` | core |
-| 92 | Navy Grog |  | Tiki & Tropical / Grog | `navy-grog` | TIKI_PACK_003 |
-| 93 | Negroni |  | Negroni | `classic-negroni` | core |
-| 94 | Negroni Sbagliato |  | Negroni / Sbagliato Style | `negroni-sbagliato` | core |
-| 95 | New Brunswick |  | Sour / Collins | `new-brunswick` | core |
-| 96 | Oaxacan Old Fashioned |  | Old Fashioned / Core Old Fashioned | `oaxacan-old-fashioned` | core |
-| 97 | Old Fashioned |  | Old Fashioned / Core Old Fashioned | `old-fashioned-classic` | core |
-| 98 | Painkiller |  | Tiki & Tropical / Creamy Tropical | `painkiller` | TIKI_PACK_003 |
-| 99 | Paloma |  | Highball / Tonic Highball | `paloma` | core |
-| 100 | Paper Plane |  | Sour / Core Sour | `paper-plane` | core |
-| 101 | Pineapple Makrut Buck |  | Highball / Ginger Highball / Buck | `pineapple-makrut-buck` | core |
-| 102 | Pisco Sour |  | Sour / Egg White Sour | `pisco-sour` | core |
-| 103 | Pomegranate Spritzer |  | Highball / Spritz | `pomegranate-spritzer` | core |
-| 104 | Porto Flip |  | Flip, Nog & Creamy / Flip | `porto-flip` | core |
-| 105 | Prado |  | Sour / Egg White Sour | `prado` | core |
-| 106 | Queen's Park Swizzle |  | Sour / Smash | `queens-park-swizzle` | PACK_006 |
-| 107 | Rabbit Szn |  | Sour / Collins | `rabbit-szn` | core |
-| 108 | Ramble |  | Sour / Core Sour | `ramble` | core |
-| 109 | Ramble On |  | Sour / Daisy | `ramble-on` | core |
-| 110 | Raspberry Lime Rickey |  | Highball / Rickey | `raspberry-lime-rickey` | core |
-| 111 | Rattlesnake |  | Sour / Egg White Sour | `rattlesnake` | core |
-| 112 | Red Hook |  | Martini & Manhattan / Manhattan Style | `red-hook` | PACK_006 |
-| 113 | Rob Roy |  | Martini & Manhattan / Manhattan Style | `rob-roy` | core |
-| 114 | Rosemary Fizz |  | Sour / Fizz | `rosemary-fizz` | core |
-| 115 | Rosemary Gin Smash |  | Sour / Smash | `rosemary-gin-smash` | core |
-| 116 | Royal Hawaiian | Princess Kaiulani | Sour / Core Sour | `royal-hawaiian` | core |
-| 117 | Shakedown Street |  | Sour / Core Sour | `shakedown-street` | core |
-| 118 | Sherry Cobbler |  | Spritz & Aperitivo / Wine Spritz | `sherry-cobbler` | PACK_006 |
-| 119 | Sicilian Sojourn |  | Highball / Spritz | `sicilian-sojourn` | core |
-| 120 | Sidecar |  | Sour / Daisy | `classic-sidecar` | core |
-| 121 | Siesta |  | Sour / Daisy | `siesta` | core |
-| 122 | Singapore Sling |  | Sour / Collins | `singapore-sling` | core |
-| 123 | Six Seeds |  | Sour / Royale | `six-seeds` | core |
-| 124 | Sonambula |  | Sour / Core Sour | `sonambula` | core |
-| 125 | Southside |  | Sour / Core Sour | `southside` | core |
-| 126 | Springs First Bloom |  | Sour / Egg White Sour | `springs-first-bloom` | core |
-| 127 | Strawberry Caipirinha |  | Sour / Smash | `strawberry-caipirinha` | core |
-| 128 | The Black Prince |  | Old Fashioned / Core Old Fashioned | `black-prince` | core |
-| 129 | Thou Shall Not Be Named |  | Negroni / Dry Negroni | `thou-shall-not-be-named` | core |
-| 130 | Three Dots and a Dash |  | Tiki & Tropical / Grog | `three-dots-and-a-dash` | core |
-| 131 | Tia Mia |  | Tiki & Tropical / Mai Tai Style | `tia-mia` | core |
-| 132 | Tom Collins |  | Sour / Collins | `tom-collins` | core |
-| 133 | Tommy's Margarita |  | Sour / Daisy | `tommys-margarita` | CLASSICS_PACK_004 |
-| 134 | Toreador |  | Sour / Daisy | `toreador` | core |
-| 135 | Toronto | Fernet Cocktail | Old Fashioned / Bittered Spirit | `toronto` | core |
-| 136 | Triple Crown |  | Sour / Whiskey Sour | `triple-crown` | core |
-| 137 | Tropical Itch |  | Tiki & Tropical / Grog | `tropical-itch` | core |
-| 138 | Vesper | Vesper Martini | Martini & Manhattan / Martini Style | `vesper` | core |
-| 139 | Vieux Carré |  | Martini & Manhattan / Manhattan Style | `vieux-carre` | core |
-| 140 | Whiskey Smash |  | Sour / Smash | `whiskey-smash` | PACK_006 |
-| 141 | Whiskey Sour |  | Sour / Egg White Sour | `classic-whiskey-sour` | core |
-| 142 | White Lady |  | Sour / Daisy | `white-lady` | core |
-| 143 | White Russian |  | Flip, Nog & Creamy / Cream Cocktail | `white-russian` | core |
-| 144 | Wildberry Lillet Spritz |  | Spritz & Aperitivo / Sbagliato Style | `wildberry-lillet` | core |
-| 145 | Zombie |  | Tiki & Tropical / Zombie / Strong Tropical | `zombie-1934` | TIKI_PACK_003 |
-| 146 | Zuzu's Petals |  | Sour / Smash | `zuzus-petals` | core |
+| 56 | Gin-Gin Mule |  | Highball / Ginger Highball / Buck | `gin-gin-mule` | core |
+| 57 | Grapefruit-Rosemary Spritzer |  | Highball / Spritz | `grapefruit-rosemary-spritzer` | core |
+| 58 | Greenpoint |  | Martini & Manhattan / Manhattan Style | `greenpoint` | PACK_007 |
+| 59 | Guardian Angel |  | Tiki & Tropical / Tropical Sour | `guardian-angel` | core |
+| 60 | Guava Mojito |  | Sour / Collins | `guava-mojito` | core |
+| 61 | Guillotine |  | Old Fashioned / Core Old Fashioned | `guillotine` | core |
+| 62 | Hemingway Daiquiri |  | Sour / Daisy | `hemingway-daiquiri` | PACK_006 |
+| 63 | Hibiscus Guava Agua Fresca |  | Highball / Agua Fresca | `hibiscus-guava-agua-fresca` | core |
+| 64 | Hotel Nacional Special |  | Sour / Daisy | `hotel-nacional` | PACK_007 |
+| 65 | Hugo Spritz |  | Spritz & Aperitivo / Classic Spritz | `hugo-spritz` | PACK_007 |
+| 66 | Humuhumunukunukuāpuaʻa |  | Tiki & Tropical / Tropical Sour | `humuhumunukunukuapuaa` | PACK_006 |
+| 67 | Infante |  | Sour / Daisy | `infante` | core |
+| 68 | Irish Maid |  | Sour / Smash | `irish-maid` | core |
+| 69 | Jasmine |  | Sour / Daisy | `jasmine` | CLASSICS_PACK_004 |
+| 70 | Jet Pilot |  | Tiki & Tropical / Zombie / Strong Tropical | `jet-pilot` | TIKI_PACK_003 |
+| 71 | John Collins |  | Sour / Collins | `john-collins` | PACK_007 |
+| 72 | Jungle Bird |  | Tiki & Tropical / Tropical Sour | `jungle-bird` | core |
+| 73 | Kentucky Buck |  | Highball / Ginger Highball / Buck | `kentucky-buck` | core |
+| 74 | Kir Royale |  | Spritz & Aperitivo / Classic Spritz | `kir-royale` | core |
+| 75 | Large-Batch Negroni Sbagliato |  | Negroni / Sbagliato Style | `morgenthaler-sbagliato` | core |
+| 76 | Last of the Oaxacans |  | Sour / Core Sour | `last-of-the-oaxacans` | core |
+| 77 | Last Word |  | Sour / Core Sour | `last-word` | core |
+| 78 | Le Coucher de Soleil | Sunset | Sour / Daisy | `le-coucher-de-soleil` | core |
+| 79 | Little Wing |  | Sour / Core Sour | `little-wing` | core |
+| 80 | Mai Tai |  | Tiki & Tropical / Mai Tai Style | `mai-tai` | core |
+| 81 | Manhattan |  | Martini & Manhattan / Manhattan Style | `classic-manhattan` | core |
+| 82 | Martinez |  | Martini & Manhattan / Martini Style | `martinez` | PACK_006 |
+| 83 | Maximilian Affair |  | Sour / Core Sour | `maximilian-affair` | core |
+| 84 | Mexico Navy |  | Sour / Core Sour | `mexico-navy` | core |
+| 85 | Mint Julep |  | Julep / Core Julep | `mint-julep` | core |
+| 86 | Mojito |  | Sour / Collins | `classic-mojito` | core |
+| 87 | Monella Sour |  | Sour / Core Sour | `monella-sour` | core |
+| 88 | Monkeypod Mai Tai | Honey-Lilikoi Mai Tai | Tiki & Tropical / Mai Tai Style | `monkeypod-mai-tai` | core |
+| 89 | Monte Cassino |  | Sour / Core Sour | `monte-cassino` | core |
+| 90 | Moscow Mule |  | Highball / Ginger Highball / Buck | `moscow-mule` | core |
+| 91 | Muddled Mission |  | Sour / Smash | `muddled-mission` | core |
+| 92 | Naked and Famous |  | Sour / Core Sour | `naked-and-famous` | core |
+| 93 | Navy Grog |  | Tiki & Tropical / Grog | `navy-grog` | TIKI_PACK_003 |
+| 94 | Negroni |  | Negroni | `classic-negroni` | core |
+| 95 | Negroni Sbagliato |  | Negroni / Sbagliato Style | `negroni-sbagliato` | core |
+| 96 | New Brunswick |  | Sour / Collins | `new-brunswick` | core |
+| 97 | Oaxacan Old Fashioned |  | Old Fashioned / Core Old Fashioned | `oaxacan-old-fashioned` | core |
+| 98 | Old Cuban |  | Spritz & Aperitivo / Champagne Cocktail | `old-cuban` | core |
+| 99 | Old Fashioned |  | Old Fashioned / Core Old Fashioned | `old-fashioned-classic` | core |
+| 100 | Painkiller |  | Tiki & Tropical / Creamy Tropical | `painkiller` | TIKI_PACK_003 |
+| 101 | Paloma |  | Highball / Tonic Highball | `paloma` | core |
+| 102 | Paper Plane |  | Sour / Core Sour | `paper-plane` | core |
+| 103 | Pineapple Makrut Buck |  | Highball / Ginger Highball / Buck | `pineapple-makrut-buck` | core |
+| 104 | Pisco Sour |  | Sour / Egg White Sour | `pisco-sour` | core |
+| 105 | Pomegranate Spritzer |  | Highball / Spritz | `pomegranate-spritzer` | core |
+| 106 | Porto Flip |  | Flip, Nog & Creamy / Flip | `porto-flip` | core |
+| 107 | Prado |  | Sour / Egg White Sour | `prado` | core |
+| 108 | Queen's Park Swizzle |  | Sour / Smash | `queens-park-swizzle` | PACK_006 |
+| 109 | Rabbit Szn |  | Sour / Collins | `rabbit-szn` | core |
+| 110 | Ramble |  | Sour / Core Sour | `ramble` | core |
+| 111 | Ramble On |  | Sour / Daisy | `ramble-on` | core |
+| 112 | Raspberry Lime Rickey |  | Highball / Rickey | `raspberry-lime-rickey` | core |
+| 113 | Rattlesnake |  | Sour / Egg White Sour | `rattlesnake` | core |
+| 114 | Red Hook |  | Martini & Manhattan / Manhattan Style | `red-hook` | PACK_006 |
+| 115 | Rob Roy |  | Martini & Manhattan / Manhattan Style | `rob-roy` | core |
+| 116 | Rosemary Fizz |  | Sour / Fizz | `rosemary-fizz` | core |
+| 117 | Rosemary Gin Smash |  | Sour / Smash | `rosemary-gin-smash` | core |
+| 118 | Royal Hawaiian | Princess Kaiulani | Sour / Core Sour | `royal-hawaiian` | core |
+| 119 | Shakedown Street |  | Sour / Core Sour | `shakedown-street` | core |
+| 120 | Sherry Cobbler |  | Spritz & Aperitivo / Wine Spritz | `sherry-cobbler` | PACK_006 |
+| 121 | Sicilian Sojourn |  | Highball / Spritz | `sicilian-sojourn` | core |
+| 122 | Sidecar |  | Sour / Daisy | `classic-sidecar` | core |
+| 123 | Siesta |  | Sour / Daisy | `siesta` | core |
+| 124 | Singapore Sling |  | Sour / Collins | `singapore-sling` | core |
+| 125 | Six Seeds |  | Sour / Royale | `six-seeds` | core |
+| 126 | Sonambula |  | Sour / Core Sour | `sonambula` | core |
+| 127 | Southside |  | Sour / Core Sour | `southside` | core |
+| 128 | Springs First Bloom |  | Sour / Egg White Sour | `springs-first-bloom` | core |
+| 129 | Strawberry Caipirinha |  | Sour / Smash | `strawberry-caipirinha` | core |
+| 130 | The Black Prince |  | Old Fashioned / Core Old Fashioned | `black-prince` | core |
+| 131 | Thou Shall Not Be Named |  | Negroni / Dry Negroni | `thou-shall-not-be-named` | core |
+| 132 | Three Dots and a Dash |  | Tiki & Tropical / Grog | `three-dots-and-a-dash` | core |
+| 133 | Tia Mia |  | Tiki & Tropical / Mai Tai Style | `tia-mia` | core |
+| 134 | Tom Collins |  | Sour / Collins | `tom-collins` | core |
+| 135 | Tommy's Margarita |  | Sour / Daisy | `tommys-margarita` | CLASSICS_PACK_004 |
+| 136 | Toreador |  | Sour / Daisy | `toreador` | core |
+| 137 | Toronto | Fernet Cocktail | Old Fashioned / Bittered Spirit | `toronto` | core |
+| 138 | Triple Crown |  | Sour / Whiskey Sour | `triple-crown` | core |
+| 139 | Tropical Itch |  | Tiki & Tropical / Grog | `tropical-itch` | core |
+| 140 | Vesper | Vesper Martini | Martini & Manhattan / Martini Style | `vesper` | core |
+| 141 | Vieux Carré |  | Martini & Manhattan / Manhattan Style | `vieux-carre` | core |
+| 142 | Whiskey Smash |  | Sour / Smash | `whiskey-smash` | PACK_006 |
+| 143 | Whiskey Sour |  | Sour / Egg White Sour | `classic-whiskey-sour` | core |
+| 144 | White Lady |  | Sour / Daisy | `white-lady` | core |
+| 145 | White Russian |  | Flip, Nog & Creamy / Cream Cocktail | `white-russian` | core |
+| 146 | Wildberry Lillet Spritz |  | Spritz & Aperitivo / Sbagliato Style | `wildberry-lillet` | core |
+| 147 | Zombie |  | Tiki & Tropical / Zombie / Strong Tropical | `zombie-1934` | TIKI_PACK_003 |
+| 148 | Zuzu's Petals |  | Sour / Smash | `zuzus-petals` | core |
 
 ## Plain name list (quick scan / paste)
 
-Amaretto Sour, Americano, Ancho Problem, Aperol Spritz, Army & Navy, Bad Birdy's Sangria, Bee's Knees, Bellini, Berry Gin Fizz, Bicycle Thief, Bijou, Bitter Giuseppe, Black Manhattan, Blue Hawaii, Boulevardier, Bourbon Renewal, Brandy Alexander, Brandy Crusta, Brooklyn, Caipirinha, Cameron's Kick, Cantaloupe and Fresno Chile Spritzer, Carajillo, Champagne Cocktail, Chartreuse Swizzle, Chestnut Cup, Classic Daiquiri, Classic Margarita, Classic Martini, Clover Club, Coffee Cocktail, Cold Fashioned, Corpse Reviver No. 2, Cosmopolitan, Dame Blanche au Poire, Dangerous Passion, Dark & Stormy, Death Flip, Distant Lover, Division Bell, Dove Dispatch, El Diablo, First Class Pass, Flor de Jerez, Fog Cutter, French 007, French 75, French Blonde, Fresh Fruit Citronade, Gargoyle, Genovese Smash, Gibson, Gimlet, Gin & Tonic, Gin Basil Smash, Grapefruit-Rosemary Spritzer, Greenpoint, Guardian Angel, Guava Mojito, Guillotine, Hemingway Daiquiri, Hibiscus Guava Agua Fresca, Hotel Nacional Special, Hugo Spritz, Humuhumunukunukuāpuaʻa, Infante, Irish Maid, Jasmine, Jet Pilot, John Collins, Jungle Bird, Kentucky Buck, Kir Royale, Large-Batch Negroni Sbagliato, Last of the Oaxacans, Last Word, Le Coucher de Soleil, Little Wing, Mai Tai, Manhattan, Martinez, Maximilian Affair, Mexico Navy, Mint Julep, Mojito, Monella Sour, Monkeypod Mai Tai, Monte Cassino, Moscow Mule, Muddled Mission, Naked and Famous, Navy Grog, Negroni, Negroni Sbagliato, New Brunswick, Oaxacan Old Fashioned, Old Fashioned, Painkiller, Paloma, Paper Plane, Pineapple Makrut Buck, Pisco Sour, Pomegranate Spritzer, Porto Flip, Prado, Queen's Park Swizzle, Rabbit Szn, Ramble, Ramble On, Raspberry Lime Rickey, Rattlesnake, Red Hook, Rob Roy, Rosemary Fizz, Rosemary Gin Smash, Royal Hawaiian, Shakedown Street, Sherry Cobbler, Sicilian Sojourn, Sidecar, Siesta, Singapore Sling, Six Seeds, Sonambula, Southside, Springs First Bloom, Strawberry Caipirinha, The Black Prince, Thou Shall Not Be Named, Three Dots and a Dash, Tia Mia, Tom Collins, Tommy's Margarita, Toreador, Toronto, Triple Crown, Tropical Itch, Vesper, Vieux Carré, Whiskey Smash, Whiskey Sour, White Lady, White Russian, Wildberry Lillet Spritz, Zombie, Zuzu's Petals
+Amaretto Sour, Americano, Ancho Problem, Aperol Spritz, Army & Navy, Bad Birdy's Sangria, Bee's Knees, Bellini, Berry Gin Fizz, Bicycle Thief, Bijou, Bitter Giuseppe, Black Manhattan, Blue Hawaii, Boulevardier, Bourbon Renewal, Brandy Alexander, Brandy Crusta, Brooklyn, Caipirinha, Cameron's Kick, Cantaloupe and Fresno Chile Spritzer, Carajillo, Champagne Cocktail, Chartreuse Swizzle, Chestnut Cup, Classic Daiquiri, Classic Margarita, Classic Martini, Clover Club, Coffee Cocktail, Cold Fashioned, Corpse Reviver No. 2, Cosmopolitan, Dame Blanche au Poire, Dangerous Passion, Dark & Stormy, Death Flip, Distant Lover, Division Bell, Dove Dispatch, El Diablo, First Class Pass, Flor de Jerez, Fog Cutter, French 007, French 75, French Blonde, Fresh Fruit Citronade, Gargoyle, Genovese Smash, Gibson, Gimlet, Gin & Tonic, Gin Basil Smash, Gin-Gin Mule, Grapefruit-Rosemary Spritzer, Greenpoint, Guardian Angel, Guava Mojito, Guillotine, Hemingway Daiquiri, Hibiscus Guava Agua Fresca, Hotel Nacional Special, Hugo Spritz, Humuhumunukunukuāpuaʻa, Infante, Irish Maid, Jasmine, Jet Pilot, John Collins, Jungle Bird, Kentucky Buck, Kir Royale, Large-Batch Negroni Sbagliato, Last of the Oaxacans, Last Word, Le Coucher de Soleil, Little Wing, Mai Tai, Manhattan, Martinez, Maximilian Affair, Mexico Navy, Mint Julep, Mojito, Monella Sour, Monkeypod Mai Tai, Monte Cassino, Moscow Mule, Muddled Mission, Naked and Famous, Navy Grog, Negroni, Negroni Sbagliato, New Brunswick, Oaxacan Old Fashioned, Old Cuban, Old Fashioned, Painkiller, Paloma, Paper Plane, Pineapple Makrut Buck, Pisco Sour, Pomegranate Spritzer, Porto Flip, Prado, Queen's Park Swizzle, Rabbit Szn, Ramble, Ramble On, Raspberry Lime Rickey, Rattlesnake, Red Hook, Rob Roy, Rosemary Fizz, Rosemary Gin Smash, Royal Hawaiian, Shakedown Street, Sherry Cobbler, Sicilian Sojourn, Sidecar, Siesta, Singapore Sling, Six Seeds, Sonambula, Southside, Springs First Bloom, Strawberry Caipirinha, The Black Prince, Thou Shall Not Be Named, Three Dots and a Dash, Tia Mia, Tom Collins, Tommy's Margarita, Toreador, Toronto, Triple Crown, Tropical Itch, Vesper, Vieux Carré, Whiskey Smash, Whiskey Sour, White Lady, White Russian, Wildberry Lillet Spritz, Zombie, Zuzu's Petals
