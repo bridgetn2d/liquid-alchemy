@@ -6122,6 +6122,33 @@ function LoreSection({ lore, displayMode, expanded, onToggleExpand }) {
 }
 
 
+function CollapsibleSection({ label, text, expanded, onToggleExpand }) {
+  if (!text) return null;
+  const compact = compactLoreText(text);
+  const needsToggle = loreExceedsCompact(text);
+  const display = expanded ? text : compact;
+  return (
+    <div>
+      <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".08em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:6}}>{label}</div>
+      <p className="lore-block" style={{borderTop:"none",paddingTop:0,marginTop:0,whiteSpace:"pre-wrap"}}>{display}</p>
+      {needsToggle&&(
+        <button
+          type="button"
+          onClick={onToggleExpand}
+          style={{
+            fontSize:".75rem",color:"var(--accent-2)",fontStyle:"italic",
+            background:"none",border:"none",padding:0,cursor:"pointer",
+            textDecoration:"underline",textUnderlineOffset:"2px",
+            fontFamily:"'Jost',sans-serif",marginTop:4,
+          }}
+        >
+          {expanded ? "Show less" : "Read more"}
+        </button>
+      )}
+    </div>
+  );
+}
+
 /* ─── Feedback Modal ─── */
 const FEEDBACK_CATEGORIES = [
   "Recipe Suggestion",
@@ -6731,6 +6758,8 @@ export default function App() {
   const [showPhilosophy, setShowPhilosophy] = useState(false);
   const [loreDisplay, setLoreDisplay] = useState("compact");
   const [loreExpanded, setLoreExpanded] = useState(false);
+  const [notesExpanded, setNotesExpanded] = useState(false);
+  const [riffsExpanded, setRiffsExpanded] = useState(false);
 
   useEffect(()=>{
     store.get(LORE_DISPLAY_STORAGE_KEY).then(pref=>{
@@ -6743,7 +6772,7 @@ export default function App() {
     store.set(LORE_DISPLAY_STORAGE_KEY, mode);
   };
 
-  useEffect(()=>{ setLoreExpanded(false); },[viewCocktailId]);
+  useEffect(()=>{ setLoreExpanded(false); setNotesExpanded(false); setRiffsExpanded(false); },[viewCocktailId]);
 
   useEffect(()=>{
     (async()=>{
@@ -7932,12 +7961,6 @@ export default function App() {
                       onToggleExpand={()=>setLoreExpanded(x=>!x)}
                     />
                   )}
-                {viewCocktail.riffs&&(
-                  <div style={{marginTop:12}}>
-                    <div style={{fontSize:".68rem",fontWeight:700,letterSpacing:".08em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:6}}>Riffs & Variations</div>
-                    <p className="lore-block" style={{borderTop:"none",paddingTop:0,whiteSpace:"pre-wrap"}}>{viewCocktail.riffs}</p>
-                  </div>
-                )}
                   {(()=>{
                     const family = getCocktailFamily(viewCocktail.id);
                     if (!family) return null;
@@ -8156,11 +8179,25 @@ export default function App() {
 
                 {viewCocktail.notes&&(
                   <div>
-                    <div className="section-label">Notes</div>
-                    <div className="notes-block">{viewCocktail.notes}</div>
+                    <CollapsibleSection
+                      label="Notes"
+                      text={viewCocktail.notes}
+                      expanded={notesExpanded}
+                      onToggleExpand={()=>setNotesExpanded(x=>!x)}
+                    />
                   </div>
                 )}
                 {viewCocktail.notes&&<AttributionStatement/>}
+                {viewCocktail.riffs&&(
+                  <div style={{marginTop:12}}>
+                    <CollapsibleSection
+                      label="Riffs & Variations"
+                      text={viewCocktail.riffs}
+                      expanded={riffsExpanded}
+                      onToggleExpand={()=>setRiffsExpanded(x=>!x)}
+                    />
+                  </div>
+                )}
 
                 {(viewCocktail.tastingNotes || viewCocktail.myPhoto) && (
                   <div>
