@@ -8197,7 +8197,7 @@ export default function App() {
           {tab==="cocktails"&&<>
             <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",flexWrap:"wrap",gap:10,marginBottom:20}}>
               <div>
-                <h1 className="page-title">Recipes</h1>
+                <h1 className="page-title">Cocktails</h1>
                 <p className="page-sub">{cocktails.length} recipe{cocktails.length!==1?"s":""} · {filtered.length} showing{anyFilter?" (filtered)":""}</p>
               </div>
               <button className="btn-primary" onClick={()=>{setEditCocktail(newCocktail());setIsNew(true);}}>+ Add Cocktail</button>
