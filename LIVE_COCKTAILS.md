@@ -1,6 +1,6 @@
 # Live Cocktails — master index
 
-Auto-generated from `app.jsx` (`MY_RECIPES_LIST`) on 2026-06-17. **148 cocktails live.**
+Auto-generated from `app.jsx` (`MY_RECIPES_LIST`) on 2026-06-19. **148 cocktails live.**
 
 Regenerate after adding any cocktail or pack: `python3 scripts/list_live_cocktails.py`
 
