@@ -5808,6 +5808,29 @@ function toOzVal(amount, unit) {
   return n;
 }
 
+// Format an ingredient amount with unicode fraction glyphs
+function fmtIngAmount(amount, unit) {
+  const n = parseFloat(amount);
+  if (isNaN(n)) return (amount || "") + (unit ? " " + unit : "");
+  const FRACS = {0.25:"¼", 0.5:"½", 0.75:"¾", 0.33:"⅓", 0.67:"⅔", 0.125:"⅛"};
+  const key = Object.keys(FRACS).find(k => Math.abs(n - parseFloat(k)) < 0.02);
+  const display = key ? FRACS[key] : n;
+  return `${display}${unit ? " " + unit : ""}`;
+}
+
+// Return the proportion-control increment for a unit, or null for non-adjustable units
+function getIncrement(unit) {
+  const u = (unit || "").toLowerCase();
+  if (u === "oz")   return 0.25;
+  if (u === "ml")   return 7.5;        // ≈ ¼ oz
+  if (u === "tsp")  return 0.25;
+  if (u === "tbsp") return 0.25;
+  if (u === "dash") return 1;
+  if (u === "drop") return 1;
+  if (u === "splash" || u === "pinch") return 1;
+  return null; // whole, each, strip, slice, sprig, leaf, peel, wheel, twist, crack, etc.
+}
+
 function CocktailCompositionDiagram({ cocktail, onNodeClick, selectedRole }) {
   const ings = (cocktail.ingredients || []).filter(i => i.name);
   if (ings.length < 2) return null;
@@ -5853,15 +5876,6 @@ function CocktailCompositionDiagram({ cocktail, onNodeClick, selectedRole }) {
   });
 
   const roleLabel = r => r.toUpperCase();
-
-  function fmtAmount(ing) {
-    const n = parseFloat(ing.amount);
-    if (isNaN(n)) return ing.amount || "";
-    const frac = {0.25:"¼", 0.5:"½", 0.75:"¾", 0.33:"⅓", 0.67:"⅔", 0.125:"⅛"};
-    const key = Object.keys(frac).find(k => Math.abs(n - parseFloat(k)) < 0.02);
-    const display = key ? frac[key] : n;
-    return `${display}${ing.unit ? " " + ing.unit : ""}`;
-  }
 
   function truncate(str, max) {
     return str.length > max ? str.slice(0, max - 1) + "…" : str;
@@ -5912,7 +5926,7 @@ function CocktailCompositionDiagram({ cocktail, onNodeClick, selectedRole }) {
                   {truncate(simplifyIngName(ing.name), 16)}
                 </text>
                 <text x={ing.sx} y={ing.sy + 14} textAnchor="middle" fontSize="7.5" fill="#7A7A74" opacity={selectedRole && !active ? 0.45 : 1}>
-                  {fmtAmount(ing)}
+                  {fmtIngAmount(ing.amount, ing.unit)}
                 </text>
               </g>
             );
@@ -5940,7 +5954,7 @@ function CocktailCompositionDiagram({ cocktail, onNodeClick, selectedRole }) {
                   {truncate(simplifyIngName(centerIng.name), 18)}
                 </text>
                 <text x={cx} y={cy + 16} textAnchor="middle" fontSize="8.5" fill="#5A5A56" opacity={selectedRole && !active ? 0.45 : 1}>
-                  {fmtAmount(centerIng)}
+                  {fmtIngAmount(centerIng.amount, centerIng.unit)}
                 </text>
               </g>
             );
@@ -5969,8 +5983,26 @@ function Originals({ cocktails, setCocktails, inventory }) {
   });
   const [selectedTemplate, setSelectedTemplate] = React.useState(null);
   const [selectedRole, setSelectedRole] = React.useState(null);
+  const [riffState, setRiffState] = React.useState(null);
   const set = (k,v) => setBuild(x=>({...x,[k]:v}));
   const toggle = (k,v) => setBuild(x=>({...x,[k]:x[k].includes(v)?x[k].filter(i=>i!==v):[...x[k],v]}));
+
+  function adjustAmount(ingName, delta) {
+    setRiffState(prev => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        ingredients: prev.ingredients.map(ing => {
+          if (ing.name !== ingName) return ing;
+          const inc = getIncrement(ing.unit);
+          if (inc === null) return ing;
+          const current = parseFloat(ing.amount) || 0;
+          const next = Math.max(0, Math.round((current + delta) * 1000) / 1000);
+          return { ...ing, amount: String(next) };
+        })
+      };
+    });
+  }
 
   const RIFF_TEMPLATE_DEFS = [
     { id:"classic-margarita",     label:"Margarita",     familyNote:"Sour · Daisy",          structNote:"Base · Acid · Modifier · Sweetener" },
@@ -5981,7 +6013,7 @@ function Originals({ cocktails, setCocktails, inventory }) {
     { id:"classic-gimlet",        label:"Gimlet",        familyNote:"Sour · Core",           structNote:"Base · Acid · Sweetener" },
     { id:"dark-and-stormy",       label:"Dark & Stormy", familyNote:"Highball · Buck",       structNote:"Base · Acid · Effervescent" },
     { id:"moscow-mule",           label:"Moscow Mule",   familyNote:"Highball · Buck",       structNote:"Base · Acid · Effervescent" },
-  ];;
+  ];
 
   const SPIRITS = ["Gin","Vodka","Rum","Cachaca","Tequila","Mezcal","Whiskey","Bourbon","Rye","Scotch","Brandy","Cognac","Pisco","Amaro","Neutral"];
   const SPLIT_BASE_OPTIONS = ["Gin","Vodka","Rum","Cachaca","Tequila","Mezcal","Whiskey","Bourbon","Rye","Brandy","Cognac","Amaro","Amaro Sfumato","Campari","Aperol","St-Germain","Cointreau","Chartreuse","Benedictine","Maraschino","Falernum","Lillet Blanc","Lillet Rose"];
@@ -6362,7 +6394,12 @@ function Originals({ cocktails, setCocktails, inventory }) {
           const cocktail = cocktails.find(c => c.id === def.id);
           if (!cocktail) return null;
           return (
-            <button key={def.id} onClick={()=>{ setSelectedTemplate(cocktail); setSelectedRole(null); setStep(8); }}
+            <button key={def.id} onClick={()=>{
+              setSelectedTemplate(cocktail);
+              setRiffState({ ...cocktail, ingredients: cocktail.ingredients.map(ing=>({...ing})) });
+              setSelectedRole(null);
+              setStep(8);
+            }}
               style={{textAlign:"left",background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"14px 16px",cursor:"pointer",transition:"border-color .15s, box-shadow .15s"}}
               onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--accent)";e.currentTarget.style.boxShadow="0 2px 8px rgba(0,0,0,0.07)";}}
               onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--border)";e.currentTarget.style.boxShadow="none";}}
@@ -6380,11 +6417,30 @@ function Originals({ cocktails, setCocktails, inventory }) {
     </div>
   );
 
-  // ── Step 8: Template composition view ───────────────────────────────────
+  // ── Step 8: Riff Lab — composition + proportion controls ────────────────
   if (step === 8 && selectedTemplate) {
+    const activeRiff = riffState || { ...selectedTemplate, ingredients: selectedTemplate.ingredients.map(ing=>({...ing})) };
     const edu = selectedRole ? ROLE_EDUCATION[selectedRole] : null;
+
+    // Ingredients matching the selected role (for proportion controls)
+    const matchingIngs = selectedRole
+      ? (activeRiff.ingredients || []).filter(ing => (ing.role || inferRole(ing)) === selectedRole)
+      : [];
+    const controllableIngs = matchingIngs.filter(ing => getIncrement(ing.unit) !== null);
+
+    // Has the user changed any amounts from the canonical template?
+    const hasChanges = selectedTemplate.ingredients.some((orig, i) => {
+      const riff = activeRiff.ingredients[i];
+      return riff && riff.amount !== orig.amount;
+    });
+
+    // Shared button base style
+    const btnBase = {fontFamily:"'Jost',sans-serif",fontWeight:400,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"10px 20px",borderRadius:"999px",border:"1px solid var(--border)",cursor:"pointer"};
+
     return (
       <div style={{maxWidth:600,margin:"0 auto",padding:"0 16px 48px"}}>
+
+        {/* Header */}
         <div style={{textAlign:"center",marginBottom:20}}>
           <div style={{fontSize:".7rem",fontWeight:600,letterSpacing:".15em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:4}}>Template</div>
           <h1 className="page-title" style={{marginBottom:4}}>{selectedTemplate.name}</h1>
@@ -6393,32 +6449,33 @@ function Originals({ cocktails, setCocktails, inventory }) {
               {selectedTemplate.family}{selectedTemplate.subFamily ? " · " + selectedTemplate.subFamily : ""}
             </div>
           )}
+          {hasChanges&&(
+            <div style={{marginTop:8,fontSize:".72rem",letterSpacing:".06em",color:"var(--accent)",fontWeight:600}}>● Proportions adjusted</div>
+          )}
         </div>
 
+        {/* Composition diagram — reads from riffState, not canonical template */}
         <div style={{background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"16px 20px",marginBottom:12}}>
           <div style={{fontSize:".7rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:4}}>Composition</div>
           <p style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:".95rem",color:"var(--text-3)",lineHeight:1.6,margin:"0 0 4px"}}>
             Start with a proven structure. Change one element at a time.
           </p>
           <CocktailCompositionDiagram
-            cocktail={selectedTemplate}
+            cocktail={activeRiff}
             onNodeClick={(role) => setSelectedRole(r => r === role ? null : role)}
             selectedRole={selectedRole}
           />
-          {!selectedRole && (
+          {!selectedRole&&(
             <p style={{textAlign:"center",fontSize:".72rem",color:"var(--text-3)",marginTop:6,letterSpacing:".04em"}}>
-              Tap a node to learn what each role contributes.
+              Tap a node to adjust its proportion.
             </p>
           )}
         </div>
 
-        {edu ? (
+        {/* Role education panel */}
+        {edu&&(
           <div style={{background:"var(--bg)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"16px 20px",marginBottom:12,position:"relative"}}>
-            <button
-              onClick={()=>setSelectedRole(null)}
-              style={{position:"absolute",top:12,right:12,background:"none",border:"none",cursor:"pointer",fontSize:"1rem",color:"var(--text-3)",lineHeight:1}}
-              title="Dismiss"
-            >×</button>
+            <button onClick={()=>setSelectedRole(null)} style={{position:"absolute",top:12,right:12,background:"none",border:"none",cursor:"pointer",fontSize:"1rem",color:"var(--text-3)",lineHeight:1}} title="Dismiss">×</button>
             <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
               <span style={{display:"inline-block",width:10,height:10,borderRadius:2,background:ROLE_STYLES[selectedRole]?.fill,border:"1.5px solid "+(ROLE_STYLES[selectedRole]?.stroke||"#ccc"),flexShrink:0}}/>
               <span style={{fontSize:".7rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:ROLE_STYLES[selectedRole]?.stroke||"var(--text-3)"}}>{edu.label}</span>
@@ -6429,16 +6486,86 @@ function Originals({ cocktails, setCocktails, inventory }) {
               <span style={{fontSize:".8rem",color:"var(--text-2)",lineHeight:1.6,fontStyle:"italic"}}>{edu.riff}</span>
             </div>
           </div>
-        ) : null}
+        )}
 
-        <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",marginTop:8}}>
-          <button onClick={()=>{ setStep(7); setSelectedRole(null); }} style={{fontFamily:"'Jost',sans-serif",fontWeight:400,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 24px",borderRadius:"999px",background:"var(--bg-2)",color:"var(--text-2)",border:"1px solid var(--border)",cursor:"pointer"}}>Choose Different</button>
-          <button onClick={()=>{
-            const spirit = (selectedTemplate.baseSpirit||"").split("/")[0].trim();
-            if (spirit) set("spirit1", spirit);
-            setSelectedRole(null);
-            setStep(1);
-          }} style={{fontFamily:"'Jost',sans-serif",fontWeight:500,fontSize:".8rem",letterSpacing:".1em",textTransform:"uppercase",padding:"12px 24px",borderRadius:"999px",background:"var(--accent)",color:"white",border:"none",cursor:"pointer"}}>Riff This Template →</button>
+        {/* Proportion controls — only when a node is selected and its ingredients have controllable units */}
+        {controllableIngs.length > 0 && (
+          <div style={{background:"var(--bg-2)",border:"1px solid var(--border)",borderRadius:"var(--radius)",padding:"14px 16px",marginBottom:12}}>
+            <div style={{fontSize:".7rem",fontWeight:700,letterSpacing:".12em",textTransform:"uppercase",color:"var(--text-3)",marginBottom:10}}>Change the proportion</div>
+            {controllableIngs.map(ing => {
+              const inc = getIncrement(ing.unit);
+              const current = parseFloat(ing.amount) || 0;
+              const atZero = current <= 0;
+              // Find the original amount for this ingredient by name
+              const origIng = selectedTemplate.ingredients.find(o => o.name === ing.name);
+              const changed = origIng && origIng.amount !== ing.amount;
+              return (
+                <div key={ing.name} style={{marginBottom:8}}>
+                  <div style={{display:"flex",alignItems:"center",gap:8}}>
+                    <span style={{flex:1,fontSize:".85rem",color:"var(--text-2)",minWidth:0,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+                      {simplifyIngName(ing.name)}
+                      {changed&&<span style={{marginLeft:6,fontSize:".68rem",color:"var(--accent)",fontWeight:700}}>●</span>}
+                    </span>
+                    <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
+                      <button
+                        onClick={()=>adjustAmount(ing.name, -inc)}
+                        disabled={atZero}
+                        style={{width:30,height:30,borderRadius:"50%",border:"1px solid var(--border)",background:"var(--bg)",color:atZero?"var(--text-3)":"var(--text)",cursor:atZero?"default":"pointer",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1}}
+                        aria-label="Decrease"
+                      >−</button>
+                      <span style={{fontSize:".9rem",fontWeight:600,color:atZero?"var(--text-3)":"var(--text)",minWidth:60,textAlign:"center",fontFamily:"'Jost',sans-serif"}}>
+                        {fmtIngAmount(ing.amount, ing.unit)}
+                      </span>
+                      <button
+                        onClick={()=>adjustAmount(ing.name, inc)}
+                        style={{width:30,height:30,borderRadius:"50%",border:"1px solid var(--border)",background:"var(--bg)",color:"var(--text)",cursor:"pointer",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",lineHeight:1}}
+                        aria-label="Increase"
+                      >+</button>
+                    </div>
+                  </div>
+                  {atZero&&(
+                    <div style={{fontSize:".72rem",color:"var(--text-3)",fontStyle:"italic",marginTop:3,paddingRight:8}}>
+                      Amount is 0 — this element has no structural weight in the diagram.
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            <p style={{fontSize:".75rem",color:"var(--text-3)",margin:"10px 0 0",fontStyle:"italic",lineHeight:1.5,borderTop:"1px solid var(--border)",paddingTop:8}}>
+              Small changes matter. Adjust one element, then taste before changing another.
+            </p>
+          </div>
+        )}
+
+        {/* Action row */}
+        <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap",marginTop:8}}>
+          {hasChanges&&(
+            <button onClick={()=>{
+              setRiffState({ ...selectedTemplate, ingredients: selectedTemplate.ingredients.map(ing=>({...ing})) });
+              setSelectedRole(null);
+            }} style={{...btnBase,background:"var(--bg-2)",color:"var(--text-3)"}}>Reset to Template</button>
+          )}
+          <button onClick={()=>{ setStep(7); setSelectedRole(null); }} style={{...btnBase,background:"var(--bg-2)",color:"var(--text-2)"}}>Choose Different</button>
+          {hasChanges&&(
+            <button onClick={()=>{
+              const savedRiff = {
+                id:"riff-"+Date.now(),
+                name:"Riff: "+selectedTemplate.name,
+                baseSpirit:selectedTemplate.baseSpirit,
+                family:selectedTemplate.family, subFamily:selectedTemplate.subFamily,
+                serveStyle:selectedTemplate.serveStyle, glass:selectedTemplate.glass,
+                tags:[...(selectedTemplate.tags||[])], rating:0, obscura:false,
+                addedAt:Date.now(), imageUrl:"", myPhoto:"",
+                sliders:{...(selectedTemplate.sliders||{})},
+                ingredients: activeRiff.ingredients.map(ing=>({...ing})),
+                instructions:selectedTemplate.instructions||"",
+                notes:"Riff of "+selectedTemplate.name+" — adjusted proportions. Make as written, taste, and note what changed.",
+                riffs:"", lore:"", tastingNotes:"",
+              };
+              setCocktails(prev=>[...prev, savedRiff]);
+              alert("Riff saved. Find it in your collection, make it as written, and use the notes field to record what you observe.");
+            }} style={{...btnBase,background:"var(--accent)",color:"white",border:"none",fontWeight:500}}>Save Riff</button>
+          )}
         </div>
       </div>
     );
@@ -7042,6 +7169,7 @@ export default function App() {
   const [filterSkinny, setFilterSkinny] = useState(false);
   const [filterLowABV, setFilterLowABV] = useState(false);
   const [filterZeroProof, setFilterZeroProof] = useState(false);
+  const [filterMyRecipes, setFilterMyRecipes] = useState(false);
   const [filterFamily, setFilterFamily] = useState("");
   const [sortBy, setSortBy] = useState("added");
   const [shuffleOrder, setShuffleOrder] = useState(null);
@@ -7858,7 +7986,8 @@ export default function App() {
       &&(!filterObscura||c.obscura===true)
       &&(!filterWantToTry||c.wantToTry===true)
       &&(!filterTried||c.tried===true)
-      &&(!filterFavorite||c.favorite===true);
+      &&(!filterFavorite||c.favorite===true)
+      &&(!filterMyRecipes||/^\d+$/.test(c.id));
   });
 
   // Compute tag match count for each cocktail
@@ -7978,7 +8107,7 @@ export default function App() {
 
   if(!loaded) return <div style={{textAlign:"center",padding:"80px",fontFamily:"'Jost',sans-serif",color:"#9c9080"}}>Loading…</div>;
 
-  const anyFilter=activeTags.size>0||filterCanMake||filterSkinny||filterLowABV||filterZeroProof||filterFamily||filterObscura||filterWantToTry||filterTried||filterFavorite||filterOccasion||filterSeason||filterDifficulty||filterServe||search;
+  const anyFilter=activeTags.size>0||filterCanMake||filterSkinny||filterLowABV||filterZeroProof||filterFamily||filterObscura||filterWantToTry||filterTried||filterFavorite||filterOccasion||filterSeason||filterDifficulty||filterServe||filterMyRecipes||search;
 
   const selStyle = hasVal=>({
     padding:"5px 12px", border:"1px solid var(--border)", borderRadius:"999px",
@@ -8068,7 +8197,7 @@ export default function App() {
           {tab==="cocktails"&&<>
             <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",flexWrap:"wrap",gap:10,marginBottom:20}}>
               <div>
-                <h1 className="page-title">My Cocktails</h1>
+                <h1 className="page-title">Recipes</h1>
                 <p className="page-sub">{cocktails.length} recipe{cocktails.length!==1?"s":""} · {filtered.length} showing{anyFilter?" (filtered)":""}</p>
               </div>
               <button className="btn-primary" onClick={()=>{setEditCocktail(newCocktail());setIsNew(true);}}>+ Add Cocktail</button>
@@ -8107,6 +8236,9 @@ export default function App() {
                   <button className={"pill"+(filterObscura?" obscura-active":"")} onClick={()=>setFilterObscura(f=>!f)} title="the best cocktails you have never heard of" style={{position:"relative"}} onMouseOver={e=>{ const t=e.currentTarget.querySelector(".obscura-tip"); if(t) t.style.opacity="1"; }} onMouseOut={e=>{ const t=e.currentTarget.querySelector(".obscura-tip"); if(t) t.style.opacity="0"; }}>{filterObscura?"✦ ":""}Obscura<span className="obscura-tip" style={{position:"absolute",bottom:"calc(100% + 6px)",left:"50%",transform:"translateX(-50%)",background:"rgba(110,90,155,0.88)",color:"white",fontSize:".72rem",fontStyle:"italic",padding:"4px 10px",borderRadius:"999px",whiteSpace:"nowrap",pointerEvents:"none",opacity:0,transition:"opacity .2s"}}>the best cocktails you have never heard of</span></button>
                 </>
               )}
+              <button className={`pill ${filterMyRecipes?"green-active":""}`} onClick={()=>setFilterMyRecipes(f=>!f)}>
+                {filterMyRecipes?"✓ ":""}My Recipes
+              </button>
               <button className={`pill ${filterSkinny?"green-active":""}`} onClick={()=>setFilterSkinny(f=>!f)}>
                 {filterSkinny?"✓ ":""}Skinny (≤150 cal)
               </button>
@@ -8141,7 +8273,7 @@ export default function App() {
               )}
               {anyFilter&&(
                 <button className="btn-ghost" style={{borderRadius:"999px",fontSize:".72rem"}}
-                  onClick={()=>{setSearch("");setActiveTags(new Set());setFilterCanMake(false);setFilterSkinny(false);setFilterLowABV(false);setFilterFamily("");setFilterObscura(false);setFilterWantToTry(false);setFilterTried(false);setFilterFavorite(false);setFilterOccasion("");setFilterSeason("");setFilterDifficulty("");setFilterServe("");}}>
+                  onClick={()=>{setSearch("");setActiveTags(new Set());setFilterCanMake(false);setFilterSkinny(false);setFilterLowABV(false);setFilterFamily("");setFilterObscura(false);setFilterWantToTry(false);setFilterTried(false);setFilterFavorite(false);setFilterOccasion("");setFilterSeason("");setFilterDifficulty("");setFilterServe("");setFilterMyRecipes(false);}}>
                   ✕ Clear
                 </button>
               )}
